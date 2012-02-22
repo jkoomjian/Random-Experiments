@@ -1,0 +1,72 @@
+<div class="idea_header">
+  <h1><%=h @idea.title %></h1>
+</div>
+
+<div class="idea_attr">
+  <span class="idea_attr_title">Overall Score:</span> <span id="idea_attr_score" class="idea_attr_score_value"><%=h @idea.score %></span>/100
+</div>
+
+<div class="idea_attr">
+  <span class="idea_attr_title">Created:</span> <%= rel_time @idea.created_on %>
+</div>
+
+<div class="idea_attr">
+  <span class="idea_attr_title">Last Updated:</span> <%= rel_time @idea.updated_at %>
+</div>
+
+<div id="idea_attr_tags" class="idea_attr" onmouseover="hoverField(this)" onmouseout="unHoverField(this)" onclick="clickTag(this)">
+  <span class="idea_attr_title">Tags:</span>
+  <span id="idea_attr_tags_text" class="display_text">
+  	<%- is_first = :true -%>
+  	<%- for tag in @idea.tags %><%- if is_first then is_first = nil else %>,&nbsp;<% end %><%= tag.name %><%- end %>
+  </span>
+  <span id="idea_attr_tags_edit" class="editable_text">
+  	<% form_for :idea, 
+  						:url => {:action => :update_tags, :id => @idea},
+  						:html => {:id => "idea_attr_tags_form", :onsubmit => "javascript:addTag('idea_attr_tags_text', 'idea_attr_tags_form_edit_area');return false;"} do |form| %>
+  		<input type="text" id="idea_attr_tags_form_edit_area" name="tag[][name]" class="medium_field" onblur="blurField($('idea_attr_tags'));" />
+  		<input type="submit" value="Add" />
+	<% end %>
+  </span>
+  <span id="idea_attr_tags_status" class="idea_status"></span>
+</div>
+
+<div id="idea_attr_summary" class="idea_attr_summary" onmouseover="hoverField(this)" onmouseout="unHoverField(this)" onclick="clickField(this)">
+  <div class="idea_attr_summary_title">
+  	<span class="idea_attr_title">Summary</span>
+	<span id="idea_attr_summary_status" class="idea_status"></span>
+  </div>
+  <span id="idea_attr_summary_text" class="display_text"><%=text_to_html @idea.summary %></span>
+  <span id="idea_attr_summary_edit" class="editable_text">
+  	<% form_for :idea, 
+  						:url => {:action => :update_summary, :id => @idea},
+  						:html => {:id => "idea_attr_summary_form"} do |form| %>
+  		<%= form.text_area :summary, :id => "idea_attr_summary_form_edit_area", :onblur => "blurField($('idea_attr_summary'));", :class => "editable_text_area summary_text_box"  %>
+	<% end %>
+  </span>
+</div>
+
+<% for criteria_response in @idea.criteria_responses %>
+	<div id="idea_attr_criteria_<%=criteria_response.id%>" class="idea_criteria" onmouseover="hoverField(this)" onmouseout="unHoverField(this)" onclick="clickField(this)">
+		<span class="idea_attr_title idea_criteria_title"><%=h criteria_response.criteria.title %></span>
+		<span class="idea_criteria_description">
+			<%=text_to_html criteria_response.criteria.description %>
+			<span id="idea_attr_criteria_<%=criteria_response.id%>_status" class="idea_status"></span>
+		</span>
+		<span id="idea_attr_criteria_<%=criteria_response.id%>_text" class="display_text">
+			<div class="idea_criteria_score">Score: <span class="idea_criteria_score_value"><%=h criteria_response.score %></span>/10</div>
+			<div class="idea_criteria_response"><%=text_to_html criteria_response.response %></div>
+		</span>
+		<span id="idea_attr_criteria_<%=criteria_response.id%>_edit" class="editable_text">
+			<% form_for :criteria_response, 
+  						:url => {:action => :update_criteria_response, :id => criteria_response},
+  						:html => {:id => "idea_attr_criteria_#{criteria_response.id}_form", :onsubmit => "blurField($('idea_attr_criteria_#{criteria_response.id}'));return false;"} do |form| %>
+				<% puts "response: #{criteria_response.response}" %>
+				<div class="idea_criteria_score">Score: <span class="idea_criteria_score_value"><%=form.text_field :score, :value => criteria_response.score, :size => 2, :maxlength => 2, :id => "idea_attr_criteria_#{criteria_response.id}_form_score", :onfocus => "setCurrentFocus(this);", :onblur => "blurCriteriaResponse($('idea_attr_criteria_#{criteria_response.id}'));" %></span>/10</div>
+				<div class="idea_criteria_response">
+			  		<%= form.text_area :response, :id => "idea_attr_criteria_#{criteria_response.id}_form_edit_area", :class => "editable_text_area", :value => criteria_response.response, :onfocus => "setCurrentFocus(this);", :onblur => "blurCriteriaResponse($('idea_attr_criteria_#{criteria_response.id}'));"  %>
+				</div>
+			<% end %>
+		</span>
+	</div>
+<% end %>

@@ -1,0 +1,63 @@
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBUsJXtpkGD72YiUBgOrk9jrz2eIr8QH-o&sensor=false"/>
+
+    <%= javascript_include_tag "gmap3" %>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+
+    <script type="text/javascript">
+        function showAddress(address) 
+        {
+            $('#map_canvas').gmap3({
+                action: 'addMarker',
+                address: address,
+                map: {
+                    center: true,
+                    zoom: 14
+                },
+                marker: {
+                    options: {
+                        draggable: false
+                    }
+                },
+                infowindow: {
+                    options: {
+                    },
+                    events: {
+                        closeclick: function () {
+                            alert("closing : " + $(this).attr("id"));
+                        }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            showAddress("seattle, wa");
+        });
+
+
+    </script>
+
+        <div style="text-align:center;">
+        <h2>Event Details</h2>
+        </div>
+        <div>
+            <div style="float:left;"><img src="thumbnail.jpg" width="75px" /></div>
+            <div id="eventDetailsContainer">
+                <div><div class="eventDetailLabel">Title:</div> <div class="eventDetailValue">EventTitle</div></div>
+                <div><div class="eventDetailLabel">Location:</div> <div class="eventDetailValue">Location</div>
+                <div><div class="eventDetailLabel">Date/Time:</div> <div class="eventDetailValue">Date/Time</div>
+                <div><div class="eventDetailLabel">Price:</div> <div class="eventDetailValue">Price</div></div>
+                <div<div class="eventDetailLabel">Description:</div> <div class="eventDetailValue">Desc</div></div>
+            </div>
+
+            <div id="eventDetailBox">
+                <div id="map_canvas" style="width:100%; height:100%"></div>
+                <a href="NewEvent.htm">Create New Event</a>
+            </div>
+        </div>

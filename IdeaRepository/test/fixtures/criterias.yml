@@ -1,0 +1,28 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+criteria1:
+  id: 1
+  user_id: 3
+  title: High-end consulting
+  description: I want to do high-end consulting, not contract work
+  weight: 33
+  active: Y
+  created_on: 2007-03-26 18:16:46
+  updated_at: 2007-03-26 18:16:46
+criteria2:
+  id: 2
+  user_id: 3
+  title: Variety of clients & projects
+  description: I want a variety of clients & projects
+  weight: 33
+  active: Y
+  created_on: 2007-03-26 18:16:46
+  updated_at: 2007-03-26 18:16:46
+criteria3:
+  id: 3
+  user_id: 3
+  title: Recruiting
+  description: I want to continue to recruit only the best and ensure we don't lower our standards
+  weight: 33
+  active: Y
+  created_on: 2007-03-26 18:16:46
+  updated_at: 2007-03-26 18:16:46

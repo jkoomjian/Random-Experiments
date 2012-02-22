@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+	  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	  <title><%= @page_title || "Idea Organizer: #{controller.action_name}" %></title>
+  	<%= stylesheet_link_tag 'idea' %>
+  	<%= stylesheet_link_tag 'default' %>
+  	<%= stylesheet_link_tag 'scaffold' %>
+  	<%= javascript_include_tag 'idea' %>
+		<%= javascript_include_tag 'prototype' %>
+	</head>
+
+	<body>
+	
+		<div class="container">
+
+			<div class="header">
+				<%= render_partial 'layouts/application_header' %>				
+			</div>
+
+			<div class="main">
+	
+				<div class="content">
+				
+					<% if flash.length > 0 	-%>
+						<div class="flash">
+							<p style="color: green"><%= flash[:notice] %></p>
+							<p style="color: red"><%= flash[:error] %></p>
+						</div>
+					<% end -%>
+	
+					<div class="bodyContent">
+						<%= yield  %>
+					</div>
+					
+				</div>
+			
+				<div class="sidenav">
+					<!--%= render_partial 'layouts/application_sidebar' %-->
+				</div>
+	
+				<div class="clearer"><span></span></div>
+			
+			</div>
+
+		</div>
+			
+		<div class="footer">
+			<%= render_partial 'layouts/application_footer' %>
+		</div>	
+
+	</body>
+</html>

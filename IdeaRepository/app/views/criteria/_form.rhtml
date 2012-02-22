@@ -1,0 +1,24 @@
+<%= error_messages_for 'criteria' %>
+
+<!--[form:criteria]-->
+<p><label for="criteria_title">Title</label><br/>
+<%= text_field 'criteria', 'title'  %></p>
+
+<p><label for="criteria_description">Description</label><br/>
+<%= text_area 'criteria', 'description'  %></p>
+
+<p><label for="criteria_weight">Weight (100% - 0%)</label><br/>
+<%= text_field 'criteria', 'weight', :size => "3", :class => 'number_field'  %> %</p>
+
+<p><label for="criteria_active">Active</label><br/>
+<%= radio_button 'criteria', 'active', 'Y' %> <label for="criteria_active_y">Yes</label>&nbsp;
+<%= radio_button 'criteria', 'active', 'N' %> <label for="criteria_active_n">No</p></label>
+
+<% if @criteria.created_on %>
+	<p>Created <%= rel_time @criteria.created_on %></p>
+<% end %>
+
+<!--p><label for="criteria_criteria_order">Criteria order</label><br/>
+<%= text_field 'criteria', 'criteria_order'  %></p-->
+<!--[eoform:criteria]-->
+

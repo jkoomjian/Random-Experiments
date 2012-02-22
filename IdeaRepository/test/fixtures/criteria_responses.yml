@@ -1,0 +1,49 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+resp1:
+  id: 1
+  idea_id: 1
+  criteria_id: 1
+  score: 8
+  response: Hit is entirely run by SAI, so we must provide the leadership and innovation to complete the project
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+resp2:
+  id: 2
+  idea_id: 1
+  criteria_id: 2
+  score: 7
+  response: Hit provides marketing/resume-building for SAI to use when pitching to clients
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+resp3:
+  id: 3
+  idea_id: 1
+  criteria_id: 3
+  score: 5
+  response: Could be used to help recruit candidates. IE. give demo to show candidates the kind of work we do.  Currently hit not used for this purpose.
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+resp4:
+  id: 4
+  idea_id: 2
+  criteria_id: 1
+  score: 7
+  response: Pros JSF is the way of the future- knowing it will be beneficial Cons everyone else is also learning JSF
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+resp5:
+  id: 5
+  idea_id: 2
+  criteria_id: 2
+  score: 6
+  response: Lots of clients will be using JSF.  By definition learning JSF will lead to JSF projects, not a variety of projects
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+resp6:
+  id: 6
+  idea_id: 2
+  criteria_id: 3
+  score: 8
+  response: Opportunities for training helps SAI recruit top candidates
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54

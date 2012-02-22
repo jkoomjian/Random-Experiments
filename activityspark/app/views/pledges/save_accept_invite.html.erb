@@ -1,0 +1,13 @@
+
+<% if @pledge.curr_num_pledged.to_i >= @pledge.num_people_required.to_i %>
+	<h2>The Activity Is On!</h2>
+<% else %>
+	<h2>Invite Your Friends!</h2>
+<% end %>
+
+
+# People Pledged: <%= @pledge.curr_num_pledged %> <br />
+# People Remaining to Tip Activity: <%= @pledge.num_people_required.to_i - @pledge.curr_num_pledged.to_i %> <br />
+
+Activity Title: <%= @pledge.title %> <br />
+Activity Location: <%= @pledge.location %> <br/>

@@ -1,0 +1,7 @@
+<div>
+	<% for curr_criteria in @criterias %>
+		<%= link_to h(curr_criteria.title), :action => 'edit', :id => curr_criteria %>
+	<% end %>
+</div>
+
+<%= link_to '[+ Add Criteria]', :action => 'new' %>

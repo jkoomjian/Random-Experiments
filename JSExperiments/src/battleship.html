@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head></head>
+<body>
+
+<script type="text/javascript">
+
+var board = [[0,1,1,1,0],
+			 [0,0,0,0,1],
+			 [0,1,0,0,1],
+			 [0,1,0,0,1],
+			 [0,1,0,0,1]];
+
+//ship object
+var Ship = function(size) {
+	// this.coords = coords;
+	this.size = size;
+	this.hits = 0;
+	this.fire = function() {
+		this.hits++;
+		return (this.hits >= this.size) ? 'sink' : 'hit';
+	}
+};
+
+//ships hash
+var shipsLocations = {};
+
+function setup() {
+	var newShip = null; 
+	var i,j,k = 0;
+	var currShip = [];
+
+	var addShip = function() {
+		if (currShip.length > 1) {
+			newShip = new Ship(currShip.length);
+			for (k=0; k<currShip.length; k++) {
+				shipsLocations[ currShip[k] ] = newShip;
+			}
+		}
+		currShip = [];
+	}
+	
+	//find all horizontal ships
+	for (i=0; i<board.length; i++) {
+		for (j=0; j<board[i].length; j++) {
+			if (board[i][j]) {
+				// console.log("pushing " + i + " " + j);
+				currShip.push( [j, i] );
+			} else {
+				addShip();
+			}
+		}
+		addShip();
+	}
+
+	//add vertical ships
+	for (i=0; i<board[0].length; i++) {
+		for (j=0; j<board.length; j++) {
+			if (board[j][i]) {
+				// console.log("pushing " + i + " " + j);
+				currShip.push( [i, j] );
+			} else {
+				addShip();
+			}
+		}
+		addShip();
+	}
+	
+}
+
+
+//takes coordinates, returns 'miss', 'hit', or 'sink'
+function shoot(x, y) {
+	if (shipsLocations[ [x,y] ]) {
+		document.write("<br>" + shipsLocations[ [x,y] ].fire() );
+	} else {
+		document.write("<br> miss" );
+	}
+}
+
+/********* TEST *************/
+function testSetup() {
+	console.dir(shipsLocations);
+}
+
+setup();
+testSetup();
+shoot(0,0);
+shoot(1,0);
+shoot(2,0);
+shoot(3,0);
+shoot(4,0);
+document.write("<br>");
+shoot(1,0);
+shoot(1,1);
+shoot(1,2);
+shoot(1,3);
+shoot(1,4);
+document.write("<br>");
+shoot(4,0);
+shoot(4,1);
+shoot(4,2);
+shoot(4,3);
+shoot(4,4);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="title">
+	<a href="/">
+		<%=image_tag 'lightbulb.gif' %>
+		<h1>Idea Organizer</h1>
+	</a>
+</div>
+
+<div class="navigation">
+	<% if @current_user %>
+		<%= link_to 'Home', :controller => 'ideas', :action => 'list' %>
+		<%= link_to 'New Idea', :controller => 'ideas', :action => 'new' %>
+		<%= link_to 'Criteria', :controller => 'criteria', :action => 'list' %>
+		<%= link_to 'Account', :controller => 'account', :action => 'change_password' %>
+		<%= link_to 'Logout', :controller => 'account', :action => 'logout' %>
+	<% end %>
+	<div class="clearer"><span></span></div>
+</div>

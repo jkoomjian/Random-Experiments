@@ -1,0 +1,89 @@
+// Place all the styles related to the index controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body 
+{
+    margin:0 auto;
+    text-align:center;
+}
+
+#mainContent 
+{
+    width:800px;
+    margin:0 auto;
+    text-align:left;
+}
+
+#logoLoginNav
+{
+        margin-top:25px;
+}
+
+#logo 
+{
+    width:110px;
+
+    float:left;
+}
+
+#login 
+{
+    width:60px;
+    float:right;
+    text-align:right;
+}
+
+#login a 
+{
+    text-decoration:none;
+}
+
+#nav 
+{
+    width:500px;
+    float:right;
+    position:relative;
+    top:76px;   
+}
+
+.navLink
+{
+    float:left;
+    width:100px;
+    text-align:center;
+}
+
+#fbFeatured
+{
+    width:620px;
+	padding:10px;
+	position:relative;
+	z-index:0;
+	top:93px; 
+	margin-left:120px;
+}
+
+#fbfriends
+{
+    width:280px;
+    text-align:center;
+    float:left;
+   
+}
+
+#featuredEvents
+{
+    width:280px;
+    text-align:center;
+    float:left;
+}
+
+#legal
+{
+    text-align:right;
+    position:relative;
+    top:200px;
+    width:800px;
+    float:right;
+    font-size:8pt;
+}

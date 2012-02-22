@@ -1,0 +1,178 @@
+<html>
+<head>
+
+
+
+<script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="slides.min.jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="slider.css" />
+
+<link rel="stylesheet" href="site.css" />
+
+<script>
+    $(function () {
+        $("#slides").slides({
+            play:5000,
+            pause: 2500,
+            hoverPause:true
+        });
+    });
+</script>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({ appId: '228200900604340',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            oauth: true
+        });
+
+        function updateButton(response) {
+            if (response.authResponse) {
+                //user is already logged in and connected
+                var userInfo = document.getElementById('user-info');
+                FB.api('/me', function (response) {
+                    userInfo.innerHTML = '<img src="https://graph.facebook.com/'
+	  + response.id + '/picture">' + response.name;
+                    button.innerHTML = 'Logout';
+                });
+                button.onclick = function () {
+                    FB.logout(function (response) {
+                        var userInfo = document.getElementById('user-info');
+                        userInfo.innerHTML = "";
+                        var friendList = document.getElementById('friends-list');
+                        friendList.innerHTML = "";
+                        button.innerHTML = 'Login';
+                    });
+                };
+            } else {
+                //user is not connected to your app or logged out
+
+            }
+        }
+
+        // run once with current status and whenever the status changes
+        //FB.getLoginStatus(updateButton);
+        FB.getLoginStatus(function (response) {
+            if (response.authResponse) {
+                // logged in and connected user, someone you know
+                //alert('logged in');
+            } else {
+                // no user session available, someone you dont know
+                //alert('not');
+            }
+        });
+
+
+        FB.Event.subscribe('auth.statusChange', updateButton);
+
+        var button = document.getElementById('fb-auth');
+        button.innerHTML = 'Login';
+        button.onclick = function () {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    // login attempt...
+                    FB.api('/me', function (response) {
+                        var userInfo = document.getElementById('user-info');
+                        userInfo.innerHTML =
+                '<img src="https://graph.facebook.com/'
+	        + response.id + '/picture" style="margin-right:5px"/>'
+	        + response.name;
+                    });
+
+                    // List your friends name and photo...
+                    FB.api('/me/friends', function (response) {
+                        var friendslist = document.getElementById('friends-list');
+                        var data = response.data;
+
+                        for (var friendIndex = 0; friendIndex < data.length && 200; friendIndex++) {
+                            var divContainer = document.createElement("div");
+                            divContainer.innerHTML = '<table style="width: 100%;text-align:left;"><tr>'
+                                + '<td style="width: 250px">'
+                                + '<img src="https://graph.facebook.com/'
+	                            + data[friendIndex].id + '/picture" style="margin-right:5px"/><b>'
+                                + data[friendIndex].name + '</b></td>'
+                                + '<td><input id="' + data[friendIndex].id + '" type="checkbox" name="'
+                                + data[friendIndex].name + '" /></td></tr></table>';
+                            friendslist.appendChild(divContainer);
+                        }
+                    });
+                } else {
+                    //user cancelled login or did not grant authorization
+                }
+            }, { scope: 'email' });
+        }
+    };
+    $(document).ready(function() {
+    (function () {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol
+    + '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    } ());
+});
+</script>
+
+</head>
+
+<body>
+<div id="fb-root"></div>
+    <div id="mainContent">
+        <div id="logoLoginNav">
+            <div id="logo"><img src="thumbnail.jpg" alt="Our Logo" width="100px"/></div>
+            <div id="user-info"></div>
+            <div id="login"><button id="fb-auth">login</button></div>
+            <div id="nav">
+                <div class="navLink">Home</div> 
+                <div class="navLink">Tour</div>
+                <div class="navLink">About Us</div> 
+                <div class="navLink">Blog</div>
+            </div>
+        </div>
+
+        <div style="text-align:center">
+	        <div id="container">
+		        <div id="example">
+			        <div id="slides">
+				        <div class="slides_container">
+					        <div class="slide">
+						        <img src="slide1.jpg" alt="Slide 1">
+					        </div>
+					        <div class="slide">
+						        <img src="slide2.jpg" alt="Slide 2">
+					        </div>
+					        <div class="slide">
+						        <img src="slide3.jpg" alt="Slide 3">
+					        </div>
+				        </div>
+			        </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fbFeatured">
+            <div id="fbFriends">
+                <h3>Facebook Friend Activity</h3>
+            </div>
+
+            <div id="featuredEvents">
+                <h3>Featured Items:</h3>
+                <ul>
+                    <li><a href="eventdetails.html"> Featured Item 1</a></li>
+                    <li>Feature Item 2</li>
+                    <li>Feature Item 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="friends-list"></div>
+        
+        <div id="legal">About Us | Privacy Policy | Terms & Conditions | &copy; Our Company, Inc 2012 - All rights reserved</div>
+    
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+<h1>Edit <%=h @idea.title %></h1>
+
+<% form_tag :action => 'update', :id => @idea do %>
+  <%= render :partial => 'form' %>
+  <div class="section_footer">
+	  <%= submit_tag 'Save', :class => 'action_button' %>
+  </div>
+
+<% end %>

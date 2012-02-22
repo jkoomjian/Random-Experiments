@@ -1,0 +1,34 @@
+<div class="content_table idea_header">
+
+  <h1>My Ideas</h1>
+	
+  <% for idea in @ideas %>
+		<div class="idea_entry">
+		  <h2><%= h(idea.score) %></h2>/100 - 
+			<span class="idea_title"><%= link_to h(idea.title), :action => 'show', :id => idea %></span>
+			<br />
+		 	Updated: <%= rel_time(idea.updated_at) %>
+		 	<br />
+		 	Tags:&nbsp;
+			<% for tag in idea.tags %>
+			  <%= link_to h(tag.name), :action => 'list', :id => tag %>&nbsp;
+			<% end %>
+    </div>
+  <% end %>
+	
+	<div class="section_footer">
+		<% if @idea_pages -%>
+			<%= link_to 'Previous page', { :page => @idea_pages.current.previous } if @idea_pages.current.previous %>
+			<%= link_to 'Next page', { :page => @idea_pages.current.next } if @idea_pages.current.next %> 
+		<% end -%>
+		
+    <br /><br/>
+  </div>
+</div>
+
+<div id="tags" class="secondary_list">
+	<h3>Tags</h3>
+	<% for tag in @current_user.tags %>
+		<div class="tag_listing"><%= link_to h(tag.name), :action => 'list', :id => tag %></div>
+	<% end %>
+</div>

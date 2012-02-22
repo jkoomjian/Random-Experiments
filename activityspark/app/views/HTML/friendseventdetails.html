@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title></title>
+    <script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="jquery.ui.core.min.js" type="text/javascript"></script>
+    <script src="jquery.ui.widget.min.js" type="text/javascript"></script>
+    <script src="jquery.ui.progressbar.min.js" type="text/javascript"></script>
+    <link rel="Stylesheet" href="jquery.ui.all.css" />
+    <link rel="stylesheet" href="site.css" />
+
+    <script type="text/javascript"">
+        $(document).ready(function () {
+            $("#progressbar").css({ 'width': '150px', 'height':'25px' }).progressbar({ value: 24 }).find("div").css({ 'height': '97%' });
+        });
+    
+    </script>
+</head>
+
+<body>
+    <div id="mainContent">
+        <div id="logoLoginNav">
+            <div id="logo"><img src="thumbnail.jpg" alt="Our Logo" width="100px"/></div>
+            <div id="login"><a href="#"> Login In</a></div>
+            <div id="nav">
+                <div class="navLink">Home</div> 
+                <div class="navLink">Tour</div>
+                <div class="navLink">About Us</div> 
+                <div class="navLink">Blog</div>
+            </div>
+        </div>
+        <div>
+        <h2>Event Details</h2>
+        </div>
+        <div>
+            <div style="float:left;"><img src="thumbnail.jpg" width="75px" /></div>
+            <div id="eventDetailsContainer">
+                <div><div class="eventDetailLabel">Title:</div> <div class="eventDetailValue">EventTitle</div></div>
+                <div><div class="eventDetailLabel">Location:</div> <div class="eventDetailValue">Location</div></div>
+                <div><div class="eventDetailLabel">Date/Time:</div> <div class="eventDetailValue">Date/Time</div></div>
+                <div><div class="eventDetailLabel">Price:</div> <div class="eventDetailValue">Price</div></div>
+                <div><div class="eventDetailLabel">Description:</div> <div class="eventDetailValue">Desc</div></div>
+            </div>
+            <div id="friendEventDetailBox">
+                <div id="eventDetailsHeader">Event Details</div>
+                <div># of Invitations Sent:</div>
+                <div>Pledge Min</div><br />
+                <div style="font-size:30px;font-weight:bold;">24%</div><br />
+                    <div id="progressbar"></div>
+                    <br />
+                <div style="font-size:20px;"><a href="CheckOut.htm">Join Event</a></div>
+            </div>
+        </div>
+
+        <div id="legal">About Us | Privacy Policy | Terms & Conditions | &copy; Our Company, Inc 2012 - All rights reserved</div>
+    
+    </div>
+
+
+</body>
+
+</html>

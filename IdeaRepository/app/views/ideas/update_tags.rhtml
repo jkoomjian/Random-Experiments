@@ -1,0 +1,2 @@
+<%- is_first = :true -%>
+<%- for tag in @idea.tags %><%- if is_first then is_first = nil else %>,&nbsp;<% end %><%= tag.name %><%- end %>

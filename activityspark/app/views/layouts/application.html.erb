@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activity Spark</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+	<style type="text/css">
+	.form .field label {display: inline-table; width: 130px; margin-top: 5px;}
+	.form .field label.wide{width: auto;}
+	.form h1, h1.form {text-align: center; font-size: 2em; font-weight: bold;}
+	.form h2, h2.form {font-weight: bold;}
+	.form textarea {width: 500px; height: 100px;}
+</style>
+
+<map name="FPMap0" id="FPMap0">
+<area href="/events" shape="polygon" coords="405, 72, 472, 71, 472, 97, 409, 97" />
+<area href="/aboutus" shape="polygon" coords="487, 73, 551, 72, 551, 98, 488, 98" />
+</map>
+
+
+ <div id="mainContent">
+  <div><%= image_tag "Header2.png", :usemap => "#FPMap0"%></div>
+  
+   <%= yield %>
+
+    <div id="legal">About Us | Privacy Policy | Terms &amp; Conditions | &copy; Our Company, Inc 2012 - All rights reserved</div>
+</div>
+ 
+</body>
+</html>

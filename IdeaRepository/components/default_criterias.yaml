@@ -1,0 +1,48 @@
+-
+  title: Personal Demand
+  description: How useful is it to you, how badly do you want it?
+  weight: 100
+  active: Y
+  criteria_order: 0
+- 
+  title: World Demand
+  description: How useful is it to the world, how badly does world want it?
+  weight: 100
+  active: Y
+  criteria_order: 1
+- 
+  title: Innovation
+  description: What's new and innovative about what you are doing? What are people forced to do now because your product doesn't exist yet? Is your idea both unique and useful?
+  weight: 100
+  active: Y
+  criteria_order: 2
+- 
+  title: Competition
+  description: Who are or may become your competitors, how strong are they, how close are they to your idea? What's stopping them from duplicating your product?
+  weight: 100
+  active: Y
+  criteria_order: 3
+- 
+  title: Marketing
+  description: Are their build in marketing channels you could use, or will you have to create your own?
+  weight: 100
+  active: Y
+  criteria_order: 4
+- 
+  title: Money
+  description: How will you make money? Any easy revenue channels (ex. adsense, affiliate programs)?
+  weight: 100
+  active: Y
+  criteria_order: 5
+- 
+  title: Estimate
+  description: How long will it take to build a releasable product?
+  weight: 100
+  active: Y
+  criteria_order: 6
+- 
+  title: Pitfalls
+  description: Any major showstoppers (ex. legal issues, is google working on it?, dependent on success of others)?
+  weight: 100
+  active: Y
+  criteria_order: 7

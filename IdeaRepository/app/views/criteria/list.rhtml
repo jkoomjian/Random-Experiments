@@ -1,0 +1,38 @@
+<div class="content_table">
+
+	<h1>My Criteria</h1>
+
+	<table>
+	  <!--tr>
+	    <th>Title</th>
+	    <th>Description</th>
+	    <th>Weight</th>
+	    <th>Updated</th>
+	  </tr-->
+	  
+	<% for criteria in @criterias %>
+	  <tr>
+	    <td>
+	    	<h2><%=h criteria.title %></h2>
+	    	<br />
+		    <b><%= link_to text_to_html(criteria.description), :action => 'show', :id => criteria %></b>
+		    <br />
+		    Wieght: <%=h criteria.weight %>%
+		    <br />
+	    	Updated: <%=rel_time criteria.updated_at %>
+	    </td>
+	  </tr>
+	<% end %>
+	</table>
+	
+	<div class="section_footer">
+		<%= link_to 'Previous page', { :page => @criteria_pages.current.previous } if @criteria_pages.current.previous %>
+		<%= link_to 'Next page', { :page => @criteria_pages.current.next } if @criteria_pages.current.next %> 
+	
+		<br />
+	
+		<b><%= link_to 'New criteria', :action => 'new' %></b>
+		
+	</div>
+
+</div>

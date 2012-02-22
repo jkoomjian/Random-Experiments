@@ -1,0 +1,193 @@
+/* #### Page Style #### */
+
+.navigation a:visited {
+color:#FFFFFF;
+}
+
+.content h1 {
+    color:#0066CC;
+    padding: 10px;
+    font-size: 3.25em;
+    line-height: 1.45;
+}
+
+.content h2 {
+    color:#EE7733;
+    font-weight: bold;
+    padding: 0;
+    display: inline;
+    font-size: 2.0em;
+}
+
+.content h3 {
+    color:#EE7733;
+    font-weight: bold;
+    padding: 10px 0;
+    font-size: 1.2em;
+}
+
+textarea {
+    height: 100px;
+}
+
+.section_footer {
+    text-align: center;
+}
+
+.action_button {
+    width: 125px;
+    height: 40px;
+    font-size: 120%;
+	font-weight: bold;
+}
+
+/* #### Layout #### */
+.content {
+}
+
+.secondary_list {
+    display: inline;
+    float: left;
+    margin-left: 25px;
+}
+
+.content_table {
+    width: 50%;
+    /*margin-left: 20%;*/
+    float: left;
+}
+
+.content_table h1 {
+    margin-left: 20px;
+}
+
+.content_table table {
+    width: 100%;
+}
+
+/*.content_table table th {
+    text-align: left;
+    padding: 5px 0 5px 5px;
+    background-color: #EE7733;
+    background-color: #DEFE92;
+    background-color: #CEFE5D;
+    background-color: #ECFEC2;
+}*/
+
+.content_table table td {
+    padding: 5px 0 20px 5px;
+}
+
+.number_field {
+    width: 30px;
+}
+
+.medium_field {
+    width: 200px;
+}
+
+.medium_large_field {
+	width: 50%;
+}
+
+/* ### Added ### */
+
+/* List Page */
+
+.idea_title {
+	font-weight: bold;
+	font-size: 1.6em;
+}
+
+.idea_entry {
+	padding: 20px 0;
+}
+
+
+.idea_header h1 {
+	padding: 20px 40px;
+}
+
+.idea_attr {
+	padding: 2px 0;
+}
+
+.idea_attr_title {
+	/*color: #E73;*/
+	/*height: 20px;*/
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.idea_status {
+	display: none;
+	margin-left: 20px;
+	padding: 3px 10px;
+	font-weight: bold;
+	background-color: #FFFF99;
+}
+
+.idea_attr_score_value {
+	color: #E73;
+	font-size: 250%;
+}
+
+.idea_attr_summary {
+	margin: 10px 0 5px 0;
+	padding: 10px 0 10px 0;
+}
+
+.idea_attr_summary_title {
+	display: block;
+	border-bottom: 1px dashed #DDD;
+}
+
+.idea_criteria {
+	padding: 10px 0px;
+	margin: 5px 0px;
+}
+
+.idea_criteria_title {
+	display: block;
+}
+
+.idea_criteria_description {
+	/*padding-left: 10px;*/
+	display: block;
+	border-bottom: 1px dashed #DDD;
+}
+
+.idea_criteria_score {
+	padding-left: 10px;
+}
+
+.idea_criteria_score_value {
+	color: #E73;
+	/*font-weight: bold;*/
+	font-size: 150%;
+}
+
+.idea_criteria_response {
+	padding-left: 10px;
+}
+
+.display_text {
+	display: inline;
+}
+
+.editable_text {
+	display: none;
+}
+
+.editable_text_area {
+	width: 90%;
+	margin: 5px;
+}
+
+.idea_text_box {
+	width: 60%;
+}
+
+.summary_text_box {
+	height: 150px;
+}

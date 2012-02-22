@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  host_id: 1
+  total_price: 9.99
+  price_per_person: 9.99
+  num_people_required: 1
+  max_num_people: 1
+  time: 2012-02-18
+  deal_deadline: 2012-02-18
+  notes: MyString
+  curr_num_pledged: 1
+  status: 1
+  location: MyString
+
+two:
+  title: MyString
+  host_id: 1
+  total_price: 9.99
+  price_per_person: 9.99
+  num_people_required: 1
+  max_num_people: 1
+  time: 2012-02-18
+  deal_deadline: 2012-02-18
+  notes: MyString
+  curr_num_pledged: 1
+  status: 1
+  location: MyString

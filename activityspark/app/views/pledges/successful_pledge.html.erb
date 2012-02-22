@@ -1,0 +1,29 @@
+<div id="pageBodyContainer">
+
+Event Title <%= @pledge.title %> <br />
+Event Location <%= @pledge.location %> <br/>
+Total Price <%= @pledge.total_price %> <br />
+Price/Person <%= @pledge.price_per_person %> <br />
+# People Required <%= @pledge.num_people_required %> <br />
+Max # People <%= @pledge.max_num_people %> <br />
+Date <%= @pledge.time %> <br />
+Deadline <%= @pledge.deal_deadline %> <br />
+# People Pledged <%= @pledge.curr_num_pledged %> <br />
+<br>
+My Info:<br/>
+First Name <%= @pledge.get_host.first_name %> <br />
+Last Name <%= @pledge.get_host.last_name %> <br />
+Email <%= @pledge.get_host.email_addr %> <br />
+Street <%= @pledge.get_host.street_addr %> <br />
+City <%= @pledge.get_host.city %> <br />
+State <%= @pledge.get_host.state %> <br />
+Zip <%= @pledge.get_host.zip %> <br />
+Phone <%= @pledge.get_host.phone %> <br />
+<br/>
+My Friends<br/>
+<% @pledge.participants.each {|p| %>
+	Email: <%= p.email_addr %><br/>
+<% } %>
+<br />
+
+</div>

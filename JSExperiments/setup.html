@@ -1,0 +1,73 @@
+<html>
+	<head> 
+		<script type="text/javascript" src="http://www.printwhatyoulike.com/site/js/site.js"></script> 
+	</head
+	<body>
+		<h2>Walkabout</h2>
+		<a href="test/walkabout_test.html">Test Walkabout</a>
+		
+		<a href="" id="walkabout">Walkabout</a>
+	
+		<script type="text/javascript" id="walkabout_loader"> 
+			function launchBookmarklet(){
+				addJs = function(jsFileName) {
+					window._page_zipper=document.createElement('script');
+					window._page_zipper.type='text/javascript';
+					window._page_zipper.src='http://localhost/jsfun/src/'+jsFileName;
+					document.getElementsByTagName('head')[0].appendChild(window._page_zipper);
+				};
+				addJs('jquery.js');
+				addJs('walkabout.js');
+			}
+		</script> 
+		<script type="text/javascript"> 
+			generateBookmarkletLink("walkabout_loader", "walkabout");
+		</script>
+		
+		<hr>
+		
+		<h2>Exploder</h2>
+		<a href="test/exploder_test.html">Test Exploder</a>
+		<a href="" id="exploder">Exploder</a>
+		
+		<script type="text/javascript" id="exploder_loader"> 
+			function launchBookmarklet(){
+				addJs = function(jsFileName) {
+					window._page_zipper=document.createElement('script');
+					window._page_zipper.type='text/javascript';
+					window._page_zipper.src='http://localhost/jsfun/src/'+jsFileName;
+					document.getElementsByTagName('head')[0].appendChild(window._page_zipper);
+				};
+				addJs('jquery.js');
+				addJs('exploder.js');
+			}
+		</script> 
+		<script type="text/javascript"> 
+			generateBookmarkletLink("exploder_loader", "exploder");
+		</script>
+		
+		<hr>
+		
+		<h2>Amazon Shipping Label Generator</h2>
+		<a href="test/amz_package_label.html">Test Amazon Package Slip</a>
+		<a href="" id="amz_label_generator">Amz Label Generator</a>
+		
+		<script type="text/javascript" id="amz_label_gen_loader"> 
+			function launchBookmarklet(){
+				addJs = function(jsFileName, defer) {
+					window._aslg=document.createElement('script');
+					window._aslg.type='text/javascript';
+					window._aslg.src='http://localhost/jsfun/src/'+jsFileName;
+					if (defer) window._aslg.defer='true';
+					document.getElementsByTagName('head')[0].appendChild(window._aslg);
+				};
+				addJs('jquery.js');
+				addJs('amz_shipping_label.js', true);
+			}
+		</script> 
+		<script type="text/javascript"> 
+			generateBookmarkletLink("amz_label_gen_loader", "amz_label_generator");
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,3 @@
+<div class="idea_criteria_score">Score: <span class="idea_criteria_score_value"><%=h @criteria_response.score %></span>/10</div>
+<div class="idea_criteria_response"><%=text_to_html @criteria_response.response %></div>
+<span id="idea_attr_criteria_<%=@criteria_response.id%>_score" style="display: none;"><%=@criteria_response.idea.score%></span>

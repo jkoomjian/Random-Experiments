@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+hit_idea:
+  id: 1
+  user_id: 3
+  title: Hit
+  score: 0
+  summary: Online procurement system developed in-house
+  additional_thoughts: 
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54
+jsf_idea:
+  id: 2
+  user_id: 3
+  title: JSF Training
+  score: 0
+  summary: Provide training courses to get 8 employees proficient in JSF
+  additional_thoughts: 
+  created_on: 2007-03-26 18:34:54
+  updated_at: 2007-03-26 18:34:54

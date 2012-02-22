@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @pledge.title %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%= @pledge.host_id %>
+</p>
+
+<p>
+  <b>Total price:</b>
+  <%= @pledge.total_price %>
+</p>
+
+<p>
+  <b>Price per person:</b>
+  <%= @pledge.price_per_person %>
+</p>
+
+<p>
+  <b>Num people required:</b>
+  <%= @pledge.num_people_required %>
+</p>
+
+<p>
+  <b>Max num people:</b>
+  <%= @pledge.max_num_people %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @pledge.time %>
+</p>
+
+<p>
+  <b>Deal deadline:</b>
+  <%= @pledge.deal_deadline %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @pledge.notes %>
+</p>
+
+<p>
+  <b>Curr num pledged:</b>
+  <%= @pledge.curr_num_pledged %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @pledge.status %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @pledge.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_pledge_path(@pledge) %> |
+<%= link_to 'Back', pledges_path %>

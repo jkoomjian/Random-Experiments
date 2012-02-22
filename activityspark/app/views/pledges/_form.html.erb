@@ -1,0 +1,118 @@
+<%= stylesheet_link_tag "jquery.ui.all" %>
+<%= stylesheet_link_tag "site" %>
+<%= stylesheet_link_tag "jquery.ui.core" %>
+<%= stylesheet_link_tag "jquery.ui.datepicker" %>
+<%= javascript_include_tag "jquery.ui.core.min" %>
+<%= javascript_include_tag "jquery.ui.datepicker.min" %>
+
+<style type="text/css">
+#text1
+{
+width: 180px;
+}
+#text2
+{
+width: 338px;
+}
+#text3
+{
+width: 120px;
+}
+#text6
+{
+width: 202px;
+}
+#TextArea1
+{
+width: 380px;
+height: 58px;
+}
+.style1
+{
+    margin-left: 40px;
+}
+#Submit1
+{
+width: 102px;
+}
+#text4
+{
+width: 70px;
+}
+#text5
+{
+width: 71px;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function () {
+        $("#instanceExpirationDate").datepicker();
+        });
+</script>
+
+<%= form_for(@pledge) do |f| %>
+  <% if @pledge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
+
+      <ul>
+      <% @pledge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :host_id %><br />
+    <%= f.number_field :host_id %>
+  </div>
+  <div class="field">
+    <%= f.label :total_price %><br />
+    <%= f.text_field :total_price %>
+  </div>
+  <div class="field">
+    <%= f.label :price_per_person %><br />
+    <%= f.text_field :price_per_person %>
+  </div>
+  <div class="field">
+    <%= f.label :num_people_required %><br />
+    <%= f.number_field :num_people_required %>
+  </div>
+  <div class="field">
+    <%= f.label :max_num_people %><br />
+    <%= f.number_field :max_num_people %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.date_select :time %>
+  </div>
+  <div class="field">
+    <%= f.label :deal_deadline %><br />
+    <%= f.date_select :deal_deadline %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br />
+    <%= f.text_field :notes %>
+  </div>
+  <div class="field">
+    <%= f.label :curr_num_pledged %><br />
+    <%= f.number_field :curr_num_pledged %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Continue' %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+
+        <div style="text-align:center">
+	        <div id="container">
+		        <div id="example">
+			        <div id="slides">
+				        <div class="slides_container">
+					        <div class="slide">
+							<%= image_tag "slide1.jpg", :alt => "slide1" %>
+					        </div>
+					        <div class="slide">
+							<%= image_tag "slide2.jpg", :alt => "slide2" %>
+					        </div>
+					        <div class="slide">
+							<%= image_tag "slide3.jpg", :alt => "slide3" %>
+					        </div>
+				        </div>
+			        </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fbFeatured">
+            <div id="fbFriends">
+                <h3>Facebook Friend Activity</h3>
+            </div>
+
+            <div id="featuredEvents">
+                <h3>Featured Items:</h3>
+                <ul>
+			<% @events.each do |event| %>
+				<li><% event_path(event) %></li>
+		    	<% end %>
+                </ul>
+            </div>
+        </div>

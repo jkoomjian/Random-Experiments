@@ -1,0 +1,106 @@
+
+    <%= stylesheet_link_tag "site" %>
+    <%= stylesheet_link_tag "jquery.ui.core" %>
+    <%= stylesheet_link_tag "jquery.ui.datepicker" %>
+    <%= javascript_include_tag "jquery.ui.core.min" %>
+    <%= javascript_include_tag "jquery.ui.datepicker.min" %>
+
+    <style type="text/css">
+        #text1
+        {
+            width: 180px;
+        }
+        #text2
+        {
+            width: 338px;
+        }
+        #text3
+        {
+            width: 120px;
+        }
+        #text6
+        {
+            width: 202px;
+        }
+        #TextArea1
+        {
+            width: 380px;
+            height: 58px;
+        }
+        .style1
+        {
+            margin-left: 40px;
+        }
+        #Submit1
+        {
+            width: 102px;
+        }
+        #text4
+        {
+            width: 70px;
+        }
+        #text5
+        {
+            width: 71px;
+        }
+        .form_table td{
+            padding-top: 3px;
+        }
+    </style>
+<div id="pageBodyContainer">
+<%= form_for :pledge, :url=>{:action => :create, :id => @pledge} do |f| %>
+  <% if @pledge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pledge.errors.count, "error") %> prohibited this pledge from being saved:</h2>
+
+      <ul>
+      <% @pledge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div style="text-align:center;padding-top:20px;padding-bottom:20px;font-weight:bold;font-size:20px;">
+<h1>Spark an Activity!</h1>
+</div>
+<div style="text-align:left;margin-left:50px;">
+	<table style="width: 100%" class="form_table">
+
+	<tr>
+	    <td style="width: 241px;height: 26px;"><%= f.label :title %></td>
+	    <td><%= f.text_field :title, :disabled => "disabled"%></td>
+	</tr>
+  <tr>
+    <td><%= f.label 'Time of event' %></td>
+    <td><%= f.text_field :time, :id => "select_time" %></td>
+  </tr>
+  <tr>
+	  <td class="field"><%= f.label 'Location of event' %></td>
+	  <td><%= f.text_field :location, :disabled => "disabled" %></td>
+  </tr>
+  <tr>
+  	<td class="field"><%= f.label '# of people required' %></td>
+	<td><%= f.number_field :num_people_required %></td>
+  </tr>
+  <tr>
+	  <td class="field"><%= f.label 'Max Friends' %></td>
+	  <td><%= f.number_field :max_num_people %></td>
+  </tr>
+  <tr>
+	  <td class="field"><%= f.label 'Estimated Cost' %></td>
+	  <td><%= f.text_field :total_price %></td>
+  </tr>
+  <tr>
+	  <td class="field"><%= f.label 'Expiration Date' %></td>
+	  <td><%= f.text_field :deal_deadline, :id => "select_time" %></td>
+  </tr>
+	<tr> 
+  		<td class="actions" colspan="2">
+        <br/>
+    	<%= f.submit 'Spark It!' %>
+  		</td>
+    </tr>
+  </table>
+</div>
+<% end %>
+</div>

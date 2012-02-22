@@ -1,0 +1,16 @@
+<h2>Hi! <%= @participant.email_addr %></h2>
+
+Activity Title <%= @pledge.title %> <br />
+Activity Location <%= @pledge.location %> <br/>
+Your Cost <%= @pledge.price_per_person %> <br />
+Date <%= @pledge.time %> <br />
+Deadline <%= @pledge.deal_deadline %> <br />
+# People Pledged <%= @pledge.curr_num_pledged %> <br />
+# People Required to Tip Deal <%= @pledge.num_people_required %> <br />
+<div style="text-align:center; font-size: 2em;">
+<%= form_for @participant, :url=>{:action=>:save_accept_invite, :id=>@pledge.id} do |f| %>
+  <div class="actions">
+    <%= f.submit 'Continue' %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pledge_id: 
+  participant_id: 1
+  note: MyString
+
+two:
+  pledge_id: 
+  participant_id: 1
+  note: MyString

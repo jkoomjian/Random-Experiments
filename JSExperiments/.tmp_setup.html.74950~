@@ -1,0 +1,25 @@
+<html>
+	<head> 
+		<script type="text/javascript" src="http://www.printwhatyoulike.com/site/js/site.js"></script> 
+	</head
+	<body>
+	
+		<a href="" id="walkabout">Walkabout</a>
+	
+		<script type="text/javascript" id="walkabout_loader"> 
+			function launchBookmarklet(){
+				addJs = function(jsFileName) {
+					window._page_zipper=document.createElement('script');
+					window._page_zipper.type='text/javascript';
+					window._page_zipper.src='http://localhost/walkabout/src/'+jsFileName;
+					document.getElementsByTagName('head')[0].appendChild(window._page_zipper);
+				};
+				addJs('jquery.js');
+				addJs('walkabout.js');
+			}
+		</script> 
+		<script type="text/javascript"> 
+			generateBookmarkletLink("walkabout_loader", "walkabout");
+		</script>
+	</body>
+</html>

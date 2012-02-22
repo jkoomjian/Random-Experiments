@@ -1,0 +1,56 @@
+<div id="pageBodyContainer">
+<%= form_for :participant, :url => { :action => :save_payment, :pledge_id => @pledge.id} do |f| %>
+
+<div class="form">
+  <h1>Add Payment Info</h1>
+
+  <div class="field">
+    <%= f.label 'First Name' %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Last Name' %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label 'Email Address' %>
+    <%= f.text_field :email_addr %>
+  </div>
+  <div class="field">
+    <%= f.label 'Street Address' %>
+    <%= f.text_field :street_addr %>
+  </div>
+  <div class="field">
+    <%= f.label 'City' %>
+    <%= f.number_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label 'State' %>
+    <%= f.number_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label 'Zip Code' %>
+    <%= f.text_field :zip %>
+  </div>
+  <h2>Credit Card Information</h2>
+  <div class="field">
+    <%= f.label 'Card Number' %>
+    <%= f.text_field :cc %>
+  </div>  
+  <div class="field">
+    <%= f.label 'Expiration Date (MM/YY)' %>
+    <%= f.text_field :expiration_dt %>
+  </div>
+  <h2>Contact Information</h2>
+  <div class="field">
+    <%= f.label 'Phone' %>
+    <%= f.text_field :phone %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit 'Continue' %>
+  </div>
+  
+</div>
+<% end %>
+</div>

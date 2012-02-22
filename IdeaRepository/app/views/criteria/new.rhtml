@@ -1,0 +1,8 @@
+<h1>New criteria</h1>
+
+<!--%= render :partial => 'list_criterias' %-->
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create", :class => 'action_button' %>
+<% end %>

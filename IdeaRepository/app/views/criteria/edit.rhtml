@@ -1,0 +1,8 @@
+<h1>Edit <%=h @criteria.title %></h1>
+
+<!--%= render :partial => 'list_criterias' %-->
+
+<% form_tag :action => 'update', :id => @criteria do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Save', :class => 'action_button' %>
+<% end %>

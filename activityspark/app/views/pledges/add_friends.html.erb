@@ -1,0 +1,79 @@
+<script>
+    $("#friendCustomMessage").live("keyup",function () {
+        $("#customMsgTxt").html($("#friendCustomMessage").val());
+    });
+
+    function showCustomMessageField() {
+        $("#showCustomMessageOption").hide();
+        $("#customMessageTextBox").show();
+    }
+
+    var friendEmailAddressBoxRows = 2
+    $(document).ready(function () {
+       ;
+        $("#friendEmailAddreses").live("keyup", function (e) {
+            var keycode;
+            if (window.event) keycode = window.event.keyCode;
+            else if (e) keycode = e.which;
+            else return true;
+            if (keycode == 13) {
+                friendEmailAddressBoxRows += 1;
+                $("#friendEmailAddreses").attr("rows", friendEmailAddressBoxRows);
+            }
+        });
+
+    });
+    function updateMessage() {
+    	var html = $("#emailPreviewBox").html();
+    	$("#message_field")[0].value = html;
+    	return true;
+    }
+</script>
+<div id="pageBodyContainer">
+        <div style="text-align:center;">
+	<%= form_tag :action=>:save_friends, :id=>@pledge.id do %>
+			<input type="hidden" id="message_field" name="message" value=""/>
+            <div id="inviteFriendFormContents">
+                <div id="inviteYourFriendsHeader">
+                    <h2 class="form">Invite Your Friends</h2>
+                </div>
+                <div>
+                    <div id="emailAddressHeader">Email Addresses: (one email per line)</div>
+                    <div><textarea id="friendEmailAddreses" name="all_emails" cols="50" rows="2" style="width: 100%; height: 150px;"></textarea></div>
+                </div>
+                <div>
+                <br />
+                    <h2 class="form">Invite Message:</h2>
+                    <div id="emailPreviewBox">
+                        <p><%= @host.first_name %> (<%= @host.email_addr %>) has invited you to join this event.</p>
+                        <p>
+                            <b>Event Details:</b><br /><br />
+                            Title: <%= @pledge.title %><br />
+                            Location: <%= @pledge.location %><br />
+                            Date/Time: <%= @pledge.time %><br />
+                        </p>
+                        <p>
+                            <b><%= @host.first_name %>'s Message:</b>
+                            <div id="customMsgTxt"></div>
+                        </p>
+                        <p>
+                            <a href="http://www.activityspark.com/pledges/accept_invite/<%= params[:id] %>">Click here</a> to see more details and to join <%= @host.first_name %> at this event!
+                        </p>
+                        <p>
+                            Count me in!
+                        </p>
+                    </div>
+                </div>
+                <div onclick="showCustomMessageField()" id="showCustomMessageOption">Add Custom Message</div>
+                <div id="customMessageTextBox">
+                    <br />
+                    <div id="customMessageHeading">Custom Message:</div>
+                    <div><textarea id="friendCustomMessage" cols="50" rows="6"></textarea></div>
+                </div>
+                <div style="text-align:right;margin-top:20px;">
+                    <div><input type="submit" value="Checkout" id="sendFriendInvites" onclick="updateMessage()"/></div>
+                </div>
+            </div>
+	<% end %>
+        </div>
+</div>

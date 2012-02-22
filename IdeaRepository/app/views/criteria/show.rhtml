@@ -1,0 +1,24 @@
+<h1><%=h @criteria.title %></h1>
+
+<p>
+  <b>Description:</b> <%=text_to_html @criteria.description %>
+</p>
+
+<p>
+  <b>Weight:</b> <%=h @criteria.weight %>%
+</p>
+
+<p>
+  <b>Active:</b> <%=h @criteria.active %>
+</p>
+
+<p>
+  <b>Created:</b> <%=rel_time @criteria.created_on %>
+</p>
+
+<p>
+  <b>Updated:</b> <%=rel_time @criteria.updated_at %>
+</p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @criteria %> |
+<%= link_to 'Delete', { :action => 'destroy', :id => @criteria }, :confirm => 'Are you sure?', :method => :post %>

@@ -1,0 +1,72 @@
+<script>
+    $("#friendCustomMessage").live("keyup",function () {
+        $("#customMsgTxt").html($("#friendCustomMessage").val());
+    });
+
+    function showCustomMessageField() {
+        $("#showCustomMessageOption").hide();
+        $("#customMessageTextBox").show();
+    }
+
+    var friendEmailAddressBoxRows = 2
+    $(document).ready(function () {
+        $("#friendEmailAddreses").live("keyup", function (e) {
+            var keycode;
+            if (window.event) keycode = window.event.keyCode;
+            else if (e) keycode = e.which;
+            else return true;
+            if (keycode == 13) {
+                friendEmailAddressBoxRows += 1;
+                $("#friendEmailAddreses").attr("rows", friendEmailAddressBoxRows);
+            }
+        });
+
+    });
+</script>
+
+        <div style="text-align:center;">
+	<%= form_for @pledge, :method => :put, :url => { :action => :check_out } do |f| %>
+            <div id="inviteFriendFormContents">
+                <div id="inviteYourFriendsHeader">
+                    <h2>Invite Your Friends</h2>
+                </div>
+                <div>
+                    <div id="emailAddressHeader">Email Addresses: (one email per line)</div>
+                    <div><textarea id="friendEmailAddreses" cols="50" rows="2"></textarea></div>
+                </div>
+                <div>
+                <br />
+                    Preview Message:
+                    <div id="emailPreviewBox">
+                        <p>Frank (email@address.com) has invited you to join him at this event.</p>
+                        <p>
+                            <b>Event Details:</b> <br /><br />
+                            Title: Title <br />
+                            Location: Location <br />
+                            Date/Time: Date/Time <br />
+                        </p>
+                        <p>
+                            <b>Frank's Message:</b>
+                            <div id="customMsgTxt"></div>
+                        </p>
+                        <p>
+                            <%= link_to "Click here", "#" %> to see more details and to join Frank at this event!
+                        </p>
+                        <p>
+                            Enjoy! <br />
+                            Count Me In!
+                        </p>
+                    </div>
+                </div>
+                <div onclick="showCustomMessageField()" id="showCustomMessageOption">Add Custom Message</div>
+                <div id="customMessageTextBox">
+                    <br />
+                    <div id="customMessageHeading">Custom Message:</div>
+                    <div><textarea id="friendCustomMessage" cols="50" rows="6"></textarea></div>
+                </div>
+                <div style="text-align:right;margin-top:20px;">
+                    <div><input type="submit" value="Continue to Checkout" id="sendFriendInvites" /></div>
+                </div>
+            </div>
+	<% end %>
+        </div>

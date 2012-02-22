@@ -1,0 +1,47 @@
+<%= error_messages_for 'idea' %>
+
+<!--[form:idea]-->
+<p><label for="idea_title">Title</label><br/>
+<%= text_field 'idea', 'title', :class => "idea_text_box" %></p>
+
+<% if @idea.score %>
+  <p>Overall Score: <%=h @idea.score %></p>
+<% end %>
+
+<% if @idea.created_on %>
+	<p>Created <%= rel_time @idea.created_on %></p>
+	<p>Updated <%= rel_time @idea.updated_at %></p>
+<% end %>
+
+<p>
+	<label for="idea_initial_score">Initial Score:&nbsp;</label>
+	<%= text_field 'idea', 'initial_score', :class => "number_field", :maxlength => 3 %>/100
+</p>
+
+<p><label for="idea_summary">Summary</label>&nbsp;&nbsp;<a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a><br/>
+<%= text_area 'idea', 'summary', :class => "idea_text_box summary_text_box"  %></p>
+
+<p>
+  <b>Tags:</b>
+  <span id="tagsList">
+	  <% is_first = :true -%>
+	  <% for tag in @idea.tags %>
+		<% if is_first then is_first = nil else %>,&nbsp;<% end %>
+		<%= tag.name %>
+	  <% end %>
+  </span>
+  <input type="text" id="tag_name" name="tag[][name]" class="medium_large_field" /><input type="button" value="Add" onclick="javascript:addTag('tagsList', 'tag_name')" />
+</p>
+
+<% # Note: you have to make criteria_response an instance variable -%>
+<% for @criteria_response in @idea.criteria_responses %>
+	<% if @criteria_response.criteria.active? %>
+		<p><b><%=h @criteria_response.criteria.title %></b><br/>
+		<%=text_to_html @criteria_response.criteria.description %><br/>
+		<% ## Rails saves entire sub collections of edited objects. Take that struts! -%>
+		Score: <%= text_field "criteria_response[]", 'score', :class => 'number_field', :maxlength => 2 %> From 10(strongest) - 0(weakest)<br/>
+		<%= text_area "criteria_response[]", 'response', :class => "idea_text_box" %><br/>
+		<%= hidden_field "criteria_response[]", 'criteria_id' %></p>
+	<% end %>
+<% end %>
+<!--[eoform:idea]-->

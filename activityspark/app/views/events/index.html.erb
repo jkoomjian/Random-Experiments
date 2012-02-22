@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activity Spark</title>
+  <map name="FPMap0" id="FPMap0">
+<area href="/events" shape="polygon" coords="405, 72, 472, 71, 472, 97, 409, 97" />
+<area href="/aboutus" shape="polygon" coords="487, 73, 551, 72, 551, 98, 488, 98" />
+</map>
+  <%= stylesheet_link_tag    "events" %>
+  <%= javascript_include_tag "events" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="mainContent">
+	<div id="frontpage-container">
+		<div id="frontpage-header" style="text-align:center">
+			<div id="slides">
+				<div class="slides_container">
+					<div><%= link_to :controller => :events, :action =>:show, :id => 1 do %><%= image_tag "LouieFoxx_small.png", :alt => "slide1"%><% end %></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="frontpage-content">
+	</div>
+
+
+<div id="legal">About Us | Privacy Policy | Terms &amp; Conditions | &copy; Our Company, Inc 2012 - All rights reserved</div>
+
+</div>
+</body>
+</html>

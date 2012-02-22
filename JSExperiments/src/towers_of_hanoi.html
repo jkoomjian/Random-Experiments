@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	
+	<style type="text/css">
+		/* For modern browsers */
+		.clearfix:before,
+		.clearfix:after {
+		    content:"";
+		    display:table;
+		}
+		.clearfix:after {
+		    clear:both;
+		}
+		/* For IE 6/7 (trigger hasLayout) */
+		.clearfix {
+		    zoom:1;
+		}
+	
+		#board {width: 710px; padding: 35px 50px; border: 2px solid black; margin: 0px auto 0 auto;}
+		.tower {width: 200px; height: 200px; margin: 20px 0; float: left; border-bottom: 4px solid black; position: relative}
+			.tower:not(:first-child) {margin-left: 50px;}
+		.pole {width: 4px; height: 200px; background-color: black; position: absolute; left: 98px; z-index: -1;}
+		.disc-container {position: absolute; bottom: 0; width: 200px;}
+		
+		.disc {height: 20px; margin-bottom: 10px; margin: 0 auto 10px auto;}
+		#disc1 {width: 50px; background-color: #FFFF66;}
+		#disc2 {width: 100px; background-color: #FF9966;}
+		#disc3 {width: 150px; background-color: #FF0066;}
+		#disc4 {width: 200px; background-color: #FF0099;}
+		
+		#move-button {text-align: center; margin-top: 20px;}
+	</style>
+	
+</head>
+<body>
+
+	<div id="board" class="clearfix">
+		<div id="tower1" class="tower">
+			<div id="pole1" class="pole"></div>
+			<div class="disc-container">
+				<div id="disc1" class="disc"></div>
+				<div id="disc2" class="disc"></div>
+				<div id="disc3" class="disc"></div>
+				<div id="disc4" class="disc"></div>
+			</div>
+		</div>
+		<div id="tower2" class="tower">
+			<div id="pole2" class="pole"></div>
+			<div class="disc-container"></div>
+			</div>
+		<div id="tower3" class="tower">
+			<div id="pole3" class="pole"></div>
+			<div class="disc-container"></div>
+		</div>
+
+	</div>
+
+	<div id="move-button">
+		<button onclick="move()">Move -></button>
+		&nbsp;#Steps: <span id="steps">0</span>
+	</div>
+
+<script type="text/javascript">
+
+var towers, discs, previousMove = {};
+
+function Disc(id, size, tower) {
+	this.id = id;
+	this.isFinal = false;
+	this.size = size;
+	this.tower = tower;
+	//returns a score
+	this._scoreTower = function(destTower) {
+		//first check if there is a final disc available
+		if (destTower.getTopDisc() && destTower.getTopDisc().isFinal && ((destTower.getTopDisc().size - this.size) == 1)) return 300;
+		//if there is a free pole, use that
+		if (!destTower.getTopDisc()) return 200;
+		//otherwise move onto smallest available pole
+		if (destTower.getTopDisc().size > this.size) return (100 - destTower.getTopDisc().size);
+		return null;
+	}
+	//returns the tower to move to, or null if no move is available
+	this.whereToMove = function() {
+		var i=0, score, scores = []; //[score, tower]
+
+		for (i=0; i<towers.length; i++) {
+			//don't move to the tower we are on
+			if (towers[i] == this.tower) continue;
+			//don't undo the previous move
+			if (previousMove["from"] == towers[i] && previousMove["to"] == this.tower && previousMove["disc"] == this) continue;
+			score = this._scoreTower(towers[i]);
+			if (score) scores.push( [score, towers[i]] );
+		}
+		
+		//sort by scores
+		scores.sort(function(a, b) {return b[0] - a[0]});
+		
+		//return highest scoring tower
+		return scores.length > 0 ? scores[0][1] : null;
+	}
+}
+
+function Tower(id, initialTower) {
+	this.id = id;
+	this.initialTower = initialTower;
+	//[bottom/big, top/small]
+	this.discStack = [];
+	this.getTopDisc = function() {
+		if (this.discStack.length > 0) {
+			return this.discStack[ this.discStack.length-1 ];
+		} else {
+			return null;
+		}
+	};
+	this.pushDisc = function(disc) {
+		var currDisc = disc.tower.discStack.pop();
+		currDisc.tower = this;
+		this.discStack.push(currDisc);
+		
+		currDisc = $("#disc" + disc.id);
+		var currTower = $("#tower" + this.id + " .disc-container");
+		currTower.prepend(currDisc);
+	}
+}
+
+function setup() {
+	towers = [new Tower(1, true), new Tower(2, false), new Tower(3, false)];
+	discs = [new Disc(4, 4, towers[0]), new Disc(3, 3, towers[0]), new Disc(2, 2, towers[0]), new Disc(1, 1, towers[0])];
+	towers[0].discStack = [discs[0], discs[1], discs[2], discs[3]];
+}
+
+//get the biggest free, non-final disc
+var _getMovableDiscs = function() {
+	var topDisc, i, movableDiscs = [];
+	for (i=0; i<towers.length; i++) {
+		topDisc = towers[i].getTopDisc();
+		if (topDisc && !topDisc.isFinal) movableDiscs.push(topDisc);
+	}
+	
+	//order movableDiscs biggest first
+	movableDiscs.sort( function(a, b){return b.size - a.size;} );
+	return movableDiscs;
+}
+
+//calculate if the disc has any moves available
+var _getBestMove = function(movableDiscs) {
+	var i, toTower;
+	for (i=0; i<movableDiscs.length; i++) {
+		toTower = movableDiscs[i].whereToMove();
+		if (toTower) return [movableDiscs[i], toTower];
+	}
+	return null;		
+}
+
+function move() {
+	
+	var move = _getBestMove( _getMovableDiscs() );
+	if (move) {
+		//set previous move
+		previousMove = {from: move[0].tower, to: move[1], disc: move[0]}; 
+		//move the disc
+		move[1].pushDisc(move[0]);
+		//set if final
+		var sittingAtopDisc, currDisc = move[0];
+		if (currDisc == discs[0]) currDisc.isFinal = true; //biggest disc is moved
+		//disc set atop a final disc 1 size greater
+		if (move[1].discStack.length >= 2) {
+			sittingAtopDisc = move[1].discStack[ move[1].discStack.length-2 ];
+			if (sittingAtopDisc.isFinal && ((sittingAtopDisc.size - currDisc.size) == 1)) {
+				currDisc.isFinal=true;
+			}
+		}
+	} else {
+		alert("no valid move found!");
+	}
+	
+	//increment # steps
+	$("#steps").html( parseInt($("#steps").html(), 10) + 1);
+}
+
+setup();
+// towers[1].pushDisc(discs[2]);
+// towers[2].pushDisc(discs[1]);
+// console.dir(_getBestMove( _getMovableDiscs() ));
+//console.dir(discs[2].whereToMove());
+
+</script>
+
+</body>
+</html>
