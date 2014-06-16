@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<PreferenceCategory 
+        android:title="@string/action_settings"
+        android:key="pref_key_settings">
+
+	    <CheckBoxPreference
+	        android:defaultValue="false"
+	        android:key="require_verified"
+	        android:title="@string/title_require_verified"
+	        android:summary="@string/summary_require_verified" />
+	
+	    <CheckBoxPreference
+	        android:defaultValue="false"
+	        android:key="require_in_contacts"
+	        android:title="@string/title_require_in_contacts"
+	        android:summary="@string/summary_require_in_contacts" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
