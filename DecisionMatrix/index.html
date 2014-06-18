@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html ng-app="dmApp">
+	<head>
+		<link rel="stylesheet" href="css/normalize.css" type="text/css">
+		<link rel="stylesheet" href="css/clearfix.css" type="text/css">
+		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+		<script type='text/javascript' src='js/jquery.js'></script>
+		<script type='text/javascript' src="js/jquery-migrate.js"></script>
+		<script type='text/javascript' src='js/underscore-min.js'></script>
+		<script type='text/javascript' src="js/angular.min.js"></script>
+		<script type='text/javascript' src='js/dm-ang.js'></script>
+		<title>Online Weighted Decision Matrix</title>
+	</head>
+	<body>
+
+		<h1>Online Weighted Decision Matrix</h1>
+		<div class='instructions'>
+			<ul>
+				<li>Click the cells to modify the values</li>
+				<li>Changes are automatically saved</li>
+				<li>This url will always bring up this decision matrix</li>
+				<li>Drag and Drop doesn't work in Chrome</li>
+			</ul>
+		</div>
+
+		<div id='matrix' ng-controller="matrixCtlr">
+
+			<div class='crit-label'>
+				<a href="" ng-click="addCriteria()" id='add-critera-link'>
+					Criteria
+					<span style='font-size: smaller'>+</span>
+				</a>
+			</div>
+
+			<div class='crit-row'>
+				<div class='crit-rotate c0'><div class='crit'></div></div>
+
+
+				<div ng-repeat="criterion in criteria" class="crit-rotate c{{$index+1}}" style="left: {{-170 + $index*30}}px">
+					<div class='crit'>
+						<a class='grip col' href="#" dnd-col>&nbsp;</a>
+						<div class='editable' editable-text>{{ criterion.name }}</div>
+						<input type='text' class='editableForm' ng-model="criterion.name" required/>
+					</div>
+				</div>
+
+				<div class='crit-rotate cTotal'  style="left: {{-170 + criteria.length*30}}px"><div class='crit total'>Total</div></div>
+			</div>
+
+			<div class='weight-label'>
+				<div class='weight-label-rotate top'><div class='weight-label-cnt'></div></div>
+				<div class='weight-label-rotate label'>
+					<div class='weight-label-cnt'>
+						<div class='weight-label-text'>Weights</div>
+					</div>
+				</div>
+			</div>
+
+			<div id='option_rows'>
+				
+				<div class='m-row option_row weights clearfix'>
+					<div class='options-label m-cell option-name'>
+						<a href="" ng-click="addOption()" id='add-option-link'>Options <span style='font-size: smaller'>+</span></a>
+					</div>
+
+					<div class='m-cell value weight' ng-repeat="criterion in criteria track by $index">
+						<div class='editable' editable-text>{{ criterion.weight }}</div>
+						<input type='number' class='editableForm' ng-model="criterion.weight" required/>
+					</div>
+
+					<div class='m-cell value weight total_weight'></div>
+				</div>
+
+				<div class='m-row option_row clearfix' ng-repeat="option in options">
+					<div class='m-cell option-name'>
+						<a class='grip row' href="#" dnd-row>&nbsp;</a>
+						<div class='editable' editable-text>{{ option.name }}</div>
+						<input type='text' class='editableForm' ng-model="option.name" required/>
+					</div>
+					
+					<div class='option-values'>
+						<div class='m-cell value' ng-repeat="v in option.values track by $index">
+							<div class='editable' editable-text>{{ option.values[$index] }}</div>
+							<!-- just using v in ng-model doesnt work for some reason -->
+							<input type='text' pattern="[0-9]+" class='editableForm' ng-model="option.values[$index]" required/>
+						</div>
+					</div>
+
+					<div class='m-cell value total_value'>{{ option.total() }}</div>
+
+				</div>
+
+			</div>
+			
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,120 @@
+/** TODO 
+* put constants in vars
+* put math at top
+**/
+
+/*********** Variables *************/
+// $strong-border: 1px solid black;
+$border-width: 2px;//1px;
+
+/************* Mixins *****************/
+@mixin rotate {position: absolute;}
+@mixin hand-border {border-image: url('../img/line.png') 3 repeat repeat;}
+@mixin strong-border {border: $border-width solid black; @include hand-border;}
+@mixin strong-border-bottom {border-bottom: $border-width solid black; @include hand-border;}
+@mixin strong-border-right {border-right: $border-width solid black; @include hand-border;}
+@mixin strong-border-top {border-top: $border-width solid black; @include hand-border;}
+@mixin light-border {box-shadow: 1px 0 0 0 #CCCCCC;}
+@mixin transform($operation) {
+	transform: $operation;
+	-webkit-transform: $operation;
+}
+
+/************* CSS *****************/
+body {
+	width: 960px; margin: 0px auto; padding: 15px;
+	background: white url('../img/graph.gif') repeat;
+	// font-family: 'Bad Script', cursive; 
+	// font-family: 'Permanent Marker', cursive;
+	// font-family: 'Walter Turncoat', cursive;
+	// font-family: 'Nothing You Could Do', cursive;
+	font-family: 'Coming Soon', cursive;
+
+	h1 {text-align: center; font-weight: normal; margin-bottom: 0px;}
+	.instructions {
+		text-align: center; margin: 5px 0 15px 0;
+		ul {display: inline-block; text-align: left; margin: 0px;}
+	}
+
+	input:invalid {outline: 2px solid red; box-shadow: none; display: inline !important;}
+}
+
+
+
+#matrix {
+	position: relative; padding: 40px; font-size: 18px;
+	@include strong-border;
+
+	a {color: black;}
+
+	.editable {
+		&:hover{cursor: pointer; background-color: rgba(255, 255, 102, 0.75);}
+	}
+	.editableForm {line-height: normal; padding: 0; width: 80%; display: none;}
+	.editable, .total_value {padding: 3px 0;}
+
+
+	a.grip {
+		background: transparent url('../img/dnd.png') no-repeat center center; display: inline-block; width: 20px; text-decoration: none; padding: 0 0 0 30px;
+		&.row {float: left;}
+		&.col {float: right;}
+	}
+	.empty_row {border: none; height: 35px;}
+
+	.crit-label {position: absolute; left: 275px; top: 70px; z-index: 100;}
+
+	.crit-row {
+		position: relative; height: 182px; margin-left: 280px; width: 670px; overflow: hidden;
+
+
+		.crit-rotate {
+			@include rotate;
+			width: 400px; height: 40px;
+			bottom: -20px;
+			@include transform(rotate(-66deg));
+
+			.crit {
+				width: 50%; height: 20px; margin-left: 50%; overflow: hidden; @include strong-border; border-width: 0 0 2px 0;
+			}
+
+			&.c0 {left: -200px;}
+		}
+	}
+
+	.weight-label {
+			position: relative; text-align: right; z-index: -10;
+			.weight-label-rotate {
+				@include rotate;
+				width: 440px; height: 60px; margin-left: 60px;
+				@include transform(rotate(45deg));
+				&.top {top: -30px;}
+				&.label {top: 1px;}
+				.weight-label-cnt {
+					width: 50%; height: 30px; line-height: 20px; margin-right: 50%; overflow: hidden; position: relative;
+					@include strong-border; border-width: 0 0 2px 0;
+					.weight-label-text {position: absolute; bottom: 0; right: 20px;}
+				}
+			}
+	}
+
+	.m-row {
+		&.weights {
+			.options-label {
+				text-align: left; @include light-border;
+				a {padding-left: 35px;}
+			}
+			.weight {@include strong-border; border-width: 2px 0 2px 0;}
+		}
+		.option-name {
+			width: 280px; text-align: right; @include strong-border; border-width: 0 2px 2px 0 !important;
+			& .editable {padding-right: 15px;}
+		}
+		.option-values {float: left;}
+		.m-cell {
+			box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+			height: 35px;
+			float: left; @include strong-border; border-width: 0 0 2px 0;
+		}
+		.value {@include light-border; width: 30px; text-align: center; font-size: smaller;}
+	}
+}

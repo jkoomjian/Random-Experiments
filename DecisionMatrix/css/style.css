@@ -1,0 +1,150 @@
+/** TODO 
+* put constants in vars
+* put math at top
+**/
+/*********** Variables *************/
+/************* Mixins *****************/
+/************* CSS *****************/
+body {
+  width: 960px;
+  margin: 0px auto;
+  padding: 15px;
+  background: white url("../img/graph.gif") repeat;
+  font-family: 'Coming Soon', cursive; }
+  body h1 {
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0px; }
+  body .instructions {
+    text-align: center;
+    margin: 5px 0 15px 0; }
+    body .instructions ul {
+      display: inline-block;
+      text-align: left;
+      margin: 0px; }
+  body input:invalid {
+    outline: 2px solid red;
+    box-shadow: none;
+    display: inline !important; }
+
+#matrix {
+  position: relative;
+  padding: 40px;
+  font-size: 18px;
+  border: 2px solid black;
+  border-image: url("../img/line.png") 3 repeat repeat; }
+  #matrix a {
+    color: black; }
+  #matrix .editable:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 102, 0.75); }
+  #matrix .editableForm {
+    line-height: normal;
+    padding: 0;
+    width: 80%;
+    display: none; }
+  #matrix .editable, #matrix .total_value {
+    padding: 3px 0; }
+  #matrix a.grip {
+    background: transparent url("../img/dnd.png") no-repeat center center;
+    display: inline-block;
+    width: 20px;
+    text-decoration: none;
+    padding: 0 0 0 30px; }
+    #matrix a.grip.row {
+      float: left; }
+    #matrix a.grip.col {
+      float: right; }
+  #matrix .empty_row {
+    border: none;
+    height: 35px; }
+  #matrix .crit-label {
+    position: absolute;
+    left: 275px;
+    top: 70px;
+    z-index: 100; }
+  #matrix .crit-row {
+    position: relative;
+    height: 182px;
+    margin-left: 280px;
+    width: 670px;
+    overflow: hidden; }
+    #matrix .crit-row .crit-rotate {
+      position: absolute;
+      width: 400px;
+      height: 40px;
+      bottom: -20px;
+      transform: rotate(-66deg);
+      -webkit-transform: rotate(-66deg); }
+      #matrix .crit-row .crit-rotate .crit {
+        width: 50%;
+        height: 20px;
+        margin-left: 50%;
+        overflow: hidden;
+        border: 2px solid black;
+        border-image: url("../img/line.png") 3 repeat repeat;
+        border-width: 0 0 2px 0; }
+      #matrix .crit-row .crit-rotate.c0 {
+        left: -200px; }
+  #matrix .weight-label {
+    position: relative;
+    text-align: right;
+    z-index: -10; }
+    #matrix .weight-label .weight-label-rotate {
+      position: absolute;
+      width: 440px;
+      height: 60px;
+      margin-left: 60px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg); }
+      #matrix .weight-label .weight-label-rotate.top {
+        top: -30px; }
+      #matrix .weight-label .weight-label-rotate.label {
+        top: 1px; }
+      #matrix .weight-label .weight-label-rotate .weight-label-cnt {
+        width: 50%;
+        height: 30px;
+        line-height: 20px;
+        margin-right: 50%;
+        overflow: hidden;
+        position: relative;
+        border: 2px solid black;
+        border-image: url("../img/line.png") 3 repeat repeat;
+        border-width: 0 0 2px 0; }
+        #matrix .weight-label .weight-label-rotate .weight-label-cnt .weight-label-text {
+          position: absolute;
+          bottom: 0;
+          right: 20px; }
+  #matrix .m-row.weights .options-label {
+    text-align: left;
+    box-shadow: 1px 0 0 0 #CCCCCC; }
+    #matrix .m-row.weights .options-label a {
+      padding-left: 35px; }
+  #matrix .m-row.weights .weight {
+    border: 2px solid black;
+    border-image: url("../img/line.png") 3 repeat repeat;
+    border-width: 2px 0 2px 0; }
+  #matrix .m-row .option-name {
+    width: 280px;
+    text-align: right;
+    border: 2px solid black;
+    border-image: url("../img/line.png") 3 repeat repeat;
+    border-width: 0 2px 2px 0 !important; }
+    #matrix .m-row .option-name .editable {
+      padding-right: 15px; }
+  #matrix .m-row .option-values {
+    float: left; }
+  #matrix .m-row .m-cell {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 35px;
+    float: left;
+    border: 2px solid black;
+    border-image: url("../img/line.png") 3 repeat repeat;
+    border-width: 0 0 2px 0; }
+  #matrix .m-row .value {
+    box-shadow: 1px 0 0 0 #CCCCCC;
+    width: 30px;
+    text-align: center;
+    font-size: smaller; }

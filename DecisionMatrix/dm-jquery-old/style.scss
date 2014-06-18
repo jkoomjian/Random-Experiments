@@ -1,0 +1,108 @@
+/** TODO 
+* use box model
+* put constants in vars
+* put math at top
+**/
+
+/*********** Variables *************/
+// $strong-border: 1px solid black;
+$border-width: 2px;//1px;
+
+/************* Mixins *****************/
+@mixin rotate {position: absolute;}
+@mixin hand-border {border-image: url('../img/line.png') 3 repeat repeat;}
+@mixin strong-border {border: $border-width solid black; @include hand-border;}
+@mixin strong-border-bottom {border-bottom: $border-width solid black; @include hand-border;}
+@mixin strong-border-right {border-right: $border-width solid black; @include hand-border;}
+@mixin strong-border-top {border-top: $border-width solid black; @include hand-border;}
+@mixin light-border {box-shadow: 1px 0 0 0 #CCCCCC;}
+
+/************* CSS *****************/
+body {
+	width: 960px; margin: 0px auto; padding: 15px;
+	background: white url('../img/graph.gif') repeat;
+	// font-family: 'Bad Script', cursive; 
+	// font-family: 'Permanent Marker', cursive;
+	// font-family: 'Walter Turncoat', cursive;
+	// font-family: 'Nothing You Could Do', cursive;
+	font-family: 'Coming Soon', cursive;
+
+	h1 {text-align: center; font-weight: normal;}
+}
+
+
+
+#matrix {
+	position: relative; padding: 40px; font-size: 18px;
+	@include strong-border;
+
+	a {color: black;}
+
+	.editable {cursor: text;}
+
+	a.grip {
+		background: #FFF url('../img/dnd.png') no-repeat center center; display: inline-block; width: 20px; text-decoration: none; padding: 0 10px;
+		&.row {float: left;}
+		&.col {float: right;}
+	}
+	.empty_row {border: none;}
+
+	.crit-label {position: absolute; left: 195px; top: 70px; z-index: 100;}
+
+	.crit-row {
+		position: relative; height: 182px; margin-left: 200px; width: 750px; overflow: hidden;
+
+
+		.crit-rotate {
+			@include rotate;
+			width: 400px; height: 40px;
+			 bottom: -20px;
+			transform: rotate(-66deg);
+			//border: 1px dashed blue;
+
+			// show dnd except on first, last crit
+//			&:not(:first-child):not(:last-child) .crit:hover {
+//				background: #FFF url('../img/dnd.png') no-repeat 80% 50%;
+//				cursor: pointer;
+//			}
+			.crit {
+				width: 50%; height: 20px; margin-left: 50%; overflow: hidden; @include strong-border-bottom;
+			}
+
+			&.c0 {left: -200px;}
+			&.c1 {left: -170px;}
+			&.c2 {left: -140px;}
+			&.cTotal {left: -110px;}
+		}
+	}
+
+	.weight-label {
+			position: relative; text-align: right; z-index: -10;
+			.weight-label-rotate {
+				@include rotate;
+				width: 400px; height: 60px;
+				transform: rotate(45deg);
+				&.top {top: -30px;}
+				&.label {top: 1px;}
+				.weight-label-cnt {
+					width: 50%; height: 30px; margin-right: 50%; overflow: hidden; position: relative; @include strong-border-bottom;
+					.weight-label-text {position: absolute; bottom: 0; right: 20px;}
+				}
+			}
+	}
+
+	.m-row {
+		margin: 0px 0 3px 19px; height: 31px;
+		&.weights {
+			.options-label {
+				text-align: left; height: 25px; @include light-border;
+				a {padding-left: 15px;}
+			}
+			.weight {@include strong-border-top}
+		}
+		//&:hover {background: #FFF url('../img/dnd.png') no-repeat 1% 50%; cursor: pointer;}
+		.m-cell {float: left; height: 24px; padding: 3px 0; line-height: 24px; @include strong-border-bottom;}
+		.option-name {width: 166px; text-align: right; padding-right: 15px; @include strong-border-right;}
+		.value {@include light-border; width: 30px; text-align: center; font-size: smaller;}
+	}
+}
