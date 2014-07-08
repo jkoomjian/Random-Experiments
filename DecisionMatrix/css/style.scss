@@ -50,7 +50,7 @@ body {
 	.editable {
 		&:hover{cursor: pointer; background-color: rgba(255, 255, 102, 0.75);}
 	}
-	.editableForm {line-height: normal; padding: 0; width: 80%; display: none;}
+	.editableForm {line-height: normal; padding: 0; width: 75%; display: none;}
 	.editable, .total_value {padding: 3px 0;}
 
 
@@ -64,37 +64,38 @@ body {
 	.crit-label {position: absolute; left: 275px; top: 70px; z-index: 100;}
 
 	.crit-row {
-		position: relative; height: 182px; margin-left: 280px; width: 670px; overflow: hidden;
+		position: relative; height: 182px; margin-left: 280px;
+		.c0 {left: 0px;}
 
-
-		.crit-rotate {
+		.crit {
+			border: 1px dashed blue;
 			@include rotate;
-			width: 400px; height: 40px;
-			bottom: -20px;
+			width: 200px; height: 20px;
+			position: absolute; bottom: 0px;
 			@include transform(rotate(-66deg));
+			// TODO
+			transform-origin: bottom left;
+			-webkit-transform-origin: bottom left;
 
-			.crit {
-				width: 50%; height: 20px; margin-left: 50%; overflow: hidden; @include strong-border; border-width: 0 0 2px 0;
-			}
-
-			&.c0 {left: -200px;}
+			@include strong-border; border-width: 0 0 2px 0;
 		}
 	}
 
-	.weight-label {
-			position: relative; text-align: right; z-index: -10;
-			.weight-label-rotate {
-				@include rotate;
-				width: 440px; height: 60px; margin-left: 60px;
-				@include transform(rotate(45deg));
-				&.top {top: -30px;}
-				&.label {top: 1px;}
-				.weight-label-cnt {
-					width: 50%; height: 30px; line-height: 20px; margin-right: 50%; overflow: hidden; position: relative;
-					@include strong-border; border-width: 0 0 2px 0;
-					.weight-label-text {position: absolute; bottom: 0; right: 20px;}
-				}
-			}
+	.weight-label-content {
+		@include rotate;
+		// TODO
+		transform-origin: bottom right;
+		-webkit-transform-origin: bottom right;
+		@include transform(rotate(45deg));
+		border-width: 0px 0 2px 0 !important;
+		box-shadow: 0 0 0 0 !important;
+
+		&.top {top: -32px;}
+		.weight-label-text {position: absolute; bottom: -3px; right: 40px;}
+	}
+
+	#option_rows {
+		position: relative;
 	}
 
 	.m-row {
@@ -106,15 +107,15 @@ body {
 			.weight {@include strong-border; border-width: 2px 0 2px 0;}
 		}
 		.option-name {
-			width: 280px; text-align: right; @include strong-border; border-width: 0 2px 2px 0 !important;
+			width: 280px; text-align: right; border-width: 0 2px 2px 0;
 			& .editable {padding-right: 15px;}
 		}
 		.option-values {float: left;}
 		.m-cell {
 			box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
 			height: 35px;
-			float: left; @include strong-border; border-width: 0 0 2px 0;
+			float: left; @include hand-border;
 		}
-		.value {@include light-border; width: 30px; text-align: center; font-size: smaller;}
+		.value {@include light-border; width: 30px; text-align: center; font-size: smaller; border-width: 0 0 2px 0;}
 	}
 }

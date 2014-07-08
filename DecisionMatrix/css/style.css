@@ -41,7 +41,7 @@ body {
   #matrix .editableForm {
     line-height: normal;
     padding: 0;
-    width: 80%;
+    width: 75%;
     display: none; }
   #matrix .editable, #matrix .total_value {
     padding: 3px 0; }
@@ -66,55 +66,39 @@ body {
   #matrix .crit-row {
     position: relative;
     height: 182px;
-    margin-left: 280px;
-    width: 670px;
-    overflow: hidden; }
-    #matrix .crit-row .crit-rotate {
+    margin-left: 280px; }
+    #matrix .crit-row .c0 {
+      left: 0px; }
+    #matrix .crit-row .crit {
+      border: 1px dashed blue;
       position: absolute;
-      width: 400px;
-      height: 40px;
-      bottom: -20px;
+      width: 200px;
+      height: 20px;
+      position: absolute;
+      bottom: 0px;
       transform: rotate(-66deg);
-      -webkit-transform: rotate(-66deg); }
-      #matrix .crit-row .crit-rotate .crit {
-        width: 50%;
-        height: 20px;
-        margin-left: 50%;
-        overflow: hidden;
-        border: 2px solid black;
-        border-image: url("../img/line.png") 3 repeat repeat;
-        border-width: 0 0 2px 0; }
-      #matrix .crit-row .crit-rotate.c0 {
-        left: -200px; }
-  #matrix .weight-label {
-    position: relative;
-    text-align: right;
-    z-index: -10; }
-    #matrix .weight-label .weight-label-rotate {
+      -webkit-transform: rotate(-66deg);
+      transform-origin: bottom left;
+      -webkit-transform-origin: bottom left;
+      border: 2px solid black;
+      border-image: url("../img/line.png") 3 repeat repeat;
+      border-width: 0 0 2px 0; }
+  #matrix .weight-label-content {
+    position: absolute;
+    transform-origin: bottom right;
+    -webkit-transform-origin: bottom right;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-width: 0px 0 2px 0 !important;
+    box-shadow: 0 0 0 0 !important; }
+    #matrix .weight-label-content.top {
+      top: -32px; }
+    #matrix .weight-label-content .weight-label-text {
       position: absolute;
-      width: 440px;
-      height: 60px;
-      margin-left: 60px;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg); }
-      #matrix .weight-label .weight-label-rotate.top {
-        top: -30px; }
-      #matrix .weight-label .weight-label-rotate.label {
-        top: 1px; }
-      #matrix .weight-label .weight-label-rotate .weight-label-cnt {
-        width: 50%;
-        height: 30px;
-        line-height: 20px;
-        margin-right: 50%;
-        overflow: hidden;
-        position: relative;
-        border: 2px solid black;
-        border-image: url("../img/line.png") 3 repeat repeat;
-        border-width: 0 0 2px 0; }
-        #matrix .weight-label .weight-label-rotate .weight-label-cnt .weight-label-text {
-          position: absolute;
-          bottom: 0;
-          right: 20px; }
+      bottom: -3px;
+      right: 40px; }
+  #matrix #option_rows {
+    position: relative; }
   #matrix .m-row.weights .options-label {
     text-align: left;
     box-shadow: 1px 0 0 0 #CCCCCC; }
@@ -127,9 +111,7 @@ body {
   #matrix .m-row .option-name {
     width: 280px;
     text-align: right;
-    border: 2px solid black;
-    border-image: url("../img/line.png") 3 repeat repeat;
-    border-width: 0 2px 2px 0 !important; }
+    border-width: 0 2px 2px 0; }
     #matrix .m-row .option-name .editable {
       padding-right: 15px; }
   #matrix .m-row .option-values {
@@ -140,11 +122,10 @@ body {
     -webkit-box-sizing: border-box;
     height: 35px;
     float: left;
-    border: 2px solid black;
-    border-image: url("../img/line.png") 3 repeat repeat;
-    border-width: 0 0 2px 0; }
+    border-image: url("../img/line.png") 3 repeat repeat; }
   #matrix .m-row .value {
     box-shadow: 1px 0 0 0 #CCCCCC;
     width: 30px;
     text-align: center;
-    font-size: smaller; }
+    font-size: smaller;
+    border-width: 0 0 2px 0; }

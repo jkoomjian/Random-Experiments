@@ -34,32 +34,27 @@
 			</div>
 
 			<div class='crit-row'>
-				<div class='crit-rotate c0'><div class='crit'></div></div>
+				<div class='crit c0'></div>
 
 
-				<div ng-repeat="criterion in criteria" class="crit-rotate c{{$index+1}}" style="left: {{-170 + $index*30}}px">
-					<div class='crit'>
-						<a class='grip col' href="#" dnd-col>&nbsp;</a>
-						<div class='editable' editable-text>{{ criterion.name }}</div>
-						<input type='text' class='editableForm' ng-model="criterion.name" required/>
-					</div>
+				<div ng-repeat="criterion in criteria" class="crit c{{$index+1}}" style="left: {{30 + $index*30}}px">
+					<a class='grip col' href="#" dnd-col>&nbsp;</a>
+					<div class='editable' editable-text>{{ criterion.name }}</div>
+					<input type='text' class='editableForm' ng-model="criterion.name" required/>
 				</div>
 
-				<div class='crit-rotate cTotal'  style="left: {{-170 + criteria.length*30}}px"><div class='crit total'>Total</div></div>
-			</div>
-
-			<div class='weight-label'>
-				<div class='weight-label-rotate top'><div class='weight-label-cnt'></div></div>
-				<div class='weight-label-rotate label'>
-					<div class='weight-label-cnt'>
-						<div class='weight-label-text'>Weights</div>
-					</div>
-				</div>
+				<div class='crit cTotal'  style="left: {{30 + criteria.length*30}}px"><div class='total'>Total</div></div>
 			</div>
 
 			<div id='option_rows'>
-				
+
 				<div class='m-row option_row weights clearfix'>
+
+					<div class='weight-label-content options-label m-cell option-name top'></div>
+					<div class='weight-label-content options-label m-cell option-name'>
+						<div class='weight-label-text'>Weights</div>
+					</div>
+
 					<div class='options-label m-cell option-name'>
 						<a href="" ng-click="addOption()" id='add-option-link'>Options <span style='font-size: smaller'>+</span></a>
 					</div>
