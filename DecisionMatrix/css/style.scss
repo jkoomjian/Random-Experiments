@@ -1,3 +1,5 @@
+@import "compass/css3/transform";
+
 /** TODO 
 * put constants in vars
 * put math at top
@@ -73,10 +75,7 @@ body {
 			width: 200px; height: 20px;
 			position: absolute; bottom: 0px;
 			@include transform(rotate(-66deg));
-			// TODO
-			transform-origin: bottom left;
-			-webkit-transform-origin: bottom left;
-
+			@include transform-origin(bottom, left);
 			@include strong-border; border-width: 0 0 2px 0;
 		}
 	}
@@ -84,8 +83,7 @@ body {
 	.weight-label-content {
 		@include rotate;
 		// TODO
-		transform-origin: bottom right;
-		-webkit-transform-origin: bottom right;
+		@include transform-origin(bottom, right);
 		@include transform(rotate(45deg));
 		border-width: 0px 0 2px 0 !important;
 		box-shadow: 0 0 0 0 !important;

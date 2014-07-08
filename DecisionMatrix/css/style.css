@@ -5,127 +5,193 @@
 /*********** Variables *************/
 /************* Mixins *****************/
 /************* CSS *****************/
+/* line 26, style.scss */
 body {
   width: 960px;
   margin: 0px auto;
   padding: 15px;
   background: white url("../img/graph.gif") repeat;
-  font-family: 'Coming Soon', cursive; }
-  body h1 {
-    text-align: center;
-    font-weight: normal;
-    margin-bottom: 0px; }
-  body .instructions {
-    text-align: center;
-    margin: 5px 0 15px 0; }
-    body .instructions ul {
-      display: inline-block;
-      text-align: left;
-      margin: 0px; }
-  body input:invalid {
-    outline: 2px solid red;
-    box-shadow: none;
-    display: inline !important; }
+  font-family: 'Coming Soon', cursive;
+}
+/* line 35, style.scss */
+body h1 {
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+/* line 36, style.scss */
+body .instructions {
+  text-align: center;
+  margin: 5px 0 15px 0;
+}
+/* line 38, style.scss */
+body .instructions ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0px;
+}
+/* line 41, style.scss */
+body input:invalid {
+  outline: 2px solid red;
+  box-shadow: none;
+  display: inline !important;
+}
 
+/* line 46, style.scss */
 #matrix {
   position: relative;
   padding: 40px;
   font-size: 18px;
   border: 2px solid black;
-  border-image: url("../img/line.png") 3 repeat repeat; }
-  #matrix a {
-    color: black; }
-  #matrix .editable:hover {
-    cursor: pointer;
-    background-color: rgba(255, 255, 102, 0.75); }
-  #matrix .editableForm {
-    line-height: normal;
-    padding: 0;
-    width: 75%;
-    display: none; }
-  #matrix .editable, #matrix .total_value {
-    padding: 3px 0; }
-  #matrix a.grip {
-    background: transparent url("../img/dnd.png") no-repeat center center;
-    display: inline-block;
-    width: 20px;
-    text-decoration: none;
-    padding: 0 0 0 30px; }
-    #matrix a.grip.row {
-      float: left; }
-    #matrix a.grip.col {
-      float: right; }
-  #matrix .empty_row {
-    border: none;
-    height: 35px; }
-  #matrix .crit-label {
-    position: absolute;
-    left: 275px;
-    top: 70px;
-    z-index: 100; }
-  #matrix .crit-row {
-    position: relative;
-    height: 182px;
-    margin-left: 280px; }
-    #matrix .crit-row .c0 {
-      left: 0px; }
-    #matrix .crit-row .crit {
-      border: 1px dashed blue;
-      position: absolute;
-      width: 200px;
-      height: 20px;
-      position: absolute;
-      bottom: 0px;
-      transform: rotate(-66deg);
-      -webkit-transform: rotate(-66deg);
-      transform-origin: bottom left;
-      -webkit-transform-origin: bottom left;
-      border: 2px solid black;
-      border-image: url("../img/line.png") 3 repeat repeat;
-      border-width: 0 0 2px 0; }
-  #matrix .weight-label-content {
-    position: absolute;
-    transform-origin: bottom right;
-    -webkit-transform-origin: bottom right;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    border-width: 0px 0 2px 0 !important;
-    box-shadow: 0 0 0 0 !important; }
-    #matrix .weight-label-content.top {
-      top: -32px; }
-    #matrix .weight-label-content .weight-label-text {
-      position: absolute;
-      bottom: -3px;
-      right: 40px; }
-  #matrix #option_rows {
-    position: relative; }
-  #matrix .m-row.weights .options-label {
-    text-align: left;
-    box-shadow: 1px 0 0 0 #CCCCCC; }
-    #matrix .m-row.weights .options-label a {
-      padding-left: 35px; }
-  #matrix .m-row.weights .weight {
-    border: 2px solid black;
-    border-image: url("../img/line.png") 3 repeat repeat;
-    border-width: 2px 0 2px 0; }
-  #matrix .m-row .option-name {
-    width: 280px;
-    text-align: right;
-    border-width: 0 2px 2px 0; }
-    #matrix .m-row .option-name .editable {
-      padding-right: 15px; }
-  #matrix .m-row .option-values {
-    float: left; }
-  #matrix .m-row .m-cell {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    height: 35px;
-    float: left;
-    border-image: url("../img/line.png") 3 repeat repeat; }
-  #matrix .m-row .value {
-    box-shadow: 1px 0 0 0 #CCCCCC;
-    width: 30px;
-    text-align: center;
-    font-size: smaller;
-    border-width: 0 0 2px 0; }
+  border-image: url("../img/line.png") 3 repeat repeat;
+}
+/* line 50, style.scss */
+#matrix a {
+  color: black;
+}
+/* line 53, style.scss */
+#matrix .editable:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 102, 0.75);
+}
+/* line 55, style.scss */
+#matrix .editableForm {
+  line-height: normal;
+  padding: 0;
+  width: 75%;
+  display: none;
+}
+/* line 56, style.scss */
+#matrix .editable, #matrix .total_value {
+  padding: 3px 0;
+}
+/* line 59, style.scss */
+#matrix a.grip {
+  background: transparent url("../img/dnd.png") no-repeat center center;
+  display: inline-block;
+  width: 20px;
+  text-decoration: none;
+  padding: 0 0 0 30px;
+}
+/* line 61, style.scss */
+#matrix a.grip.row {
+  float: left;
+}
+/* line 62, style.scss */
+#matrix a.grip.col {
+  float: right;
+}
+/* line 64, style.scss */
+#matrix .empty_row {
+  border: none;
+  height: 35px;
+}
+/* line 66, style.scss */
+#matrix .crit-label {
+  position: absolute;
+  left: 275px;
+  top: 70px;
+  z-index: 100;
+}
+/* line 68, style.scss */
+#matrix .crit-row {
+  position: relative;
+  height: 182px;
+  margin-left: 280px;
+}
+/* line 70, style.scss */
+#matrix .crit-row .c0 {
+  left: 0px;
+}
+/* line 72, style.scss */
+#matrix .crit-row .crit {
+  border: 1px dashed blue;
+  position: absolute;
+  width: 200px;
+  height: 20px;
+  position: absolute;
+  bottom: 0px;
+  transform: rotate(-66deg);
+  -webkit-transform: rotate(-66deg);
+  -webkit-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -ms-transform-origin: bottom left;
+  -o-transform-origin: bottom left;
+  transform-origin: bottom left;
+  border: 2px solid black;
+  border-image: url("../img/line.png") 3 repeat repeat;
+  border-width: 0 0 2px 0;
+}
+/* line 83, style.scss */
+#matrix .weight-label-content {
+  position: absolute;
+  -webkit-transform-origin: bottom right;
+  -moz-transform-origin: bottom right;
+  -ms-transform-origin: bottom right;
+  -o-transform-origin: bottom right;
+  transform-origin: bottom right;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  border-width: 0px 0 2px 0 !important;
+  box-shadow: 0 0 0 0 !important;
+}
+/* line 91, style.scss */
+#matrix .weight-label-content.top {
+  top: -32px;
+}
+/* line 92, style.scss */
+#matrix .weight-label-content .weight-label-text {
+  position: absolute;
+  bottom: -3px;
+  right: 40px;
+}
+/* line 95, style.scss */
+#matrix #option_rows {
+  position: relative;
+}
+/* line 101, style.scss */
+#matrix .m-row.weights .options-label {
+  text-align: left;
+  box-shadow: 1px 0 0 0 #CCCCCC;
+}
+/* line 103, style.scss */
+#matrix .m-row.weights .options-label a {
+  padding-left: 35px;
+}
+/* line 105, style.scss */
+#matrix .m-row.weights .weight {
+  border: 2px solid black;
+  border-image: url("../img/line.png") 3 repeat repeat;
+  border-width: 2px 0 2px 0;
+}
+/* line 107, style.scss */
+#matrix .m-row .option-name {
+  width: 280px;
+  text-align: right;
+  border-width: 0 2px 2px 0;
+}
+/* line 109, style.scss */
+#matrix .m-row .option-name .editable {
+  padding-right: 15px;
+}
+/* line 111, style.scss */
+#matrix .m-row .option-values {
+  float: left;
+}
+/* line 112, style.scss */
+#matrix .m-row .m-cell {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 35px;
+  float: left;
+  border-image: url("../img/line.png") 3 repeat repeat;
+}
+/* line 117, style.scss */
+#matrix .m-row .value {
+  box-shadow: 1px 0 0 0 #CCCCCC;
+  width: 30px;
+  text-align: center;
+  font-size: smaller;
+  border-width: 0 0 2px 0;
+}
