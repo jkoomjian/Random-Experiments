@@ -26,24 +26,26 @@
 
 		<div id='matrix' ng-controller="matrixCtlr">
 
-			<div class='crit-label'>
-				<a href="" ng-click="addCriteria()" id='add-critera-link'>
-					Criteria
-					<span style='font-size: smaller'>+</span>
-				</a>
-			</div>
-
-			<div class='crit-row'>
-				<div class='crit c0'></div>
-
-
-				<div ng-repeat="criterion in criteria" class="crit c{{$index+1}}" style="left: {{30 + $index*30}}px">
-					<a class='grip col' href="#" dnd-col>&nbsp;</a>
-					<div class='editable' editable-text>{{ criterion.name }}</div>
-					<input type='text' class='editableForm' ng-model="criterion.name" required/>
+			<div class="clearfix">
+				<div class='crit-label'>
+					<a href="" ng-click="addCriteria()" id='add-critera-link'>
+						Criteria
+						<span style='font-size: smaller'>+</span>
+					</a>
 				</div>
 
-				<div class='crit cTotal'  style="left: {{30 + criteria.length*30}}px"><div class='total'>Total</div></div>
+				<div class='crit-row'>
+					<div class='crit c0'></div>
+
+
+					<div ng-repeat="criterion in criteria" class="crit c{{$index+1}}" style="left: {{2.4 + $index*2.25}}em">
+						<a class='grip col' href="#" dnd-col>&nbsp;</a>
+						<div class='editable' editable-text>{{ criterion.name }}</div>
+						<input type='text' class='editableForm' ng-model="criterion.name" required/>
+					</div>
+
+					<div class='crit cTotal'  style="left: {{2.25 + criteria.length*2.25}}em"><div class='total'>Total</div></div>
+				</div>
 			</div>
 
 			<div id='option_rows'>

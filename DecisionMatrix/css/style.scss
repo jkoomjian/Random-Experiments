@@ -1,13 +1,15 @@
 @import "compass/css3/transform";
+@import "compass/css3/box-sizing";
 
-/** TODO 
-* put constants in vars
-* put math at top
-**/
 
 /*********** Variables *************/
-// $strong-border: 1px solid black;
 $border-width: 2px;//1px;
+
+$name-col-width: 17.5em;
+$content-col-width: 35em;
+$m-line-height: 1.25em;
+$cell-side: 2.25em;
+
 
 /************* Mixins *****************/
 @mixin rotate {position: absolute;}
@@ -21,6 +23,7 @@ $border-width: 2px;//1px;
 	transform: $operation;
 	-webkit-transform: $operation;
 }
+
 
 /************* CSS *****************/
 body {
@@ -44,35 +47,37 @@ body {
 
 
 #matrix {
-	position: relative; padding: 40px; font-size: 18px;
+	position: relative; padding: 2.5em;
 	@include strong-border;
 
 	a {color: black;}
 
 	.editable {
+		width: 100%; height: 100%; @include box-sizing(border-box);
 		&:hover{cursor: pointer; background-color: rgba(255, 255, 102, 0.75);}
 	}
-	.editableForm {line-height: normal; padding: 0; width: 75%; display: none;}
-	.editable, .total_value {padding: 3px 0;}
+	.editableForm {line-height: normal; padding: 0; width: 75%; height: 75%; display: none;}
+	.editable, .total_value {padding: 0.2em 0;}
 
 
 	a.grip {
-		background: transparent url('../img/dnd.png') no-repeat center center; display: inline-block; width: 20px; text-decoration: none; padding: 0 0 0 30px;
+		background: transparent url('../img/dnd.png') no-repeat center center;
+		display: inline-block; width: 1.25em; text-decoration: none; padding: 0 0 0 2em;
 		&.row {float: left;}
 		&.col {float: right;}
 	}
-	.empty_row {border: none; height: 35px;}
+	.empty_row {border: none; height: $cell-side;}
 
-	.crit-label {position: absolute; left: 275px; top: 70px; z-index: 100;}
+	.crit-label {float: left; width: $name-col-width; box-sizing: border-box;
+								padding-right: 3.1em; text-align: right;}
 
 	.crit-row {
-		position: relative; height: 182px; margin-left: 280px;
+		position: relative; float: left; height: 15.5em; width: $content-col-width;
 		.c0 {left: 0px;}
 
 		.crit {
-			border: 1px dashed blue;
 			@include rotate;
-			width: 200px; height: 20px;
+			width: $name-col-width; height: 2em;
 			position: absolute; bottom: 0px;
 			@include transform(rotate(-66deg));
 			@include transform-origin(bottom, left);
@@ -82,14 +87,13 @@ body {
 
 	.weight-label-content {
 		@include rotate;
-		// TODO
 		@include transform-origin(bottom, right);
 		@include transform(rotate(45deg));
 		border-width: 0px 0 2px 0 !important;
 		box-shadow: 0 0 0 0 !important;
 
-		&.top {top: -32px;}
-		.weight-label-text {position: absolute; bottom: -3px; right: 40px;}
+		&.top {top: -2em;}
+		.weight-label-text {position: absolute; bottom: -0.1875em; right: 2.5em;}
 	}
 
 	#option_rows {
@@ -100,20 +104,20 @@ body {
 		&.weights {
 			.options-label {
 				text-align: left; @include light-border;
-				a {padding-left: 35px;}
+				a {padding-left: 2em;}
 			}
 			.weight {@include strong-border; border-width: 2px 0 2px 0;}
 		}
 		.option-name {
-			width: 280px; text-align: right; border-width: 0 2px 2px 0;
-			& .editable {padding-right: 15px;}
+			width: $name-col-width; text-align: right; border-width: 0 2px 2px 0;
+			& .editable {padding-right: 1em;}
 		}
 		.option-values {float: left;}
 		.m-cell {
-			box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
-			height: 35px;
-			float: left; @include hand-border;
+			@include box-sizing(border-box);
+			height: $cell-side;
+			float: left; @include hand-border; border-style: solid;
 		}
-		.value {@include light-border; width: 30px; text-align: center; font-size: smaller; border-width: 0 0 2px 0;}
+		.value {@include light-border; width: $cell-side; text-align: center; border-width: 0 0 2px 0;}
 	}
 }
