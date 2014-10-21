@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">UmLikeYouKnow</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="main_title">Filler Words:</string>
+    <string name="main_subtitle">(comma separated list of filler words)</string>
+    <string name="main_filler_placeholder">ex. like, um, apparently</string>
+    <string name="main_start_button_start">Start</string>
+    <string name="main_start_button_stop">Stop</string>
+    
+</resources>

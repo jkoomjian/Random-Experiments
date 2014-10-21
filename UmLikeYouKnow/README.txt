@@ -1,0 +1,1 @@
+A simple android app to detect filler words such as 'like' and 'you know'. To use the app, type in the filler words at the top and press start. The app will transcribe your speech, and vibrate if one of the filler words is spoken.
