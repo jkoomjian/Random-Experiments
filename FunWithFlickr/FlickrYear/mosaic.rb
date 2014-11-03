@@ -6,8 +6,8 @@ require 'date'
 @tile_width = 150
 @tile_height = 150
 # @tiles_across = @tiles_high = 19
-@tiles_across = 19
-@tiles_high = 14
+@tiles_across = 30
+@tiles_high = 12
 
 @cmd = "montage -border 0" +
         " -geometry '#{@tile_width}x#{@tile_height}'" +
