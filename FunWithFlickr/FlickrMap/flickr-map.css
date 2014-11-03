@@ -1,0 +1,55 @@
+.flickr-map {position: relative; display: inline-block;}
+.flickr-map a {
+	position: absolute;
+	display: block;
+	border-radius: 50%;
+	border-width: 0;
+	width: 5px;
+	height: 5px;
+	transition: all 0.3s;
+}
+.flickr-map a.hover {
+	transform: scale(3);
+	z-index: 3;
+}
+
+.flickr-map-img-details {
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	border-width: 3px;
+	border-style: solid;
+	border-radius: 50%;
+	z-index: 2;
+}
+
+.flickr-map-img-details-arrow {
+	width: 0;
+	height: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+.flickr-map-img-details-arrow.left {
+	border-top: 35.5px solid transparent !important;
+	border-bottom: 35.5px solid transparent !important;
+	border-right: 50px solid red;
+}
+
+.flickr-map-img-details-arrow.right {
+	border-top: 35.5px solid transparent !important;
+	border-bottom: 35.5px solid transparent !important;
+	border-left: 50px solid red;
+}
+
+.flickr-map-img-details-arrow.down {
+	border-right: 35.5px solid transparent !important;
+	border-left: 35.5px solid transparent !important;
+	border-top: 50px solid red;
+}
+
+.flickr-map-img-details-arrow.up {
+	border-right: 35.5px solid transparent !important;
+	border-left: 35.5px solid transparent !important;
+	border-bottom: 50px solid red;
+}
