@@ -36,7 +36,7 @@ angApp.controller('cntrlPanelController', function($scope, $route, $routeParams,
     //Normally you would use ng-model on compName input. But when the routes are switched,
     //the input is cleared, clearing $scope.compName
     //this is a hack to get around the problem :(
-    $scope.compName = document.getElementById("name").value;
+    $scope.compName = document.getElementById('name').value;
     console.log(`name is: ${$scope.compName}`);
     $scope.puCount = 0;
   }
@@ -44,7 +44,7 @@ angApp.controller('cntrlPanelController', function($scope, $route, $routeParams,
   function incCount() {
     console.log('at inc count, count is: ' + $scope.puCount);
     $scope.puCount = $scope.puCount + 1;
-    socketioService.publishPushup(); //call the service
+    socketioService.publishEvent();
     return false;
   }
 
