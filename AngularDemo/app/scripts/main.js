@@ -11,7 +11,7 @@ angApp.config(function($routeProvider) {
     })
     .otherwise({
       redirectTo  :'/'
-    })
+    });
 });
 
 angApp.factory('socketioService', function() {
@@ -19,12 +19,12 @@ angApp.factory('socketioService', function() {
   return {
     publishEvent: function() {
     }
-  }
+  };
 });
 
 angApp.controller('cntrlPanelController', function($scope, $route, $routeParams, $location, socketioService) {
   $scope.puCount = 0;
-  $scope.compName;
+  $scope.compName = undefined;
   $scope.startComp = startComp;
   $scope.incCount = incCount;
   $scope.setCompName = setCompName;
@@ -37,9 +37,9 @@ angApp.controller('cntrlPanelController', function($scope, $route, $routeParams,
     //the input is cleared, clearing $scope.compName
     //this is a hack to get around the problem :(
     $scope.compName = document.getElementById("name").value;
-    console.log(`name is: ${$scope.compName}`)
+    console.log(`name is: ${$scope.compName}`);
     $scope.puCount = 0;
-  };
+  }
 
   function incCount() {
     console.log('at inc count, count is: ' + $scope.puCount);
