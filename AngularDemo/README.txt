@@ -1,0 +1,1 @@
+Example project working with Angular, yeoman, gulp, bower, and some other stuff

@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'White Rabbit';
+  src: url('/fonts/MODES___.TTF') format('truetype');
+}
+
+
+body {
+  background-color: black;
+  color: #5cb85c;
+  font-family: 'White Rabbit', sans-serif;
+}
+
+.ctrl-panel {
+  padding: 30px 0; margin-top: 50px; margin-bottom: 50px;
+  .enter-name {
+    & > * {display: block; line-height: 2.5; font-size: 25px;}
+    #name {width: 100%;}
+    #start {float: right; margin-top: 20px;}
+  }
+
+  .register-pu {
+    text-align: center;
+    #register_pu {line-height: 3; font-size: 35px; padding-left: 2rem; padding-right: 2rem;}
+  }
+}
+
+.counter {
+  text-align: center;
+  .name {font-size: 15vh;}
+  .count {font-size: 50vh;}
+}
