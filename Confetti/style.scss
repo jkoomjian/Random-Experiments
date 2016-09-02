@@ -12,23 +12,23 @@ body {
   top: -50px; //start above viewport
 
   //animation
-  animation: falling 5s linear 0s infinite forwards, rotating 5s linear 0s infinite forwards;
+  // animation: falling 5s linear 0s infinite forwards, rotating 5s linear 0s infinite forwards;
 }
 
-@keyframes rotating {
-  from {
-    transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
-  }
-  to {
-    transform: rotate(360deg) rotateY(360deg) rotateX(360deg);
-  }
-}
-
-@keyframes falling {
-  from {
-    top: 0%;
-  }
-  to {
-    top: 130%;
-  }
-}
+// @keyframes rotating {
+//   from {
+//     transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg) rotateY(360deg) rotateX(360deg);
+//   }
+// }
+//
+// @keyframes falling {
+//   from {
+//     top: 0%;
+//   }
+//   to {
+//     top: 130%;
+//   }
+// }
