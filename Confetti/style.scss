@@ -1,3 +1,35 @@
 body {
-  & .test {color: blue;}
+  background-color: navy;
+}
+
+.star {
+  -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+  width: 50px;
+  height: 50px;
+
+  position: absolute;
+  top: -50px; //start above viewport
+
+  //animation
+  animation: falling 5s linear 0s 1 forwards, rotating 5s linear 0s infinite forwards;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg) rotateY(0deg) rotateX(0deg);
+  }
+  to {
+    transform: rotate(360deg) rotateY(360deg) rotateX(360deg);
+  }
+}
+
+@keyframes falling {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 130%;
+  }
 }
