@@ -13,7 +13,7 @@ body {
   top: -50px; //start above viewport
 
   //animation
-  animation: falling 5s linear 0s 1 forwards, rotating 5s linear 0s infinite forwards;
+  animation: falling 5s linear 0s infinite forwards, rotating 5s linear 0s infinite forwards;
 }
 
 @keyframes rotating {

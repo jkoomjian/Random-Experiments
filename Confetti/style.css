@@ -8,7 +8,7 @@ body {
   height: 50px;
   position: absolute;
   top: -50px;
-  animation: falling 5s linear 0s 1 forwards, rotating 5s linear 0s infinite forwards; }
+  animation: falling 5s linear 0s infinite forwards, rotating 5s linear 0s infinite forwards; }
 
 @keyframes rotating {
   from {
