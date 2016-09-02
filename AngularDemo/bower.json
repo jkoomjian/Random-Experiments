@@ -2,8 +2,11 @@
   "name": "src",
   "private": true,
   "dependencies": {
+    "jquery": "^3.0.0",
+    "bootstrap": "^3.3.6",
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
+    "angular": "^1.5.7",
     "angular-route": "^1.5.5"
   },
   "overrides": {
