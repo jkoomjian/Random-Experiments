@@ -47,7 +47,11 @@ var confetti = (function() {
       console.log(`added ${starCount} stars!`);
       starCount++;
       this.generateStar();
-      window.setTimeout(this.beginCreatingStars.bind(this), randomRange(0, 1000));
+      window.setTimeout(function() {
+        window.requestAnimationFrame(function(){
+          confetti.beginCreatingStars();
+        });
+      }, randomRange(0, 1000));
     }
   };
 })();
