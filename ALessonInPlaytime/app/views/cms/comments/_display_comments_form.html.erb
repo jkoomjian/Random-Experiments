@@ -1,0 +1,33 @@
+<%= form_for @comment, {:url=> "/comments/#{@comment.id.blank? ? 'create' : 'update'}", :method=>'post'} do |f| %>
+
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %>
+  <%= f.cms_error_messages %>
+
+  <% if !logged_in? %>
+
+    <div class="fields text_fields row">
+      <%# These 2 fields are on 1 line to avoid having the spaces displayed between two inline elems #%>
+      <%= f.label :author, 'Name *', :class => "col-xs-12 col-sm-3"  %><%= f.text_field :author, :class => "col-xs-12 col-sm-5" %>
+    </div>
+    <div class="fields text_fields row">
+      <%= f.label :email, 'E-mail Address', :class => "col-xs-12 col-sm-3" %><%= f.text_field :email, :class => "col-xs-12 col-sm-5" %>
+    </div>
+
+    <%#-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--%>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="signup_check" value=""></div>
+
+  <% end %>
+
+  <div class="fields text_fields row">
+    <%= f.label :url, 'Web Site', :class => "col-xs-12 col-sm-3" %><%= f.text_field :url, :class => "col-xs-12 col-sm-5" %>
+  </div>
+  <div class="fields text_editor_fields row">
+    <%= f.label :body, 'Body *', :class => "col-xs-12" %>
+    <%= f.text_area :body, :size => "50x5", :style => 'height: auto', :class => "col-xs-8" %>
+  </div>
+  <div class="buttons clear">
+    <button type="submit" name="commit" class="button">Submit Comment</button>
+  </div>
+<% end %>

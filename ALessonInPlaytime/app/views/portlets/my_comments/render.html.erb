@@ -1,0 +1,13 @@
+<h1>My Comments</h1>
+<% if @my_comments.length > 0 %>
+  <% for comment in @my_comments %>
+    <div class="comment_summary">
+      <h4><%= comment.name %></h4>
+      <div>On: <%= comment.commentable.name %></div>
+      <div><%= display_date(comment.created_at) %></div>
+      <div><a href="/members/comment-form/<%= comment.id %>" class="edit button">Edit</a></div>
+    </div>
+  <% end %>
+<% else %>
+  You do not yet have any comments
+<% end %>

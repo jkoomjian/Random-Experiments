@@ -1,0 +1,3 @@
+access_key_id: <%= ALessonInPlaytime::Application.config.s3_access_key_id %>
+secret_access_key: <%= ALessonInPlaytime::Application.config.s3_secret_access_key %>
+bucket: <%= ALessonInPlaytime::Application.config.s3_bucket %>

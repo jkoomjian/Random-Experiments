@@ -1,0 +1,24 @@
+<%= f.cms_text_field :name %>
+
+
+<% if @block.commentable %>
+  <div class="fields text_fields">
+    <label for="">Comment On:</label>
+    <a href="<%= @block.commentable_url %>"><%= "#{@block.commentable_type}: #{@block.commentable.name}" %></a>
+  </div>
+<% else %>
+  <%= f.cms_text_field :commentable_id %>
+  <%= f.cms_text_field :commentable_type %>
+<% end %>
+
+<%= f.cms_text_field :author %>
+<% if !@block.user.nil? %>
+  <div class="fields text_fields">
+    <label for="">User:</label>
+    <a href='<%= "/cms/users/#{@block.user.id}/edit" %>'><%= "#{@block.user.full_name}" %></a>
+  </div>  
+<% end %>
+<%= f.cms_text_field :email %>
+<%= f.cms_text_field :url %>
+<%= f.cms_text_field :ip %>
+<%= f.cms_text_area :body %>

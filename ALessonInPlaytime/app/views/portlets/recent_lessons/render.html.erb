@@ -1,0 +1,31 @@
+<% curr = 1 %>
+<% colors = [:pink, :blue, :green, :yellow, :orange, :orange, :green, :blue, :yellow] %>
+
+<div id='recent_lessons_portlet' class="recent_posts_portlet">
+  <h2 class="row col-xs-12">Recent Lessons</h2>
+
+  <div class="row lessons">
+
+    <div class="col-xs-12 col-md-12 col-lg-4">
+      <% if @lessons[0] %>
+        <%= render :partial => "cms/lessons/lesson_summary", :locals => {lesson_summary: @lessons[0], size: :small, color: colors[0]} %>
+      <% end %>
+    </div>
+
+    <% 4.times do |i| %>
+      <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+        <% 2.times do |j| %>
+          <% if @lessons[curr] %>
+            <%= render :partial => "cms/lessons/lesson_summary", :locals => {lesson_summary: @lessons[curr], color: colors[curr]} %>
+          <% end %>
+          <% curr += 1 %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="more_link">
+    <a href="/lessonfinder" class="button">All Recent Lessons</a>
+  </div>
+</div>

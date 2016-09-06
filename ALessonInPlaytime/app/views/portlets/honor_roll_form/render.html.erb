@@ -1,0 +1,41 @@
+<h1>Create A New Honor Roll Post</h1>
+<div class="instructions">Share your experience with this lesson</div>
+
+<%= form_for @honor_roll_post, {:url => "/honor_roll_posts/create", :method => "post"} do |f| %>
+
+  <%= f.cms_error_messages %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :lesson_id %>
+  <div class="fields text_fields">
+    <%= f.label :name, 'Post Name: ' %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="fields text_fields">
+    <%= f.label :blog_url, 'Blog Url (optional): ' %>
+    <%= f.text_field :blog_url %>
+  </div>
+  <%= f.cms_attachment_manager %>
+  <div class="fields text_fields full">
+    <%= f.label :question_enrichment, 'How did you make this lesson more meaningful for your child?' %>
+    <%= f.text_area :question_enrichment %>
+  </div>
+
+  <div class="fields text_fields full">
+    <%= f.label :question_material, 'What materials did you replace to teach this lesson?' %>
+    <%= f.text_area :question_material %>
+  </div>
+
+  <div class="fields text_fields full">
+    <%= f.label :question_content, "What did you change to meet your child's needs?" %>
+    <%= f.text_area :question_content %>
+  </div>
+
+  <div class="fields text_fields full">
+    <%= f.label :question_testing, "How do you know your child mastered this lesson's objective?" %>
+    <%= f.text_area :question_testing %>
+  </div>
+
+  <div class="buttons clear">
+    <button type="submit" name="commit" class="button">Create Honor Roll Posting</button>
+  </div>
+<% end %>

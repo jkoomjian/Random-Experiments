@@ -1,0 +1,70 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.13'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'mysql2'
+
+
+# Gems used only for assets and not required
+# in production environments by default.
+gem 'sass-rails',   '~> 3.2.3'
+gem 'bootstrap-sass', '~> 3.0'
+group :assets do
+
+  # gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms => :ruby
+
+  gem 'uglifier', '>= 1.0.3'
+end
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
+
+# Use a local copy of bcms which includes bug fixes and customizations
+gem "browsercms", "3.5.7", :path => './vendor/browsercms-3.5.7' 
+
+# required for browsercms - these are not included automatically for unpacked gems
+gem "ancestry", "~> 1.2.4"
+gem "ckeditor_rails", "~> 3.6.4"
+gem "jquery-rails", "~> 2.0"
+gem "paperclip", "~> 3.0.3"
+gem "term-ansicolor", ">= 0"
+
+
+# required for browsercms on heroku where there is no local disk access
+gem "bcms_aws_s3", "~> 1.0.2"
+gem "bcms_blog"
+
+#required to work around a bug in bcms - https://groups.google.com/forum/#!msg/browsercms/UJWg3aNumBA/ifX85qBY3IgJ
+gem 'cocaine', '0.3.2'
+
+# recommended for heroku
+# gem 'rails_12factor', group: :production
+
+# Stripe!
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
+group :development, :test do
+  gem 'debugger'
+  gem 'pry'
+  gem 'capistrano', "~> 2.14.2"
+  # fixing a bug
+  gem 'net-ssh', '~> 2.8.1', :git => "https://github.com/net-ssh/net-ssh"
+end

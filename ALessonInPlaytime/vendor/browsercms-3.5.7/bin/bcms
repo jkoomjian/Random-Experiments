@@ -1,0 +1,324 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'thor'
+require 'term/ansicolor'
+require 'rails/generators/actions'
+require 'active_support/core_ext/string/inflections'
+require 'cms/version'
+require 'cms/commands/actions'
+require 'cms/upgrades/v3_4_0'
+require 'cms/upgrades/v3_5_0'
+# This seems to be required only due to a bug in Thor documented here:
+#   https://rails.lighthouseapp.com/projects/8994/tickets/4692-error-when-creating-app-from-template-undefined-method-wrap-for-arrayclass
+# If this bug is fixed the following line can probably be removed.
+require 'active_support/core_ext/array/wrap'
+
+
+class String
+  include Term::ANSIColor
+end
+
+
+class Cms::Install < Thor
+  include Thor::Actions
+  include Rails::Generators::Actions
+  include Cms::Commands::Actions
+  include Cms::Upgrades::V3_4_0
+  include Cms::Upgrades::V3_5_0
+
+  def self.common_options
+    method_option :database, :aliases => "-d", :desc => "Preconfigure for selected database (options: mysql/oracle/postgresql/sqlite3/frontbase/ibm_db) [Default: sqlite3]"
+    method_option :template, :aliases => "-m", :desc => "Path to an application template (can be a filesystem path or URL)"
+    option_skip_bundle
+  end
+
+  def self.option_skip_bundle
+    method_option :skip_bundle, :aliases => "--skip-bundle", :desc => "Don't run bundle install", :default => false, :type => :boolean
+  end
+
+  desc "new [NAME]", "Creates a blank BrowserCMS project with a single default template. Suitable for starting a new website project."
+  common_options
+
+  def new(name)
+    create_blank_cms_project(name)
+    display_instructions(name)
+  end
+
+  desc 'demo [NAME]', "Generates a BrowserCMS application with a sample demo website. Suitable for learning BrowserCMS."
+  common_options
+
+  def demo(name)
+    create_blank_cms_project(name)
+    generate_demo_project
+    display_instructions(name)
+  end
+
+  desc 'module [NAME]', "Generates a BrowserCMS module for sharing code between BrowserCMS projects. (Name must start with bcms_)"
+  common_options
+
+  def module(name)
+    @project_name = name
+    create_mountable_app
+    create_license_files
+
+    inside rails_app do
+      generate_seeds_rb
+    end
+
+    add_rake_tasks_for_module
+    generate_browsercms_project
+    generate_installation_script
+    generate_default_template
+
+    display_instructions(name)
+  end
+
+  desc "upgrade", "Upgrades a BrowserCMS project to v#{Cms::VERSION}"
+  method_option :skip_rails, :aliases => "--skip-rails", :desc => "Skip running `rake rails:update`.", :default => false, :type => :boolean
+  method_option :skip_bundle, :aliases => "--skip-bundle", :desc => "Don't run `bundle update` during the process'", :default => false, :type => :boolean
+
+  def upgrade
+    update_browsercms_gem_version
+    comment_out_rails_in_gemfile
+    run_bundle_update
+    install_migrations
+    rake "rails:update" unless options[:skip_rails]
+    generate_rails_3_4_0_migration
+    upgrade_to_3_5_0
+    install_cms_seed_data
+
+    instructions = <<TEXT
+Upgrade is nearly complete. Review https://github.com/browsermedia/browsercms/wiki/Upgrading-a-BrowserCMS-project before proceeding.
+Next Steps:
+1. Review the changes made by the script, revert any files that need it.
+2. Run `rake db:migrate`
+TEXT
+    puts instructions
+  end
+
+  desc 'version', 'Show BrowserCMS version'
+  map "-v" => :version, "--version" => :version
+
+  def version
+    puts "BrowserCMS #{Cms::VERSION}"
+  end
+
+  desc 'install', "Adds BrowserCMS to an existing rails application."
+  option_skip_bundle
+  def install
+    common_setup('.')
+    prefix_cms_tables
+    generate_default_template
+    puts "BrowserCMS has been installed. Run rake db:install to add the tables then restart your server."
+  end
+
+  desc 'install_db', "Adds just migrations and seed data to the project."
+  def install_db
+    install_migrations
+    install_cms_seed_data
+  end
+
+  private
+
+  def prefix_cms_tables
+    append_to_file "config/initializers/browsercms.rb", <<-CODE
+Cms.table_prefix = "cms_"
+    CODE
+  end
+
+  def create_license_files
+    template 'COPYRIGHT.txt'
+    template 'LICENSE.txt'
+    template 'GPL.txt'
+    remove_file "MIT-LICENSE"
+  end
+
+  # i.e. Change the working directory (i.e. cd [name])
+  def cd_to(name=@project_name)
+    self.destination_root = (File.join(destination_root, name))
+  end
+
+  def create_rails_app(name)
+    rails_options = {:skip_bundle => true}
+    if options[:template]
+      rails_options[:template] = options[:template]
+    end
+    if options[:database]
+      rails_options[:database] = options[:database]
+    end
+
+    require 'rails/generators'
+    require 'rails/generators/rails/app/app_generator'
+
+    # We invoke this programmatically, rather than via shell (`rails new #{name}`) so we get EXACT version of rails we want. (Works for Rails 3.1 or later)
+    rails_script = Rails::Generators::AppGenerator.new([name], rails_options)
+    rails_script.invoke_all
+
+  end
+
+  def create_rails_plugin(name)
+    require 'rails/generators'
+    require 'rails/generators/rails/plugin_new/plugin_new_generator'
+
+    rails_options = {:skip_bundle => true}
+    rails_options[:mountable] = true
+    plugin_script = Rails::Generators::PluginNewGenerator.new([name], rails_options)
+    plugin_script.invoke_all
+
+  end
+
+  def create_mountable_app(name = @project_name)
+    create_rails_plugin(name)
+    cd_to(name)
+
+    gemspec "browsercms", :version => "~> #{::Cms::VERSION}"
+    add_browsercms_dependency
+    include_cms_module
+    remove_rails_dependency
+    run_bundle_install
+  end
+
+  def display_instructions(name)
+    puts "\nCreated new BrowserCMS project '#{name}'."
+    puts "    To get started, type 'cd #{name}'"
+    puts "    then type 'rake db:install'"
+    puts "    then type 'rails server' and open your browser to 'http://localhost:3000'."
+  end
+
+  def enable_asset_precompiling
+    gsub_file "config/environments/production.rb", /config\.assets\.compile = false/, 'config.assets.compile = true'
+  end
+
+  def configure_mail_server
+    [
+        "# Configure your mail server's address below",
+        "config.action_mailer.smtp_settings = {:address => 'mail.yourmailserver.com', :domain => config.cms.site_domain}\n"
+    ].reverse.each do |line|
+      environment line, :env => "production"
+    end
+  end
+
+  def add_sitedomain_to_production
+    [
+        %!# Uncomment and set this to match your production URL. Used for emailing links to the CMS. (default: localhost:3000)!,
+        %!# config.cms.site_domain = "www.example.com"\n!
+    ].reverse.each do |line| # Reverse ensures comment appears first
+      environment line, :env => "production"
+    end
+  end
+
+  def generate_browsercms_project
+    install_migrations
+
+    inside rails_app do
+      install_cms_seed_data
+      add_route_to_end("mount_browsercms")
+      create_browsercms_initializer
+      enable_asset_precompiling
+    end
+    configure_mail_server
+    add_sitedomain_to_production
+  end
+
+  def generate_demo_project
+    source_paths << File.expand_path(File.join(__FILE__, '../../lib/generators/browser_cms/demo_site/templates'))
+
+    inside rails_app do
+      copy_file 'logo.jpg', "public/themes/blue_steel/images/logo.jpg"
+      copy_file 'splash.jpg', "public/themes/blue_steel/images/splash.jpg"
+      copy_file 'style.css', "public/themes/blue_steel/stylesheets/style.css"
+
+      copy_file 'demo_site.rake', 'lib/tasks/demo_site.rake'
+      copy_file 'demo.seeds.rb', 'db/demo_site_seeds.rb'
+    end
+  end
+
+  def add_rake_tasks_for_module
+    copy_file 'module_tasks.rake', 'lib/tasks/module_tasks.rake'
+    append_to_file 'Rakefile', "\nload 'lib/tasks/module_tasks.rake'"
+    insert_into_file "#{current_project}.gemspec", "  s.files -= Dir['lib/tasks/module_tasks.rake']\n  ", :before => "s.test_files"
+  end
+
+  # When working with modules, the 'root' is the dummy application
+  def in_root
+    inside(rails_app) { yield }
+  end
+
+  def rails_app
+    if @project_name
+      "test/dummy"
+    else
+      @destination_stack.first
+    end
+  end
+
+  def project_root
+    if @project_name
+      @project_name
+    else
+      @destination_stack.first
+    end
+  end
+
+  # For both creating new bcms project and adding bcms to existing rails projects.
+  def common_setup(name)
+    gem 'browsercms', :version => ::Cms::VERSION
+    run_bundle_install
+    generate :jdbc if defined?(JRUBY_VERSION)
+    generate_browsercms_project
+  end
+
+  def generate_default_template
+    generate 'cms:template', "default"
+  end
+
+  def standard_file_permissions
+    "Cms.attachment_file_permission = 0640"
+  end
+
+  def generate_seeds_rb
+    create_file "db/seeds.rb", "# Load BrowserCMS seed data\n"
+  end
+
+  def add_browsercms_dependency
+    prepend_file "lib/#{@project_name}/engine.rb", "require 'browsercms'\n"
+  end
+
+  def create_blank_cms_project(name)
+    create_rails_app(name)
+    cd_to(name)
+
+    # Unsure if this handles windows specific removal of files
+    remove_file("public/index.html")
+
+    common_setup name
+    create_browsercms_initializer
+    generate_default_template
+
+  end
+
+  def create_browsercms_initializer
+    initializer 'browsercms.rb', <<-CODE
+#{standard_file_permissions}
+    CODE
+  end
+
+  def gemspec_file
+    "#{@project_name}.gemspec"
+  end
+
+  # Add a dependency to the project gemspec file.
+  def gemspec(name, options={})
+    text = <<-RUBY
+      s.add_dependency "#{name}", "#{options[:version]}"\n
+    RUBY
+    insert_into_file(gemspec_file(), text, :after => "Gem::Specification.new do |s|\n")
+  end
+
+  def remove_rails_dependency
+    insert_into_file gemspec_file, "# Depend on BrowserCMS,rather than Rails \n # ", :before => "s.add_dependency \"rails\""
+  end
+end
+
+Cms::Install.start

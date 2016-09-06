@@ -1,0 +1,109 @@
+<h1><%= @content_block.name %></h1>
+
+<div><img class="lesson_img" src="<%= @content_block.display_image_url(:poster) %>" /></a></div>
+<div class="lesson-overview">
+
+  <div class="overview">
+    <label>Est Duration:</label>
+    <div class="text"><%= @content_block.est_duration %></div>
+  </div>
+
+  <div class="overview">
+    <label>Lesson Focus:</label>
+    <div class="text"><%= @content_block.lesson_focus %></div>
+  </div>
+
+  <div class="overview">
+    <label>Suggested Age:</label>
+    <div class="text"><%= @content_block.suggested_age_display %></div>
+  </div>
+
+  <div class="overview">
+    <label>Location:</label>
+    <div class="text"><%= @content_block.location %></div>
+  </div>
+
+  <div class="overview">
+    <label>Prep Time:</label>
+    <div class="text"><%= @content_block.prep_time %></div>
+  </div>
+
+  <div class="overview">
+    <label># of Children:</label>
+    <div class="text"><%= @content_block.num_children %></div>
+  </div>
+
+</div>
+
+<div class="direction">
+  <label>Objective</label>
+  <div><%= @content_block.objective.html_safe %></div>
+</div>
+
+<div class="direction">
+  <label>Developmental Milestone</label>
+  <div><%= @content_block.milestone.html_safe %></div>
+</div>
+
+<% if has_access @content_block, current_user %>
+
+  <div class="direction">
+    <label>Printables:</label>
+    <%= render :partial => "cms/lessons/printable", :collection => @content_block.printables %>
+  </div>
+
+  <div class="direction">
+    <label>Materials</label>
+    <div><%= @content_block.materials.html_safe %></div>
+  </div>
+
+  <div class="direction">
+    <label>Lesson Prep</label>
+    <div><%= @content_block.lesson_prep.html_safe %></div>
+  </div>
+
+  <div class="direction">
+    <label>Lesson Plan</label>
+    <div><%= @content_block.lesson_plan.html_safe %></div>
+  </div>
+
+  <div class="direction">
+    <label>Video</label>
+    <div><%= @content_block.video.html_safe %></div>
+  </div>
+
+  <div class="direction">
+    <label>Honor Roll Posts:</label>
+    <% if @content_block.honor_roll_posts.published.length > 0 %>
+      <div>
+        <%= render :partial => "cms/honor_roll_posts/honor_roll_post_summary", :collection => @content_block.honor_roll_posts.published.limit(4).order("id desc") %>
+      </div>
+    <% end %>
+    <a href="/honor-roll-form/<%= @content_block.slug %>" class="button add_hrp_button">Add an honor roll posting</a>
+  </div>
+
+  <% unless @content_block.category_id.blank? %>
+    <div class="direction">
+      <label>Posted In:</label>
+      <a href="/lessonfinder/category/<%= @content_block.category_name %>"><%= @content_block.category_name %></a>
+    </div>
+  <% end %>
+
+  <div class="direction">
+    <label>Tags:</label>
+    <%= render :partial => "cms/lessons/tag", :collection => @content_block.tags %>
+  </div>
+  
+  <%= render :partial => "layouts/social_toolbar" %>
+  <%= render :partial => "cms/comments/display_comments", :locals => {:post => @content_block} %>
+
+<% else %>
+  <% if has_account_expired current_user %>
+    <%= render :partial => "cms/lessons/membership_expired_popup"  %>
+    <a href="/members/" style='font-size: larger;'>Purchase a subscription</a> to receive full access to this lesson
+  <% else %>
+    <%= render :partial => "cms/lessons/membership_popup"  %>
+    <a href="/login/#signup-tab" style='font-size: larger;'>Sign Up</a> to receive full access to this lesson
+  <% end %>
+
+<% end %>

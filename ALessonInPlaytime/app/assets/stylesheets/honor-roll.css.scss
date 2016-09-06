@@ -1,0 +1,16 @@
+#honor-roll {
+  .main-photo {text-align: center; margin: 20px auto;
+    img {border-radius: 7px;}
+    .orig.visible-xs {margin-top: 15px;}
+  }
+  .photos_row {
+    margin-bottom: 30px;
+    img {margin-right: 10px; border-radius: 7px;}
+  }
+  .item {margin-bottom: 15px;
+    .instructions {margin-bottom: 5px;}
+    .user_name {display: inline; font-weight: bold;}
+    .lesson {display: inline;}
+    h4 {margin: 15px 0 0 0;}
+  }
+}

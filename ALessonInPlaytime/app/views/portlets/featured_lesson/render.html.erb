@@ -1,0 +1,9 @@
+<div class="image">
+  <img src="<%= @lesson.display_image_url(:poster) %>" />
+</div>
+<div class="content">
+  <div class="name summary-content"><%= @lesson.name %></div>
+  <div class="summary-content">
+    <%= raw @lesson.summary %> &nbsp;&nbsp; <a href="/lessons/<%= @lesson.slug %>" class="more">More...</a>
+  </div>
+</div>

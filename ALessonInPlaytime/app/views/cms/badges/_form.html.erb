@@ -1,0 +1,4 @@
+<%= f.cms_text_field :name %>
+
+<%= f.cms_drop_down :lesson_focus, Lesson.pluck(:lesson_focus).uniq.map{|c| [c, c]} %>
+<%= f.cms_file_field :image, :label => "Image" %>

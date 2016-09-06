@@ -1,0 +1,8 @@
+#members-settings {
+  .plan_type label {
+    display: block;
+    &[for] {font-weight: normal;}
+  }
+  label[for*=password] {width: 30%;}
+  label.cvc {margin-left: 5px;}
+}

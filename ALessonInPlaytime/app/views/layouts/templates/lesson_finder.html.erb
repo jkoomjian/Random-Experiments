@@ -1,0 +1,45 @@
+<% content_for :content do %>
+
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-3 col-md-offset-1 search-column">
+      <h3>Find The Perfect Lesson</h3>
+      <div class='search-area'>
+        <div class='search-box'>
+          <input type="search" placeholder='Search' id='search-input' name="search" results=5 />
+          <button type="button" class="btn btn-default search-button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </div>
+        <div class='find-by'>
+          <h5>Find Lessons By:</h5>
+
+          <input type="hidden" name="tag" value="<%= params[:tag] %>" />
+          <input type="hidden" name="category" value="<%= params[:category] %>" />
+
+          <select class='finder' name="age">
+            <option value="" selected>Child Age</option>
+            <% (1..10).to_a.each {|i| %>
+              <option value='<%= i %>'><%= i %></option>
+            <% } %>
+          </select>
+
+          <select class='finder' name="focus">
+            <option value="" selected>Lesson Focus</option>
+            <% Lesson.all_lesson_topics.each {|i| %>
+              <option value='<%= i %>'><%= i %></option>
+            <% } %>
+
+          </select>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-7 lessons-dock">
+      
+    </div>
+  </div>
+</section>
+
+<% end %>
+<%= render template: "layouts/templates/default" %>

@@ -1,0 +1,14 @@
+<%= content_for :html_head do %>
+  <%= stylesheet_link_tag('cms/form_layout') %>
+<% end %>
+<%= form_for(@user) do |f| %>
+  <%= f.cms_error_messages %>
+  <%= render :partial => 'user_fields', :locals => {:f => f} unless @change_password %>
+  <%= render :partial => 'password', :locals => {:f => f} if @user.new_record? %>
+  <%= render :partial => 'groups' %>
+  <%= f.cms_drop_down :subscription_status, {"None" => "none", "Trial" => "trial", "Paid" => "paid", "Free" => "free", "Trial Expired" => "expired"} %>
+  <%= f.cms_date_picker :trial_start, :label => 'Trial Subscription Start Date', :instructions => 'Automatically starts when user signs up' %>
+  <div class="buttons">
+    <%= lt_button_wrapper(f.submit("Save", :class => "submit")) %>
+  </div>
+<% end %>

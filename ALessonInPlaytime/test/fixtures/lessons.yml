@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  est_duration: MyString
+  suggested_age_display: MyString
+  suggested_age_min: 1
+  suggested_age_max: 1
+  prep_time: 1
+  lesson_focus: MyString
+  location: MyString
+  num_children: MyString
+  objective: 
+  milestone: 
+  materials: 
+  lesson_prep: 
+  lesson_plan: 
+  video: MyText
+
+two:
+  name: MyString
+  est_duration: MyString
+  suggested_age_display: MyString
+  suggested_age_min: 1
+  suggested_age_max: 1
+  prep_time: 1
+  lesson_focus: MyString
+  location: MyString
+  num_children: MyString
+  objective: 
+  milestone: 
+  materials: 
+  lesson_prep: 
+  lesson_plan: 
+  video: MyText

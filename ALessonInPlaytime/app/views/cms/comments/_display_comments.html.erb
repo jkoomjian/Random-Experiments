@@ -1,0 +1,25 @@
+<div id="comments">
+
+  <% comments = post.comments.published.reject(&:new_record?) %>
+  <h1 class="comment_count">Comments</h1>
+
+  <% if comments.any? -%>
+    <% comments.each_with_index do |comment, i| %>
+      <div class="comment <%= 'first' if i == 0 %>">
+        <%= h comment.body %>
+        <p>
+          <% comment_author_name = comment.user_id.present? ? comment.user.display_name : comment.author %>
+          &mdash;<%= comment.url.present? ? link_to(h(comment_author_name), comment.url, :target => "_blank", :rel => "external nofollow") : h(comment_author_name) %>
+          on <em><%= display_date(comment.created_at) %></em>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% unless @comment.nil? %>
+    <div class="comment_form">
+      <%= render :partial => '/cms/comments/display_comments_form' %>
+    </div>
+  <% end %>
+
+</div>

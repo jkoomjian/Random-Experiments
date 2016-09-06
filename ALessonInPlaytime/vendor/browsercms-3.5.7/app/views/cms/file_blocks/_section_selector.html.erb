@@ -1,0 +1,13 @@
+<%
+   root = Cms::Section.root.first
+   root.full_path = root.name
+   @sections = []
+   @sections << root
+   @sections += root.master_section_list
+   @sections.each {|s| s.full_path = "/" + s.full_path unless s == root }
+%>
+<span style="display: hidden">
+<% @sections.each do |s| -%>
+    <%= tag :span, :class=>"section_id_map",  :data=>{:id=> s.id, :path => s.prependable_path}  %>
+<% end %>
+</span>

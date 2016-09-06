@@ -1,0 +1,26 @@
+<% content_for :content do %>
+
+<section class="container">
+  <div class='row col-xs-8 col-xs-offset-2'>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
+      <% if should_show_signup_from %>
+        <li><a href="#signup-tab" data-toggle="tab">Sign Up</a></li>
+      <% end %>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="login-tab"><%= container :login %></div>
+      <% if should_show_signup_from %>
+        <div class="tab-pane fade" id="signup-tab"><%= container :signup %></div>
+      <% end %>
+    </div>
+
+  </div>
+</section>
+
+<% end %>
+<%= render template: "layouts/templates/default" %>

@@ -1,0 +1,230 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require cms/attachment_manager
+ *= require_self
+ *= require_tree .
+ */
+
+ /* Override Sass variables by putting your own varialbes before the bootstrap import
+  * see https://github.com/twbs/bootstrap-sass#sass
+  */
+@import "bootstrap";
+
+
+/*********** Variables *************/
+$dblue: #6ec6ec;
+$lblue: #b0e0f7;
+$orange: #d1562c;
+$lgray: #cfcab7;
+$dgray: #5c5656;
+$lmidnight: #484b5a;
+$dmidnight: #26374b;
+
+$gray-text: #8C8C8E;
+
+/************* Mixins *****************/
+@mixin alip-background($color, $text-color, $button-color, $button-hover-color) {
+  background-color: $color; color: $text-color;
+  a.button, input[type=submit].button, button[type=submit].button {background-color: $button-color;
+    &:hover {background-color: $button-hover-color;}
+  }
+}
+
+
+/************* Site-wide Styles *****************/
+@font-face {
+  font-family: 'Chalet';
+  src: url('/fonts/ChaletComprime-MilanSixty.woff') format('woff');
+}
+
+.white-bg {
+  a, h1, h2, h3, {color: $dblue;}
+  a:hover {color: #8c8c8e;}
+  a.button:hover {color: white;}
+}
+
+.white-bg {@include alip-background(white, #8c8c8e, $dblue, $lblue);}
+.lblue-bg {@include alip-background($lblue, white, #c0e6f9, #D5EEFB);}
+.orange-bg {@include alip-background($orange, white, #f99a6a, #FAAC85);}
+.lgray-bg {@include alip-background($lgray, white, #aa9d8c, #B5AA9B);}
+.dgray-bg {@include alip-background($dgray, white, #af9a7b, #B8A589);}
+.lmidnight-bg {@include alip-background($lmidnight, white, #b4b4b4, #C2C2C2);}
+.dmidnight-bg {@include alip-background($dmidnight, white, #6983a6, #7890B0);}
+
+a:hover {text-decoration: none;}
+a.button, input[type=submit].button, button[type=submit].button {
+  padding: 6px 15px; border-radius: 5px; color: white; background-color: $dblue; border-width: 0;
+  &:before {content: "\25B6\a0\a0";}
+}
+
+.container.row {margin-left: auto; margin-right: auto;}
+.alert {
+  margin: 20px auto; text-align: center;
+  &>div {display: inline-block; text-align: left;}
+}
+img {max-width: 100%;}
+
+.fields {
+  margin-bottom: 5px;
+  label {}
+  input, textarea {border: 1px solid $lblue; padding: 6px; color: $dgray;}
+  input {text-transform: lowercase;}
+  textarea {display: block;}
+  textarea.col-xs-8 {margin-left: 15px;}
+  &.buttons {margin-top: 15px;}
+}
+
+//hack for bootstrap - we dont want container-fluid to extend across
+//the entire screen on desktops. Any containers which should extend across the
+//entire desktop add class=full-width-desktop
+.container-fluid:not(.full-width-desktop) {max-width: 1140px; margin-left: auto; margin-right: auto;}
+
+//fix a bug where bootstrap adds a horizontal toolbar
+.container-fluid.full-width-desktop.row, .container-fluid.full-width-desktop .row {margin-left: 0; margin-right: 0;}
+
+input, textarea {text-transform: none !important;}
+
+header {
+  .logo-row {background-color: $dblue; color: white;
+    &>div {text-align: center;}
+    .logo-header {color: white;
+      h3 {display: inline;}
+      .logo {margin: 10px 3px; transition: all 0.25s; height: 83px; width: 65px;
+        &:hover {height: 108px; width: 85px;}
+      }      
+    }
+    .social-bar {
+      position: absolute; right: 15%; top: 0; background-color: white;
+      padding: 5px 15px; font-size: 18px; border-radius: 0 0 10px 10px;
+      a {background-color: $dblue; padding: 8px; border-radius: 18px; color: white; margin-right: .1em;
+        &:hover {background-color: #428BCA;}
+      }
+    }
+  }
+  
+  .navbar-wrapper {margin: 0; min-height: 50px;}
+
+  nav.navbar {
+    border-radius: 0; border-width: 0; margin: 0;
+    // for the affixed nav bar
+    width: 100%; z-index: 10;
+    &.affix {top: 0;
+      .navbar-nav .nav-logo a {opacity: 1;}
+    }
+    
+    .navbar-nav {width: 100%; margin: 0;
+      .nav-logo a {background: url('/images/nav-logo.png') no-repeat scroll center center;
+                    width: 45px; height: 50px; padding: 0;
+                    transition: opacity 0.1s linear; opacity: 0;
+                  }
+      > li > a {color: white; font-weight: bold;
+        &:hover {background-color: #c1e7fa !important; color: white;}
+      }
+      li.right {float: right;}
+      li.trial a {background: url("/images/30-days.png") no-repeat scroll 0 center; padding-left: 45px; text-transform: uppercase;}
+    }
+  }
+
+  //Mobile menu
+  @media screen and (max-width: 767px) {
+    .navbar-nav {
+      > li {
+        border-bottom: 1px solid $dblue;
+        &:last-of-type {border-bottom-width: 0;}
+        &.right {float: none !important;}
+        &:not(.showmobile) {display: none;}
+        &.showmobile {border-bottom-width: 0;}
+      }
+    }
+    .navicon {
+      display: block; position: absolute; top: 5px; right: 35px; color: white;
+      font-size: 20px; background-color: $dblue; border-radius: 5px;
+      padding: 5px 15px; border: 1px solid #54ACD2;
+    }
+  }
+
+}
+
+section, .section {padding: 35px 0 75px 0;
+  h1, h2, h3 {text-transform: lowercase; font-family: 'Chalet';}
+  h1 {font-size: 70px;}
+  h2 {font-size: 50px;}
+  h3 {font-size: 40px;}
+}
+
+footer {
+  .col-xs-3 > h2 {margin-top: 0px;}
+  a {color: white;}
+  .credits {text-align: center; margin-top: 50px;}
+  .social_links {margin-top: 30px; font-size: 35px;
+    a {margin-right: 5px; color: #6983a6;
+      &:hover {color: white;}
+    }
+  }
+}
+
+#comments {
+  .comment_count {margin: 30px 0 8px 0;}
+  .buttons {margin-top: 15px;}
+  .comment {margin: 15px 0 15px 15px; width: 60%;}
+}
+
+/*-------------------- Page Specific ---------------------*/
+#membership-signup {
+  h1 {text-align: center;}
+  .promo-content {
+    width: 70%; margin: 10px auto 0 auto; 
+    & > * {text-align: left; margin-bottom: 20px;}
+    .signup {display: inline-block;}
+    .email_form > input {width: 25%;}
+    .email_form > input[type=email] {width: 40%}
+    .terms-check {text-align: center; font-size: smaller;}
+    .go_button {margin: 10px 0; text-align: center;}
+  }
+}
+
+.lesson_summary .img-container, .honor_roll_post_summary .img-container {
+  background-position: center center; background-repeat: no-repeat; background-attachment: scroll;
+  position: relative; overflow-y: hidden;
+
+  &.img-small {width: 380px; height: 286px;}
+  &.img-thumb {width: 190px; height: 143px;}
+  .overlay {
+    background-color: black; color: white;
+    height: 2em; width: 100%; line-height: 2em;
+    position: absolute; bottom: 0;
+    padding: 0 10px;
+    transition: height 0.75s ease;
+    &.pink {background-color: rgba(244, 118, 153, 0.8);}
+    &.blue {background-color: rgba(105, 111, 173, 0.8);}
+    &.green {background-color: rgba(83, 188, 151, 0.8);}
+    &.yellow {background-color: rgba(230, 186, 51, 0.8);}
+    &.orange {background-color: rgba(244, 139, 63, 0.8);}
+    .name {font-weight: bold;}
+  }
+}
+.lesson_summary .img-container:hover .overlay {height: 100%;}
+
+#style-guide {
+  fieldset {margin-bottom: 20px;
+    & legend {margin-bottom: 10px;}
+  }
+  table {border: 1px solid black;
+    td {padding: 20px;}
+    td.dblue {background-color: $dblue;}
+  }
+}
+
+.modal-dialog {
+  button.close {position: absolute; top: 20px; right: 20px;}
+  .plato-says {display: inline-block; vertical-align: top; margin-top: 100px; z-index: 100;}
+  .modal-content {display: inline-block; border-width: 0; z-index: -1; border-radius: 25px;}
+}

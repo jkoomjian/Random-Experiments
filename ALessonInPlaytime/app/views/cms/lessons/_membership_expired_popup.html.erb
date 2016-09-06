@@ -1,0 +1,18 @@
+<div id="membership_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+        <div id="membership-signup">
+          <%= render :partial=>"partials/membership_expired_popup" %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#membership_modal').modal()
+</script>

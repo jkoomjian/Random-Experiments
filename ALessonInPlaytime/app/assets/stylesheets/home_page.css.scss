@@ -1,0 +1,81 @@
+#homepage {
+
+  .featured_lesson {padding: 0;
+    h3 {margin-top: 0;}
+    .image {margin: 0;}
+    .content {margin: 20px 20px 0 20px;
+      p {display: inline;}
+      .name {font-weight: bold;}
+    }
+  }
+  
+  .lessons_links {padding-left: 50px;
+    h1:first-child {margin: 0 0 10px 0;}
+    h1:not(:first-child) {margin-top: 45px;}
+    ul {list-style-type: none; padding-left: 20px;
+      li:before {content: "\25B6"; margin-right: 0.33em; color: #6ec6ec; font-size: smaller;}
+    }
+  }
+
+  .seasonal_promotion {
+    .row.top {text-align: center;}
+    .top {
+      h2 {margin: 35px 0 25px 0;}
+    }
+    .lesson {text-align: center; margin-top: 60px;
+      .img {width: 143px; height: 143px; border-radius: 100%; margin: 0 auto;
+            background-position: center center; background-repeat: no-repeat; background-attachment: scroll;}
+      p {text-align: left;}
+    }
+  }
+
+  .recent_posts_portlet {
+    h2 {margin-top: 0;}
+    .lesson_summary {margin-bottom: 20px;}
+    .honor_roll_post_summary {margin: 0 0 20px 0;}
+    .more_link {margin: 20px 20px 0 20px; text-align: right;}
+  }
+
+  .newsletter_signup {
+    text-align: center;
+    h2 {margin-top: 0px;}
+    .newsletter-promo-text {
+      a {text-transform: uppercase; display: inline-block; color: #b4b4b4; margin: 25px 8px;
+        &:hover {color: white;}
+        &.free-trial {
+          padding-top: 64px;
+          // Multi-layer background
+          //ugh!
+          background: url('/images/30-days-gray-alpha.png') no-repeat scroll center top,
+                      linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 65px 64px;
+          background: url('/images/30-days-gray-alpha.png') no-repeat scroll center top,
+                      -webkit-linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 65px 64px;
+          background: url('/images/30-days-gray-alpha.png') no-repeat scroll center top,
+                      -moz-linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 65px 64px;
+          &:hover {
+            background-image: url("/images/30-days-gray-alpha.png"), linear-gradient(white, white);
+            background-image: url("/images/30-days-gray-alpha.png"), -webkit-linear-gradient(white, white);
+            background-image: url("/images/30-days-gray-alpha.png"), -moz-linear-gradient(white, white);
+          }
+        }
+        &.publications {
+          padding-top: 42px; 
+          background: url('/images/publications-gray-alpha.png') no-repeat scroll center top,
+                        linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 75px 42px;
+          background: url('/images/publications-gray-alpha.png') no-repeat scroll center top,
+                        -webkit-linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 75px 42px;
+          background: url('/images/publications-gray-alpha.png') no-repeat scroll center top,
+                        -moz-linear-gradient(#b4b4b4, #b4b4b4) no-repeat scroll center top / 75px 42px;
+          &:hover {
+            background-image: url("/images/publications-gray-alpha.png"), linear-gradient(white, white);
+            background-image: url("/images/publications-gray-alpha.png"), -webkit-linear-gradient(white, white);
+            background-image: url("/images/publications-gray-alpha.png"), -moz-linear-gradient(white, white);
+          }
+        }
+      }
+    }
+    form {margin-bottom: 30px;}
+    input[type=email] {border-width: 0; padding: 5px; margin-right: 15px; max-width:40%;}
+  }
+
+}

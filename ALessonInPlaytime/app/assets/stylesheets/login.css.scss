@@ -1,0 +1,7 @@
+#login {
+  .tab-content {margin-top: 20px;}
+  form .fields {
+    label {width: 150px;}
+    label[for=remember_me] {font-weight: normal; color: #5c5656;}
+  }
+}

@@ -1,0 +1,14 @@
+#lessons {
+  label {margin: 0;}
+  img.lesson_img {border-radius: 7px;}
+  .lesson-overview {
+    margin: 30px 0 0 0;
+    .overview {width: 45%; display: inline-block; margin-bottom: 15px;
+      .text {display: inline; padding-left: 5px;}
+    }
+  }
+  .direction {margin-bottom: 15px;
+    label {font-size: larger;}
+  }
+  .add_hrp_button {display: inline-block; margin-top: 15px;}
+}

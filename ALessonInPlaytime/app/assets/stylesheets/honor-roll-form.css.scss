@@ -1,0 +1,14 @@
+#honor-roll-form {
+  h1 {margin-bottom: 5px;}
+  form.new_honor_roll_post {margin-top: 20px;}
+  .fields {
+    margin-bottom: 15px;
+    label {width: 30%;}
+    &.full {
+      margin-bottom: 25px;
+      label {width: 100%;}
+    }
+    textarea {width: 80%; height: 100px;}
+  }
+  form.new_honor_roll_post > br, .select_fields {display: none;}
+}

@@ -1,0 +1,33 @@
+<footer class="section dmidnight-bg">
+  <div class="container-fluid">
+    
+    <div class="row">
+
+      <div class="col-xs-12 col-md-3 col-md-offset-1">
+        <h2>Blog</h2>
+        <%= render_portlet "Alip Blog" %>
+      </div>
+
+      <div class="col-xs-12 col-md-3">
+        <h2>Recipes</h2>
+        <%= render_portlet "Recipe Blog" %>
+      </div>
+
+      <div class="col-xs-12 col-md-3">
+        <h2>Contact</h2>
+        <%= render :partial=>"partials/footer_contact" %>
+        <div class="social_links">
+          <%= render :partial=>"partials/social_links" %>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="">
+      <div class="credits">
+        <%= render :partial=>"partials/footer" %>
+      </div>
+    </div>
+
+  </div>
+</footer>

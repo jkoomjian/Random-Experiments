@@ -1,0 +1,52 @@
+<%= cms_toolbar %>
+
+<% ensure_trial_expiration_warning_displayed %>
+
+<header>
+  
+  <div class='logo-row'>
+    <div class="container-fluid row full-width-desktop">
+      <div class="col-xs-12">
+        <a href="/" class="logo-header">
+          <h3>a lesson in</h3>
+          <img src="/images/logo.png" class="logo" />
+          <h3>playtime</h3>
+        </a>
+        <div class="social-bar hidden-xs hidden-sm">
+          <a href="#" class="fa fa-facebook-square"></a> 
+          <a href="#" class="fa fa-twitter-square href="></a>
+          <a href="#" class="fa fa-pinterest-square"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='navbar-wrapper'>
+    <nav class="navbar navbar-default lblue-bg" role="navigation" data-spy="affix" data-offset-top="103">
+      <div class="container-fluid row full-width-desktop">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-offset-2">
+          <%= render_menu :class=>"nav navbar-nav" %>
+          <a href="#" class="visible-xs navicon">&#9776;</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container-fluid row full-width-desktop">
+    <div class="col-xs-12">
+      <% if flash.key?(:success) %>
+        <div class="alert alert-success"><div><%= raw flash[:success] %></div></div>
+      <% end %>
+      <% if flash.key?(:notice) %>
+        <div class="alert alert-info"><div><%= raw flash[:notice] %></div></div>
+      <% end %>
+      <% if flash.key?(:warning) %>
+        <div class="alert alert-warning"><div><%= raw flash[:warning] %></div></div>
+      <% end %>
+      <% if flash.key?(:error) %>
+        <div class="alert alert-danger"><div><%= raw flash[:error] %></div></div>
+      <% end %>
+    </div>
+  </div>
+
+</header>

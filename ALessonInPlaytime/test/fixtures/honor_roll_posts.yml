@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  blog_url: MyString
+  question_enrichment: 
+  question_material: 
+  question_content: 
+  question_testing: 
+  teachers_lounge: 
+
+two:
+  name: MyString
+  blog_url: MyString
+  question_enrichment: 
+  question_material: 
+  question_content: 
+  question_testing: 
+  teachers_lounge: 

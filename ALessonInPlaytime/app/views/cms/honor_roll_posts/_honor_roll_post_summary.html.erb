@@ -1,0 +1,18 @@
+<div class="honor_roll_post_summary">
+  <a href="/honor-roll/<%= honor_roll_post_summary.slug %>">
+  
+    <div class='img-container img-<%= defined?(size) ? size : :thumb %>' style='background-image: url("<%= honor_roll_post_summary.display_image_url(defined?(size) ? size : :thumb) %>")'>
+      <div class="overlay <%= defined?(color) ? color : random_color %>">
+        <span class="name"><%= honor_roll_post_summary.name %></span>
+      </div>
+    </div>
+
+  </a>
+
+  <% if defined?(display_edit) && display_edit %>
+    <div>
+      <a href='<%= "/honor-roll-form/#{honor_roll_post_summary.lesson.slug}/#{honor_roll_post_summary.slug}" %>' class="edit button">Edit</a>
+    </div>
+  <% end %>
+
+</div>

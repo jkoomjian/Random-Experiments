@@ -1,0 +1,42 @@
+<style type='text/css'>
+  .hp-seasonal-promo {
+      background-color: <%= @portlet.bg_color %>;
+      color: <%= @portlet.text_color %>;
+  }
+  .hp-seasonal-promo a.lesson-link {color: <%= @portlet.text_color %>; display: block; padding: 10px; border-radius: 10px;}
+  .hp-seasonal-promo a.lesson-link:hover {background-color: <%= @portlet.button_color %>;}
+  .hp-seasonal-promo a.button, .hp-seasonal-promo input.button[type="submit"], .hp-seasonal-promo button.button[type="submit"] {
+      background-color: <%= @portlet.button_color %>;
+  }
+  .hp-seasonal-promo a.button:hover, .hp-seasonal-promo input.button[type="submit"]:hover, .hp-seasonal-promo button.button[type="submit"]:hover {
+      background-color: <%= @portlet.button_hover_color %>;
+  }
+</style>
+
+
+<section class="hp-seasonal-promo">
+  <div class="container seasonal_promotion">
+
+    <div class="row col-lg-12 top">
+      <div><img src="<%= @portlet.plato_img_path %>" /></div>
+      <div><h2><%= @portlet.promo_title %></h2></div>
+      <div><a href="#" class="button"><%= @portlet.promo_button_text %></a></div>
+    </div>
+    <div class="row">
+
+      <% for lesson in @featured_lessons %>
+
+        <div class="col-md-12 col-lg-4 lesson">
+          <a href="/lessons/<%= lesson.slug %>" class="lesson-link">
+            <div class="img" style="background-image: url('<%= lesson.display_image_url(:thumb) %>')"></div>
+            <h3><%= lesson.name %></h3>
+            <p><%= raw lesson.summary %></p>
+          </a>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+</section>

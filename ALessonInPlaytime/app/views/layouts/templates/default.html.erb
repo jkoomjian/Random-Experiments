@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render :partial => "layouts/common_head" %>
+  </head>
+  <body id="<%= page_id %>" class="">
+    <%= render :partial => "layouts/header" %>
+
+    <div id="main">
+      
+      <%# If the template is sublcassed, run the subtemplate, else allow a block %>
+      <% if content_for?(:content) %>
+        <%= yield(:content) %>
+      <% else %>
+        <section class="container">
+          <div class='row col-sm-12 col-md-8 col-md-offset-2 white-bg'>
+            <%= container :main %>
+          </div>
+        </section>
+      <% end %>
+
+    </div>
+    
+    <%= render :partial => "layouts/footer" %>
+  </body>
+</html>

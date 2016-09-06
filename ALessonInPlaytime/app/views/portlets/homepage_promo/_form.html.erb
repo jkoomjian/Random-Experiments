@@ -1,0 +1,13 @@
+<%= f.cms_text_field :name %>
+<%= f.cms_text_field :bg_color %>
+<%= f.cms_text_field :text_color %>
+<%= f.cms_text_field :button_color %>
+<%= f.cms_text_field :button_hover_color %>
+<%= f.cms_text_field :plato_img_path %>
+<%= f.cms_text_field :promo_title %>
+<%= f.cms_text_field :promo_desc %>
+<%= f.cms_text_field :promo_button_text %>
+<%= f.cms_drop_down :featured_lesson_1, Lesson.all(:order => 'created_at desc').map{|c| [c.name, c.id]}, :label => "Lesson 1" %>
+<%= f.cms_drop_down :featured_lesson_2, Lesson.all(:order => 'created_at desc').map{|c| [c.name, c.id]}, :label => "Lesson 2" %>
+<%= f.cms_drop_down :featured_lesson_3, Lesson.all(:order => 'created_at desc').map{|c| [c.name, c.id]}, :label => "Lesson 3" %>
+<%= f.cms_template_editor :template %>

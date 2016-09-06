@@ -1,0 +1,24 @@
+<div class="login-portlet">
+  <% if logged_in? %>
+    <p>Welcome, <%= current_user.login %></p>
+    <p><%= link_to "Logout", cms.logout_path %></p>
+  <% else %>
+    <%= form_tag cms.login_path do %>
+      <%= hidden_field_tag :success_url, @success_url %>
+      <%= hidden_field_tag :failure_url, @failure_url %>    
+      <div class="fields text_fields">
+        <%= text_field_tag :login, @login, :placeholder => "Email" %>
+      </div>
+      <div class="fields text_fields">
+        <%= password_field_tag :password, nil, :placeholder => "Password" %>
+      </div>
+      <div class="fields text_fields">
+        <%= label_tag :remember_me %>
+        <%= check_box_tag :remember_me, '1', @remember_me %>
+      </div>
+      <div class="fields buttons">
+        <%= submit_tag "Login", :class => "submit button" %>
+      </div>
+    <% end %>  
+  <% end %>
+</div>

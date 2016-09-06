@@ -1,0 +1,20 @@
+<%= form_for(@user, portlet_form_params(@portlet, 'create_new_member')) do |f| %>
+  <%= f.cms_error_messages %>
+
+  <div class="fields text_fields">
+      <%= f.text_field :email, :autocomplete => "off", :placeholder => "Email" %>
+  </div>
+  <div class="fields text_fields">
+      <%= f.text_field :first_name, :autocomplete => "off", :placeholder => "First Name" %>
+  </div>
+  <div class="fields text_fields">
+      <%= f.text_field :last_name, :autocomplete => "off", :placeholder => "Last Name" %>
+  </div>
+
+  <%= render :partial => 'cms/users/password', :locals => {:f => f} if @user.new_record? %>
+
+  <input type="hidden" name="failure_url" value="/login" />
+  <div class="fields buttons">
+    <%= f.submit("Sign Up", :class => "submit button") %>
+  </div>
+<% end %>

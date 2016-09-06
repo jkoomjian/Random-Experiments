@@ -1,0 +1,4 @@
+
+<%= f.cms_text_field :name %>
+<%= f.cms_drop_down :lesson_id, Lesson.all(:order => 'created_at desc').map{|c| [c.name, c.id]}, :instructions => "Lesson this printable is attached to" %>
+<%= f.cms_file_field :attachment, :label => "Attachment" %>

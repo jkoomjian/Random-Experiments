@@ -1,0 +1,12 @@
+<p><b>Name:</b> <%= @content_block.name %></p>
+<p><b>Author:</b> <%= @content_block.author %></p>
+<p><b>Email:</b> <%= @content_block.email %></p>
+<% if !@content_block.user.nil? %>
+  <p>
+     <b>User:</b>
+     <a href='<%= "/cms/users/#{@content_block.user.id}/edit" %>'><%= "#{@content_block.user.full_name}" %></a>
+  </p>
+<% end %>
+<p><b>Url:</b> <%= @content_block.url %></p>
+<p><b>Ip:</b> <%= @content_block.ip %></p>
+<p><b>Body:</b> <%= @content_block.body %></p>

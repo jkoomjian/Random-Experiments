@@ -1,0 +1,31 @@
+<%#-- FB TODO set app id --%>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      status     : false,
+      xfbml      : true
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<%#-- Local urls wont work for FB testing %>
+<div class="fb-like"
+      data-href="<%= Rails.env == 'development' ? 'http://www.alessoninplaytime.com' : request.original_url %>"
+      data-layout="button_count"
+      data-action="like"
+      data-show-faces="false"
+      data-share="false"></div>
+
+
+<%#-- Pinterest --%>
+<a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>

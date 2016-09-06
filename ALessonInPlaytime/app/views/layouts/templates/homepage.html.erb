@@ -1,0 +1,37 @@
+<% content_for :content do %>
+
+  <section class="white-bg">
+    <div class="container row">
+      <div class="col-xs-12 col-lg-8 featured_lesson">
+        <%= container :featured_lesson %>
+      </div>
+      <div class="col-xs-12 col-lg-4 lessons_links">
+        <%= container :lessons_links %>
+      </div>
+    </div>
+  </section>
+
+  <%= container :seasonal_promo_portlet %>
+
+  <section class="lgray-bg">
+    <div class="container-fluid">
+      <%= container :recent_lessons_portlet %>
+    </div>
+  </section>
+
+  <section class="dgray-bg">
+    <div class="container-fluid">
+      <%= container :recent_honor_roll_posts_portlet %>
+    </div>
+  </section>
+
+  <section class="lmidnight-bg">
+    <div class="container-fluid row newsletter_signup">
+      <div class="col-xs-12">
+        <%= container :newsletter_text %>
+      </div>
+    </div>
+  </section>
+
+<% end %>
+<%= render template: "layouts/templates/default" %>

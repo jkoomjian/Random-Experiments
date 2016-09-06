@@ -1,0 +1,8 @@
+<h1>My Honor Roll Posts</h1>
+<div>
+  <% if @hrps.length > 0 %>
+    <%= render :partial => "cms/honor_roll_posts/honor_roll_post_summary", :collection => @hrps, :locals => {:display_edit => true} %>
+  <% else %>
+    You do not yet have any honor roll posts
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+#lessonfinder {
+  h3 {margin-top: 0;}
+  .search-area {border-right: 1px solid black;
+    input {width: 70%;}
+    input, select {max-width: 350px;}
+  }
+  .search-button {border-color: white; padding: 6px 10px;}
+  .find-by {padding-bottom: 30px;
+    h5 {margin-top: 15px; margin-bottom: 7px;}
+    select {display: block; width: 80%; margin-bottom: 7px;}
+  }
+  .lesson_summary {display: inline-block; margin: 15px 10px;}
+}

@@ -1,0 +1,34 @@
+<%= f.cms_text_field :name %>
+<%= f.cms_text_field :slug %>
+<%= f.cms_drop_down :user_id, Cms::User.all(:order => 'created_at desc').map{|c| ["#{c.first_name} #{c.last_name}", c.id]}, :label => "Post Author" %>
+<%= f.cms_drop_down :lesson_id, Lesson.all(:order => 'created_at desc').map{|c| [c.name, c.id]}, :label => "Lesson" %>
+<%= f.cms_text_field :blog_url, :label => "Post Author's Blog Url" %>
+<%= f.cms_attachment_manager %>
+<%= f.cms_text_area :question_enrichment, :label => "Enrichment", :instructions => "How did you make this lesson more meaningful for your child?" %>
+<%= f.cms_text_area :question_material, :label => "Material Substitutions", :instructions => "What materials did you replace to teach this lesson?" %>
+<%= f.cms_text_area :question_content, :label => "Content Modifications", :instructions => "What did you change to meet your child's needs?" %>
+<%= f.cms_text_area :question_testing, :label => "Testing Method", :instructions => "How do you know your child mastered this lesson's objective?" %>
+<%= f.cms_text_area :teachers_lounge, :label => "Teacher's Lounge" %>
+
+<div class="fields file_fields">
+  <label for="" style="padding: 0;">Email TL Response</label>
+  <input type="checkbox" id="email_tl" name="email_tl" autocomplete="off"/>
+  <div style="padding-top: 10px;" class="instructions">Email a copy of this teacher's lounge response to the user</div>
+  <div style="clear:both"></div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var email_tl_manually_changed = false;
+
+    $("#email_tl").change(function() {
+      email_tl_manually_changed = true;
+    });
+
+    $("#honor_roll_post_teachers_lounge").keydown(function() {
+      if (!email_tl_manually_changed) {
+        $("#email_tl").prop('checked', true);
+      }
+    });
+  });
+</script>

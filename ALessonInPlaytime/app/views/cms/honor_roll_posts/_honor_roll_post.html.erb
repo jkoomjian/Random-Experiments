@@ -1,0 +1,66 @@
+<h1>Honor Roll: <%= hrp.lesson.name %></h1>
+<div class='instructions'>
+  Check out one member's experience with this lesson here. Don't forget to applaud their efforts or ask a question below.
+</div>
+
+<%# For some reason BCMS throws an error here if you use hrp.images, but hrp.attachments is ok %>
+<% if !hrp.attachments.empty? %>
+  <div class='main-photo'>
+    <% 0.upto(hrp.attachments.length - 1) {|i| %>
+      <img class="orig<%= i != 0 ? ' visible-xs' : '' %>" src="<%= hrp.attachments[i].url(:full) %>" />
+    <% } %>
+  </div>
+<% end %>
+
+<% if hrp.attachments.length >= 2 %>
+  <div class='photos_row hidden-xs'>
+    <% 0.upto(hrp.attachments.length - 1) {|i| %>
+      <a href="#" class="thumb-photos"><img class="thumb" src="<%= hrp.attachments[i].url(:thumb) %>" /></a>
+    <% } %>
+  </div>
+<% end %>
+
+<div class='item'>
+  <h2><%= hrp.name %></h2>
+  <h4 class='user_name'><%= hrp.user.login.capitalize %></h4>
+  <% if !hrp.blog_url.empty? %> - <a href="<%= hrp.blog_url %>"><%= hrp.blog_url %></a><% end %>
+</div>
+
+<div class='item'>
+  <h4 class="lesson">Lesson:</h4>
+  <a href="/lessons/<%= hrp.lesson.slug %>"><%= hrp.lesson.name %></a>
+</div>
+
+<div class='item'>
+  <h4>Enrichment</h4>
+  <div class='instructions'>How did you make this lesson more meaningful for your child?</div>
+  <%= hrp.question_enrichment %>
+</div>
+
+<div class='item'>
+  <h4>Material Substitutions</h4>
+  <div class='instructions'>What materials did you replace to teach this lesson?</div>
+  <%= hrp.question_material %>
+</div>
+
+<div class='item'>
+  <h4>Content Modifications</h4>
+  <div class='instructions'>What did you change to meet your child's needs?</div>
+  <%= hrp.question_content %>
+</div>
+
+<div class='item'>
+  <h4>Testing Method</h4>
+  <div class='instructions'>How do you know your child mastered this lesson's objective?</div>
+  <%= hrp.question_testing %>
+</div>
+
+<% if !hrp.teachers_lounge.blank? %>
+  <div class='teachers_lounge item'>
+    <h4>Teachers Lounge</h4>
+    <div class='instructions'>Check out what Bonnie and Erika have to say about this honor roll posting.</div>
+    <%= raw hrp.teachers_lounge %>
+  </div>
+<% end %>
+
+<%= render :partial => "cms/comments/display_comments", :locals => {:post => hrp} %>
