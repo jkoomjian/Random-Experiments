@@ -1,0 +1,35 @@
+#workspace, #workspace * {
+  box-sizing: border-box; }
+
+#workspace {
+  margin: 1% auto;
+  width: 100%;
+  max-width: 600px; }
+  #workspace #lego-space-wrapper {
+    width: 100%;
+    padding-top: 100%;
+    position: relative; }
+    #workspace #lego-space-wrapper #lego-space {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 1px dotted red; }
+
+.plane {
+  position: absolute;
+  width: 10em;
+  background-color: #EDEDED; }
+  .plane .row {
+    height: 1em; }
+  .plane .cell {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray; }
+  .plane .cell:first-of-type {
+    border-left: 1px solid lightgray; }
+  .plane .row:first-of-type .cell {
+    border-top: 1px solid lightgray; }
