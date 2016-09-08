@@ -88,6 +88,16 @@ function dragLegoSpace(event) {
   }
 }
 
+function wheelMove(event) {
+  if (ctrlKeyDown) {
+    var pers = window.getComputedStyle($("#lego-space")).perspective;
+    pers = parseInt(pers.split("px")[0], 10);
+    var magicNumber = 5; //% to increase perspective by
+    $("#lego-space").style.perspective = (pers + (event.wheelDelta * magicNumber * -1)) + "px"
+    event.preventDefault();
+  }
+}
+
 
 //---------- Assign Event Handlers ------------
 function initEventHandlers() {
@@ -96,4 +106,5 @@ function initEventHandlers() {
   window.addEventListener("mousedown", mouseDown);
   window.addEventListener("mouseup", mouseUp);
   window.addEventListener("mousemove", dragLegoSpace);
+  window.addEventListener("wheel", wheelMove);
 }
