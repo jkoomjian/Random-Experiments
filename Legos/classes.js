@@ -9,7 +9,6 @@ class LegoSpace {
 
     //set origin
     this.origin = {x: Math.floor( w * .2), y: Math.floor( y * .8)};
-    this.elem.style.transformOrigin = `${this.origin.x}px ${this.origin.y}px`;
   }
 }
 
@@ -52,7 +51,7 @@ class XPlane extends Plane {
   }
   rotateAboutOrigin() {
     console.log("at xplane rotate");
-    this.elem.style.transform = "rotateX(90deg)";
+    this.elem.style.transform = "rotateX(-90deg)";
   }
 }
 
@@ -62,6 +61,6 @@ class ZPlane extends Plane {
   }
   rotateAboutOrigin() {
     console.log("at zplane rotate");
-    this.elem.style.transform = "rotateY(90deg)";
+    this.elem.style.transform = "rotateY(-90deg)";
   }
 }
