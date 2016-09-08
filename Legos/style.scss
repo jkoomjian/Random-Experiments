@@ -16,7 +16,7 @@ $lego-board-color: rgba(235, 252, 204, 1);
     #lego-space {
       position: absolute; top: 0; bottom: 0; left: 0; right: 0;
       border: 1px dotted red;
-      perspective: 1500px;
+      perspective: 2000px;
       perspective-origin: 60% top;
       transform-style:preserve-3d;
     }
@@ -27,6 +27,7 @@ $lego-board-color: rgba(235, 252, 204, 1);
   position: absolute;
   width: 10em;
   background-color: rgba(237,237,237,0.25);
+  transform-origin: bottom left;
 
   .row {
     height: 1em;
@@ -41,10 +42,16 @@ $lego-board-color: rgba(235, 252, 204, 1);
   }
   .cell:first-of-type {border-left:1px solid lightgray;}
   .row:first-of-type .cell {border-top:1px solid lightgray;}
+  .axis {
+    transform-origin: bottom left;
+    background-color: lightgray; margin: 0; padding: 0; border-width: 0;
+    width: 13em; height: 1px;
+    position: absolute; left: 0; bottom: 0;
+  }
 }
 
 // .plane-x * {border-color: red !important;}
-.plane-z * {border-color: gray !important;}
+// .plane-z * {border-color: gray !important;}
 .plane-x  {
   background-color: $lego-board-color;
   .cell:before {

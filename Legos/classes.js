@@ -22,8 +22,13 @@ class Plane {
     this.elem.className = `plane plane-${this.planeDimension}`;
     $("#lego-space").appendChild(this.elem);
 
+    //add axis line
+    this.axis = document.createElement("hr");
+    this.axis.className = "axis axis-" + planeDimension;
+    this.elem.appendChild(this.axis);
+
     //add cols, rows
-    this.elem.appendNChildren(10, "row", (parent) => {
+    this.elem.appendNChildren(10, "row", true, (parent) => {
       parent.appendNChildren(10, "cell");
     });
 
@@ -31,7 +36,6 @@ class Plane {
     this.elem.style.top = (legoSpace.origin.y - this.elem.offsetHeight) + "px";
     this.elem.style.left = legoSpace.origin.x + "px";
 
-    this.elem.style.transformOrigin = "bottom left";
     this.rotateAboutOrigin();
   }
 
@@ -43,6 +47,9 @@ class YPlane extends Plane {
   constructor(legoSpace) {
     super(legoSpace, "y");
   }
+  rotateAboutOrigin() {
+    this.axis.style.transform = "rotate(-90deg)";
+  }
 }
 
 class XPlane extends Plane {
@@ -50,7 +57,6 @@ class XPlane extends Plane {
     super(legoSpace, "x");
   }
   rotateAboutOrigin() {
-    console.log("at xplane rotate");
     this.elem.style.transform = "rotateX(-90deg)";
   }
 }
@@ -60,7 +66,6 @@ class ZPlane extends Plane {
     super(legoSpace, "z");
   }
   rotateAboutOrigin() {
-    console.log("at zplane rotate");
     this.elem.style.transform = "rotateY(-90deg)";
   }
 }

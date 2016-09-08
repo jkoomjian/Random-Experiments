@@ -7,10 +7,10 @@ function repeatNTimes(n, callback) {
   for (let i=0; i<n; i++) callback(i);
 }
 
-HTMLElement.prototype.appendNChildren = function(numElems, className, callback) {
+HTMLElement.prototype.appendNChildren = function(numElems, className, reverseNumbering=false, callback) {
   repeatNTimes(numElems, (n) => {
     let div = document.createElement("div");
-    div.className = `${className} ${className}-${n}`;
+    div.className = `${className} ${className}-${ reverseNumbering ? numElems - 1 - n : n}`;
     this.appendChild(div);
     if (callback) callback(div, n);
   });

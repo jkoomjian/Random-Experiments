@@ -16,14 +16,15 @@
       left: 0;
       right: 0;
       border: 1px dotted red;
-      perspective: 1500px;
+      perspective: 2000px;
       perspective-origin: 60% top;
       transform-style: preserve-3d; }
 
 .plane {
   position: absolute;
   width: 10em;
-  background-color: rgba(237, 237, 237, 0.25); }
+  background-color: rgba(237, 237, 237, 0.25);
+  transform-origin: bottom left; }
   .plane .row {
     height: 1em; }
   .plane .cell {
@@ -36,9 +37,17 @@
     border-left: 1px solid lightgray; }
   .plane .row:first-of-type .cell {
     border-top: 1px solid lightgray; }
-
-.plane-z * {
-  border-color: gray !important; }
+  .plane .axis {
+    transform-origin: bottom left;
+    background-color: lightgray;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    width: 13em;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    bottom: 0; }
 
 .plane-x {
   background-color: #ebfccc; }
