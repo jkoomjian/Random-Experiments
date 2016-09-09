@@ -10,24 +10,23 @@ body {
 #workspace {
   margin: 0 auto;
   width: 100%;
-  max-width: 600px; }
-  #workspace #lego-space-wrapper {
-    width: 100%;
-    padding-top: 100%;
-    position: relative; }
-    #workspace #lego-space-wrapper #lego-space {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border: 1px dotted red;
-      perspective: 2000px;
-      perspective-origin: 60% top;
-      transform-style: preserve-3d; }
+  height: 15rem;
+  max-width: 1200px; }
+  #workspace #lego-space {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 10rem);
+    border: 1px dotted red;
+    width: 20rem;
+    height: 15rem;
+    perspective: 2000px;
+    perspective-origin: 60% top;
+    transform-style: preserve-3d; }
 
 .plane {
   position: absolute;
+  top: 10%;
+  left: 25%;
   width: 10rem;
   background-color: rgba(237, 237, 237, 0.25);
   transform-origin: bottom left; }
@@ -71,7 +70,7 @@ body {
   width: 66%;
   max-width: 800px;
   font-size: 16px;
-  margin: 1.5rem auto 0 auto; }
+  margin: 1rem auto 0 auto; }
   #controls .lego-set {
     text-align: center; }
     #controls .lego-set .lego-pile {
@@ -81,8 +80,6 @@ body {
       margin: .8em;
       border-width: 3px;
       border-style: solid;
-      cursor: -webkit-grab;
-      cursor: grab;
       position: relative; }
       #controls .lego-set .lego-pile:before, #controls .lego-set .lego-pile:after {
         content: '';
@@ -118,3 +115,29 @@ body {
     font-size: larger; }
   #controls .instructions .desc p {
     margin: 0.5em 0 0.5em 0.5em; }
+
+.lego {
+  position: relative; }
+  .lego > div {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: #0582ff;
+    opacity: .7;
+    border: 1px solid #0069d1; }
+    .lego > div.front {
+      transform: translateZ(1rem); }
+    .lego > div.back {
+      transform: translateZ(0rem); }
+    .lego > div.top {
+      transform-origin: top;
+      transform: rotateX(90deg); }
+    .lego > div.bottom {
+      transform-origin: bottom;
+      transform: rotateX(-90deg); }
+    .lego > div.left {
+      transform-origin: left;
+      transform: rotateY(-90deg); }
+    .lego > div.right {
+      transform-origin: right;
+      transform: rotateY(90deg); }

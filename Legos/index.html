@@ -6,18 +6,28 @@
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="classes.js"></script>
     <script type="text/javascript" src="events.js"></script>
+    <script type="text/javascript" src="drag.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
 
   <body>
 
-    <div id="workspace">
-      <div id="lego-space-wrapper">
-        <div id="lego-space"></div>
-      </div>
-    </div>
+    <section id="workspace">
+      <div id="lego-space">
 
-    <div id="controls">
+        <div class="lego">
+          <div class="front face"></div>
+          <div class="back face"></div>
+          <div class="top face"></div>
+          <div class="bottom face"></div>
+          <div class="left face"></div>
+          <div class="right face"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="controls">
 
       <fieldset>
         <legend>Legos</legend>
@@ -42,7 +52,9 @@
 
       </fieldset>
 
-    </div>
+    </section>
+
+
 
 
   </body>

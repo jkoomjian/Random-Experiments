@@ -17,28 +17,22 @@ html {font-size: 39.6px;}
 body {margin: 0;}
 
 #workspace {
-
   margin: 0 auto;
-  width: 100%;
-  max-width: 600px;
+  width: 100%; height: 15rem;
+  max-width: 1200px;
 
-  #lego-space-wrapper {
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
-
-    #lego-space {
-      position: absolute; top: 0; bottom: 0; left: 0; right: 0;
-      border: 1px dotted red;
-      perspective: 2000px;
-      perspective-origin: 60% top;
-      transform-style:preserve-3d;
-    }
+  #lego-space {
+    position: absolute; top: 0; left: calc(50% - 10rem);
+    border: 1px dotted red;
+    width: 20rem; height: 15rem;
+    perspective: 2000px;
+    perspective-origin: 60% top;
+    transform-style:preserve-3d;
   }
 }
 
 .plane {
-  position: absolute;
+  position: absolute; top: 10%; left: 25%;
   width: 10rem;
   background-color: rgba(237,237,237,0.25);
   transform-origin: bottom left;
@@ -81,7 +75,7 @@ body {margin: 0;}
 
 #controls {
     width: 66%; max-width: 800px; font-size: $normal-font-size;
-    margin: 1.5rem auto 0 auto;
+    margin: 1rem auto 0 auto;
 
     .lego-set {
         text-align: center;
@@ -89,7 +83,7 @@ body {margin: 0;}
             display: inline-block; width: 1rem; height: 1rem;
             margin: .8em;
             border-width: 3px; border-style: solid;
-            cursor: grab; position: relative;
+            position: relative; //cursor: grab;
             &:before, &:after {
                 content: '';
                 display: block;
@@ -114,4 +108,22 @@ body {margin: 0;}
            p {margin: 0.5em 0 0.5em 0.5em}
         }
     }
+}
+
+.lego {
+  position: relative;
+
+  & > div {
+    position: absolute;
+    width: 1rem; height: 1rem;
+    background-color: $lego-blue; opacity: .7; border: 1px solid darken($lego-blue, 10%);
+
+    &.front {transform: translateZ(1rem);}
+    &.back {transform: translateZ(0rem);}
+    &.top {transform-origin: top; transform: rotateX(90deg);}
+    &.bottom {transform-origin: bottom; transform: rotateX(-90deg);}
+    &.left {transform-origin: left; transform: rotateY(-90deg);}
+    &.right {transform-origin: right; transform: rotateY(90deg);}
+  }
+
 }

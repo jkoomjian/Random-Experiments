@@ -5,10 +5,11 @@ class LegoSpace {
     var y = this.elem.offsetHeight;
 
     // set font-size
-    this.elem.style.fontSize = ((w / 10) * .66) + "px";
+    // this.elem.style.fontSize = ((w / 10) * .66) + "px";
 
-    //set origin
-    this.origin = {x: Math.floor( w * .2), y: Math.floor( y * .8)};
+    //set origin (0,0)
+    //this.origin = {x: Math.floor( w * .4),
+    //              y: Math.floor( y * .66)};
   }
 }
 
@@ -33,8 +34,8 @@ class Plane {
     });
 
     //position at origin
-    this.elem.style.top = (legoSpace.origin.y - this.elem.offsetHeight) + "px";
-    this.elem.style.left = legoSpace.origin.x + "px";
+    // this.elem.style.top = legoSpace.origin.y + "px";
+    // this.elem.style.left = legoSpace.origin.x + "px";
 
     this.rotateAboutOrigin();
   }

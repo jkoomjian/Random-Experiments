@@ -112,6 +112,16 @@ function wheelMove(event) {
   }
 }
 
+function addMouseOver() {
+  // addHandlers(".cell", "mouseover", onMouseOver);
+}
+
+function onMouseOver(event) {
+  var targetCell = event.target;
+  var targetPlane = targetCell.parentElement.parentElement;
+  console.log("At mouseover: Plane: " + targetPlane.className + " Cell: " + targetCell.className);
+  targetCell.style.backgroundColor = "yellow";
+}
 
 //---------- Assign Event Handlers ------------
 function initEventHandlers() {
@@ -121,4 +131,6 @@ function initEventHandlers() {
   window.addEventListener("mouseup", mouseUp);
   window.addEventListener("mousemove", dragLegoSpace);
   window.addEventListener("wheel", wheelMove);
+  addMouseOver();
+  initializeDrag();
 }
