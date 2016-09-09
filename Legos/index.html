@@ -15,7 +15,7 @@
     <section id="workspace">
       <div id="lego-space">
 
-        <div class="lego">
+        <div class="lego blue">
           <div class="front face"></div>
           <div class="back face"></div>
           <div class="top face"></div>
@@ -32,12 +32,12 @@
       <fieldset>
         <legend>Legos</legend>
         <div class="lego-set">
-          <div class="lego-pile blue"></div>
-          <div class="lego-pile green"></div>
-          <div class="lego-pile yellow"></div>
-          <div class="lego-pile orange"></div>
-          <div class="lego-pile red"></div>
-          <div class="lego-pile purple"></div>
+          <div class="lego-pile blue" draggable="true"></div>
+          <div class="lego-pile green" draggable="true"></div>
+          <div class="lego-pile yellow" draggable="true"></div>
+          <div class="lego-pile orange" draggable="true"></div>
+          <div class="lego-pile red" draggable="true"></div>
+          <div class="lego-pile purple" draggable="true"></div>
         </div>
 
         <div class="instructions">
@@ -54,8 +54,16 @@
 
     </section>
 
-
-
+    <template id="lego-template">
+      <div class="lego">
+        <div class="front face"></div>
+        <div class="back face"></div>
+        <div class="top face"></div>
+        <div class="bottom face"></div>
+        <div class="left face"></div>
+        <div class="right face"></div>
+      </div>
+    </template>
 
   </body>
 

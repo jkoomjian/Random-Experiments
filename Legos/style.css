@@ -80,7 +80,9 @@ body {
       margin: .8em;
       border-width: 3px;
       border-style: solid;
-      position: relative; }
+      position: relative;
+      cursor: -webkit-grab;
+      cursor: grab; }
       #controls .lego-set .lego-pile:before, #controls .lego-set .lego-pile:after {
         content: '';
         display: block;
@@ -117,14 +119,16 @@ body {
     margin: 0.5em 0 0.5em 0.5em; }
 
 .lego {
-  position: relative; }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1rem;
+  height: 1rem; }
   .lego > div {
     position: absolute;
     width: 1rem;
     height: 1rem;
-    background-color: #0582ff;
-    opacity: .7;
-    border: 1px solid #0069d1; }
+    opacity: .7; }
     .lego > div.front {
       transform: translateZ(1rem); }
     .lego > div.back {
@@ -141,3 +145,21 @@ body {
     .lego > div.right {
       transform-origin: right;
       transform: rotateY(90deg); }
+  .lego.blue > div {
+    background-color: #0582ff;
+    border: 1px solid #0069d1; }
+  .lego.green > div {
+    background-color: #00ad41;
+    border: 1px solid #007a2e; }
+  .lego.yellow > div {
+    background-color: #f8d404;
+    border: 1px solid #c6a903; }
+  .lego.orange > div {
+    background-color: #ff7c0a;
+    border: 1px solid #d66400; }
+  .lego.red > div {
+    background-color: #f8272a;
+    border: 1px solid #e5070b; }
+  .lego.purple > div {
+    background-color: #f34ed0;
+    border: 1px solid #f01ec3; }

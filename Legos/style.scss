@@ -83,7 +83,7 @@ body {margin: 0;}
             display: inline-block; width: 1rem; height: 1rem;
             margin: .8em;
             border-width: 3px; border-style: solid;
-            position: relative; //cursor: grab;
+            position: relative; cursor: grab;
             &:before, &:after {
                 content: '';
                 display: block;
@@ -111,12 +111,12 @@ body {margin: 0;}
 }
 
 .lego {
-  position: relative;
+  position: absolute; top: 0; left: 0; width: 1rem; height: 1rem;
 
   & > div {
     position: absolute;
     width: 1rem; height: 1rem;
-    background-color: $lego-blue; opacity: .7; border: 1px solid darken($lego-blue, 10%);
+    opacity: .7;
 
     &.front {transform: translateZ(1rem);}
     &.back {transform: translateZ(0rem);}
@@ -126,4 +126,10 @@ body {margin: 0;}
     &.right {transform-origin: right; transform: rotateY(90deg);}
   }
 
+  &.blue > div {background-color: $lego-blue; border: 1px solid darken($lego-blue, 10%);}
+  &.green > div {background-color: $lego-green; border: 1px solid darken($lego-green, 10%);}
+  &.yellow > div {background-color: $lego-yellow; border: 1px solid darken($lego-yellow, 10%);}
+  &.orange > div {background-color: $lego-orange; border: 1px solid darken($lego-orange, 10%);}
+  &.red > div {background-color: $lego-red; border: 1px solid darken($lego-red, 10%);}
+  &.purple > div {background-color: $lego-purple; border: 1px solid darken($lego-purple, 10%);}
 }

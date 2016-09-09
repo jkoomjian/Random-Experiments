@@ -66,15 +66,17 @@ function mouseDown(event) {
   mouseBtnDown = true;
   if (ctrlKeyDown) {
     lastMouseCoords = [event.clientX, event.clientY];
+    event.preventDefault();
+    updatePointerState();
   }
-  updatePointerState();
-  event.preventDefault();
 }
 
 function mouseUp(event) {
   mouseBtnDown = false;
-  updatePointerState();
-  event.preventDefault();
+  if (ctrlKeyDown) {
+    updatePointerState();
+    event.preventDefault();
+  }
 }
 
 function dragLegoSpace(event) {
