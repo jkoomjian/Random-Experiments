@@ -90,10 +90,24 @@ function dragLegoSpace(event) {
 
 function wheelMove(event) {
   if (ctrlKeyDown) {
-    var pers = window.getComputedStyle($("#lego-space")).perspective;
-    pers = parseInt(pers.split("px")[0], 10);
-    var magicNumber = 5; //% to increase perspective by
-    $("#lego-space").style.perspective = (pers + (event.wheelDelta * magicNumber * -1)) + "px"
+    var toTransform = "";
+    var currTransform = $("#lego-space").style.transform;
+    var magicNumber = .001; //amount to increase scale by
+    var baseScale = 1;
+
+    if (currTransform.match(/scale3d/)) {
+      var r = new RegExp(/\s?scale3d\(([\d\.]+),\s?[\d\.]+,\s?[\d\.]+\)/g).exec(currTransform);
+      if (r) {
+        currTransform = currTransform.replace(r[0], "");
+        baseScale = parseFloat(r[1]);
+      }
+    }
+
+    var newScale = (magicNumber * event.wheelDelta) + baseScale;
+    toTransform = currTransform + ` scale3d(${newScale}, ${newScale}, ${newScale})`;
+    // console.log(toTransform);
+    $("#lego-space").style.transform = toTransform;
+
     event.preventDefault();
   }
 }

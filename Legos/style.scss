@@ -1,10 +1,11 @@
 $lego-board-color: rgba(235, 252, 204, 1);
 
 #workspace, #workspace * {box-sizing: border-box;}
+body {margin: 0;}
 
 #workspace {
 
-  margin: 1% auto;
+  margin: 0 auto;
   width: 100%;
   max-width: 600px;
 
