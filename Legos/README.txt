@@ -1,3 +1,5 @@
 A simple project to play around with Web Animation API
 
-* add legos
+* add dnd
+* figure out coordinates
+* figure out dropping

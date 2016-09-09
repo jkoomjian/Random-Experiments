@@ -1,6 +1,9 @@
 #workspace, #workspace * {
   box-sizing: border-box; }
 
+html {
+  font-size: 39.6px; }
+
 body {
   margin: 0; }
 
@@ -25,15 +28,15 @@ body {
 
 .plane {
   position: absolute;
-  width: 10em;
+  width: 10rem;
   background-color: rgba(237, 237, 237, 0.25);
   transform-origin: bottom left; }
   .plane .row {
-    height: 1em; }
+    height: 1rem; }
   .plane .cell {
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    width: 1rem;
+    height: 1rem;
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray; }
   .plane .cell:first-of-type {
@@ -46,7 +49,7 @@ body {
     margin: 0;
     padding: 0;
     border-width: 0;
-    width: 13em;
+    width: 13rem;
     height: 1px;
     position: absolute;
     left: 0;
@@ -56,10 +59,62 @@ body {
   background-color: #ebfccc; }
   .plane-x .cell:before {
     content: '\25CF \25CF \25CF \25CF';
-    font-size: 0.75em;
+    font-size: 0.75rem;
     width: 100%;
     height: 100%;
     display: block;
     color: #dcfaa5;
     line-height: 60%;
     word-wrap: break-word; }
+
+#controls {
+  width: 66%;
+  max-width: 800px;
+  font-size: 16px;
+  margin: 1.5rem auto 0 auto; }
+  #controls .lego-set {
+    text-align: center; }
+    #controls .lego-set .lego-pile {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      margin: .8em;
+      border-width: 3px;
+      border-style: solid;
+      cursor: -webkit-grab;
+      cursor: grab;
+      position: relative; }
+      #controls .lego-set .lego-pile:before, #controls .lego-set .lego-pile:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -.2rem;
+        height: .2rem;
+        width: 33%; }
+      #controls .lego-set .lego-pile:before {
+        left: .1rem; }
+      #controls .lego-set .lego-pile:after {
+        right: .1rem; }
+      #controls .lego-set .lego-pile.blue, #controls .lego-set .lego-pile.blue:before, #controls .lego-set .lego-pile.blue:after {
+        background-color: #0582ff;
+        border-color: #0069d1; }
+      #controls .lego-set .lego-pile.green, #controls .lego-set .lego-pile.green:before, #controls .lego-set .lego-pile.green:after {
+        background-color: #00ad41;
+        border-color: #007a2e; }
+      #controls .lego-set .lego-pile.yellow, #controls .lego-set .lego-pile.yellow:before, #controls .lego-set .lego-pile.yellow:after {
+        background-color: #f8d404;
+        border-color: #c6a903; }
+      #controls .lego-set .lego-pile.orange, #controls .lego-set .lego-pile.orange:before, #controls .lego-set .lego-pile.orange:after {
+        background-color: #ff7c0a;
+        border-color: #d66400; }
+      #controls .lego-set .lego-pile.red, #controls .lego-set .lego-pile.red:before, #controls .lego-set .lego-pile.red:after {
+        background-color: #f8272a;
+        border-color: #e5070b; }
+      #controls .lego-set .lego-pile.purple, #controls .lego-set .lego-pile.purple:before, #controls .lego-set .lego-pile.purple:after {
+        background-color: #f34ed0;
+        border-color: #f01ec3; }
+  #controls .instructions .title {
+    font-weight: bold;
+    font-size: larger; }
+  #controls .instructions .desc p {
+    margin: 0.5em 0 0.5em 0.5em; }
