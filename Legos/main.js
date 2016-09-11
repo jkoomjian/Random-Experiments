@@ -16,6 +16,33 @@ HTMLElement.prototype.appendNChildren = function(numElems, className, reverseNum
   });
 }
 
+// Given a callback, and x, y coordinates, only execute the callback if the coordinates have changed
+// by more than minPointerDifference
+var lastPointers = {};
+function executeOnGreatEnoughChange(x, y, minPointerDifference, name, callback) {
+  var lastPointer = lastPointers[name];
+
+  if (!lastPointer) {
+    lastPointers[name] = [x, y];
+    return callback();
+  }
+
+  var diff = Math.abs(x - lastPointer[0]) + Math.abs(y - lastPointer[1]);
+  if (diff > minPointerDifference) {
+    lastPointers[name] = [x, y];
+    return callback();
+  }
+}
+
+// return the angle, between 0-90
+function calculateAngle(xDist, yDist) {
+  const rad2deg = 180/Math.PI;
+  var x = Math.abs(xDist);
+  var y = Math.abs(yDist);
+  var degrees = Math.atan( y / x) * rad2deg;
+  return degrees % 90;
+}
+
 window.addEventListener('load', function() {
   var legoSpace = new LegoSpace();
   var xPlane = new XPlane(legoSpace);

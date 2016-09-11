@@ -15,11 +15,14 @@ function onDragStart(e) {
 }
 
 function onDrag(event) {
-  lego.drag(event.clientX, event.clientY);
+  executeOnGreatEnoughChange(event.clientX, event.clientY, 50, 'dragLego', function() {
+    lego.drag(event.clientX, event.clientY);
+  });
 }
 
 function onDragEnd(e) {
   console.log("at drag end");
+  lego.elem.style.transform = `translateZ(0rem)`;
 }
 
 function initializeDrag() {

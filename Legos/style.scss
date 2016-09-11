@@ -61,6 +61,7 @@ body {margin: 0;}
     width: 13rem; height: 1px;
     position: absolute; left: 0; bottom: 0;
   }
+  .cell.active {background-color: darken($lego-board-color, 30%);}
 }
 
 // .plane-x * {border-color: red !important;}
@@ -80,6 +81,7 @@ body {margin: 0;}
 
 .lego {
   position: absolute; top: 0; left: 0; width: 1rem; height: 1rem;
+  transform-style: preserve-3d;
 
   & > div {
     position: absolute;
