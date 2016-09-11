@@ -115,7 +115,7 @@ function wheelMove(event) {
 }
 
 function addMouseOver() {
-  // addHandlers(".cell", "mouseover", onMouseOver);
+  addHandlers(".cell", "mouseover", onMouseOver);
 }
 
 function onMouseOver(event) {
@@ -133,6 +133,6 @@ function initEventHandlers() {
   window.addEventListener("mouseup", mouseUp);
   window.addEventListener("mousemove", dragLegoSpace);
   window.addEventListener("wheel", wheelMove);
-  addMouseOver();
+  // addMouseOver();
   initializeDrag();
 }
