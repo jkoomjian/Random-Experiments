@@ -81,13 +81,18 @@ class Lego {
 
     // Z
     if (axis.includes('z')) {
+      // yHieght = the height above the floor the lego is
+      // adding yHeight to eventY will give the y coord as if the lego was on the plane
+      var yPlaneTop = $(`.plane-y .row-${this.zPlaneHeight}`).getBoundingClientRect().top;
+      var yPlaneBottom = $(`.plane-y .row-0`).getBoundingClientRect().top;
+      var yHeight =  Math.floor(yPlaneBottom - yPlaneTop);
       var legoYxy; // y dimension in the xy plane (not the x plane the block rests on)
-      if (eventY < xPlaneRect.top) {
+      if (eventY + yHeight < xPlaneRect.top) {
         legoYxy = "9";
-      } else if (eventY > xPlaneRect.bottom){
+      } else if (eventY + yHeight > xPlaneRect.bottom){
         legoYxy = "0";
       } else {
-        legoYxy = (eventY - xPlaneRect.top) / (xPlaneRect.bottom - xPlaneRect.top);
+        legoYxy = (eventY + yHeight - xPlaneRect.top) / (xPlaneRect.bottom - xPlaneRect.top);
         legoYxy = 9 - Math.floor(legoYxy * 10);
       }
 
@@ -114,13 +119,11 @@ class Lego {
 
     // Y
     if (axis.includes('y')) {
-      // debugger;
       var yPlaneRect = $(".plane-y").getBoundingClientRect();
       var xPlaneCell = $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`);
-
       var xPlaneCellBottom = xPlaneCell.getBoundingClientRect().bottom;
-
       var yPlaneHeight = yPlaneRect.bottom - yPlaneRect.top;
+
       var legoZxy;
       if (eventY < xPlaneCellBottom - yPlaneHeight) {
         legoZxy = "9";
