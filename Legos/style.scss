@@ -27,7 +27,6 @@ body {margin: 0;}
 
   #lego-space {
     position: absolute; top: 0; left: calc(50% - #{$lego-space-side / 2});
-    border: 1px dotted red;
     width: $lego-space-side; height: $lego-space-side;
     perspective: 2000px;
     perspective-origin: 60% top;
@@ -143,8 +142,10 @@ body {margin: 0;}
 
   legend {font-weight: bold; font-size: larger; padding-left: .7em; padding-right: .7em;}
   .instructions {
+    color: #37474f; font-size: 15px;
     .desc {
        p {margin: 0.5em 0 0.5em 0.5em}
+       span {color: black; font-size: 16px;}
     }
   }
 }

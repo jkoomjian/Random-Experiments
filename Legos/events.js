@@ -145,6 +145,6 @@ function initEventHandlers() {
   window.addEventListener("mousedown", mouseDown);
   window.addEventListener("mouseup", mouseUp);
   window.addEventListener("mousemove", mouseMove);
-  window.addEventListener("wheel", wheelMove);
+  $("#lego-space").addEventListener("wheel", wheelMove);
   initializeDrag();
 }

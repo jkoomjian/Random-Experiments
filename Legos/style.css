@@ -16,7 +16,6 @@ body {
     position: absolute;
     top: 0;
     left: calc(50% - 12.5rem);
-    border: 1px dotted red;
     width: 25rem;
     height: 25rem;
     perspective: 2000px;
@@ -175,8 +174,14 @@ body {
     font-size: larger;
     padding-left: .7em;
     padding-right: .7em; }
-  #controls .instructions .desc p {
-    margin: 0.5em 0 0.5em 0.5em; }
+  #controls .instructions {
+    color: #37474f;
+    font-size: 15px; }
+    #controls .instructions .desc p {
+      margin: 0.5em 0 0.5em 0.5em; }
+    #controls .instructions .desc span {
+      color: black;
+      font-size: 16px; }
 
 #empty {
   position: absolute;
