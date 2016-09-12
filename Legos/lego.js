@@ -128,7 +128,7 @@ class Lego {
       this.elem.style.transform = `translateZ(-${legoZxy}rem)`;
     }
 
-    // console.log(`coords: ${this.zPlaneCell}, ${this.zPlaneRow}`);
+    console.log(`coords: ${this.zPlaneCell}, ${this.zPlaneRow}`);
 
     $$('.plane-x .cell.active').forEach( cell => {cell.className = cell.className.replace("active", "");});
     $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`).className += " active";

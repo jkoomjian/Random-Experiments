@@ -23,6 +23,12 @@ if (!Array.prototype['includes']) {
   }
 }
 
+function addHandlers(selector, eventType, eventHandler) {
+  $$(selector).forEach( elem => {
+    elem.addEventListener(eventType, eventHandler);
+  });
+}
+
 // Given a callback, and x, y coordinates, only execute the callback if the coordinates have changed
 // by more than minPointerDifference
 var lastPointers = {};
@@ -31,13 +37,13 @@ function executeOnGreatEnoughChange(x, y, minPointerDifference, name, callback) 
 
   if (!lastPointer) {
     lastPointers[name] = [x, y];
-    return callback();
+    return callback(0);
   }
 
   var diff = Math.abs(x - lastPointer[0]) + Math.abs(y - lastPointer[1]);
   if (diff > minPointerDifference) {
     lastPointers[name] = [x, y];
-    return callback();
+    return callback(diff);
   }
 }
 

@@ -1,9 +1,3 @@
-function addHandlers(selector, eventType, eventHandler) {
-  $$(selector).forEach( elem => {
-    elem.addEventListener(eventType, eventHandler);
-  });
-}
-
 var lego;
 function onDragStart(e) {
   console.log("start drag!");
@@ -15,14 +9,17 @@ function onDragStart(e) {
 }
 
 function onDrag(event) {
-  executeOnGreatEnoughChange(event.clientX, event.clientY, 30, 'dragLego', function() {
-    lego.drag(event.clientX, event.clientY);
+  executeOnGreatEnoughChange(event.clientX, event.clientY, 30, 'dragLego', function(mouseChangeAmount) {
+    // At mouse end mouse coords go off to the side
+    if (mouseChangeAmount < 200) {
+      lego.drag(event.clientX, event.clientY);
+    }
   });
 }
 
 function onDragEnd(e) {
   console.log("at drag end");
-  lego.elem.style.transform = `translateZ(0rem)`;
+  lego.elem.style.transform = 'translateZ(0rem)';
 }
 
 function initializeDrag() {
