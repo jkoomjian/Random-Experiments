@@ -1,10 +1,63 @@
-class Lego {
-  constructor(sourceLegoPile, startClientX, startClientY) {
+// Responsible for determining the axis the mouse is moving along
+class MousePath {
+
+  constructor(startClientX, startClientY) {
     this.lastClientX = startClientX;
     this.lastClientY = startClientY;
+    this.isInitialDrag = true;
+  }
 
+  // Try to figure out which axis the user is moving the lego along
+  // this is done by getting the angle of movement of the mouse,
+  // the angles of the 3 axes, and returning the axis with the angle
+  // closest to the mouse movement
+  getAxesClosestsToMovement(eventX, eventY) {
+
+    let mouseAngle = calculateAngle(eventX - this.lastClientX, eventY - this.lastClientY);
+    // console.log(`mouse angle: ${mouseAngle} eventY: ${eventY} lastY: ${this.lastClientY} eventX: ${eventX} lastX: ${this.lastClientX}`);
+    let closest = [];
+
+    //get the axis angles
+    $$(".axis").forEach( axis => {
+      let rect = axis.getBoundingClientRect()
+      let angle = calculateAngle(rect.right - rect.left, rect.bottom - rect.top);
+      let axisName = axis.className.match(/axis-([xyz])/i)[1];
+      // console.log(`axis: ${axisName} angle: ${angle} top: ${rect.top} bottom: ${rect.bottom} left: ${rect.left} right: ${rect.right}`);
+      closest.push([axisName, angle, Math.abs(mouseAngle - angle)]);
+    });
+
+    closest.sort( (a, b) => {
+      return a[2] - b[2];
+    });
+
+    var log = `mouse angle: ${mouseAngle} -> ${Math.abs(eventX - this.lastClientX)} x ${Math.abs(eventY - this.lastClientY)}\n`;
+    closest.forEach( e => {log += `${e[0]}: ${e[1]}\n`});
+    console.log(log);
+
+    return closest.map( ar => {return ar[0]})[0];
+  }
+
+  onDragGetAxes(eventX, eventY) {
+    var axis = this.isInitialDrag ? ['x','z'] : this.getAxesClosestsToMovement(eventX, eventY);
+
+    //update last xy
+    this.lastClientX = eventX;
+    this.lastClientY = eventY;
+
+    this.isInitialDrag = false;
+
+    return axis;
+  }
+
+}
+
+class Lego {
+
+  constructor(sourceLegoPile, startClientX, startClientY) {
     this.zPlaneCell = 0;
     this.zPlaneRow = 0;
+
+    this.mousePath = new MousePath(startClientX, startClientY);
 
     var legoTemplate = $("#lego-template")
     this.elem = document.importNode(legoTemplate.content, true).children[0];
@@ -15,56 +68,15 @@ class Lego {
     this.elem.className += " " + color;
   }
 
-  // Try to figure out which axis the user is moving the lego along
-  // this is done by getting the angle of movement of the mouse,
-  // the angles of the 3 axes, and returning the axis with the angle
-  // closest to the mouse movement
-  // returns the closest two axes
-  getAxisOfMovement(eventX, eventY) {
-
-    let mouseAngle = calculateAngle(eventX - this.lastClientX, eventY - this.lastClientY);
-    console.log(`mouse angle: ${mouseAngle} eventY: ${eventY} lastY: ${this.lastClientY} eventX: ${eventX} lastX: ${this.lastClientX}`);
-    // let closestAngle = null;
-    // let closestAxis = null;
-    let closest = [];
-
-    //get the axis angles
-    $$(".axis").forEach( axis => {
-      let rect = axis.getBoundingClientRect()
-      let angle = calculateAngle(rect.right - rect.left, rect.bottom - rect.top);
-      let axisName = axis.className.match(/axis-([xyz])/i)[1];
-      console.log(`axis: ${axisName} angle: ${angle} top: ${rect.top} bottom: ${rect.bottom} left: ${rect.left} right: ${rect.right}`);
-
-      // if (closestAngle == null || Math.abs(mouseAngle - angle) < Math.abs(mouseAngle - closestAngle)) {
-      //   closestAngle = angle;
-      // let closestAxis = axis.className.match(/axis-([xyz])/i)[1];
-      // }
-
-      closest.push([axisName, angle, Math.abs(mouseAngle - angle)]);
-    });
-
-    closest.sort( (a, b) => {
-      return a[2] - b[2];
-    });
-
-    console.log(closest);
-    return [closest[0][0], closest[1][0]];
-
-    // console.log(`closestAngle: ${closestAxis}: ${closestAngle}`);
-    // return closestAxis;
-  }
-
-
   drag(eventX, eventY) {
     var xPlaneRect = $(".plane-x").getBoundingClientRect();
     // console.log(`drag x:${eventX} y:${eventY} lego x:${this.elem.style.left} y:${this.elem.style.top}`);
 
-    // can only move one dimension at a time!
-    var axis = this.getAxisOfMovement(eventX, eventY);
+    // can only move two dimensions at a time!
+    var axis = this.mousePath.onDragGetAxes(eventX, eventY);
     console.log(`axes to update: ${axis}`);
 
-    // Y
-    // if (axis == 'z') {
+    // Z
     if (axis.includes('z')) {
       var legoYxy; // y dimension in the xy plane (not the x plane the block rests on)
       if (eventY < xPlaneRect.top) {
@@ -80,7 +92,6 @@ class Lego {
     }
 
     // X
-    // if (axis == 'x') {
     if (axis.includes('x')) {
       var legoXxy;
       if (eventX < xPlaneRect.left) {
@@ -95,8 +106,7 @@ class Lego {
       this.zPlaneCell = legoXxy;
     }
 
-    // Z
-    // if (axis == 'y') {
+    // Y
     if (axis.includes('y')) {
       // debugger;
       var yPlaneRect = $(".plane-y").getBoundingClientRect();
@@ -118,10 +128,7 @@ class Lego {
       this.elem.style.transform = `translateZ(-${legoZxy}rem)`;
     }
 
-    //update last xy
-    this.lastClientX = eventX;
-    this.lastClientY = eventY;
-    console.log(`coords: ${this.zPlaneCell}, ${this.zPlaneRow}`);
+    // console.log(`coords: ${this.zPlaneCell}, ${this.zPlaneRow}`);
 
     $$('.plane-x .cell.active').forEach( cell => {cell.className = cell.className.replace("active", "");});
     $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`).className += " active";

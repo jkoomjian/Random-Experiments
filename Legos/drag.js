@@ -15,7 +15,7 @@ function onDragStart(e) {
 }
 
 function onDrag(event) {
-  executeOnGreatEnoughChange(event.clientX, event.clientY, 20, 'dragLego', function() {
+  executeOnGreatEnoughChange(event.clientX, event.clientY, 30, 'dragLego', function() {
     lego.drag(event.clientX, event.clientY);
   });
 }
