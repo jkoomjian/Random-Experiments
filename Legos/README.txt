@@ -5,9 +5,6 @@ A simple project to play around with Web Animation API
 +* try the degree idea - match the axis to the angle which most closely matches an axis on the space
 +* top two axis's?
 
-* seperate out classes
-** move angle to its own class
-
 * angle
 ** always returns x,y on first loading
 ** tracks calls, calculates over distance if on z axis
