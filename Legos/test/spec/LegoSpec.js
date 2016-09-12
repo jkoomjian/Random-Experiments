@@ -6,3 +6,19 @@ describe("Calculate Angle", function() {
   });
 
 });
+
+describe("Transform class", function() {
+
+  it("should return correct property values", function() {
+    var t = new Transform("rotateX(-12deg) rotateY(-17deg)");
+    expect( t.transform["rotateX"] ).toEqual("-12deg");
+    expect( t.transform["rotateY"] ).toEqual("-17deg");
+    expect( t.transform["rotateZ"] ).toEqual(undefined);
+    expect( t.getPropValueInDegree("rotateX") ).toEqual(-12);
+    expect( t.getPropValueInDegree("rotateY") ).toEqual(-17);
+    t.transform["rotateX"] = "-10deg";
+    expect( t.getPropValueInDegree("rotateX") ).toEqual(-10);
+    expect( t.toString() ).toEqual("rotateX(-10deg) rotateY(-17deg)");
+  });
+
+});

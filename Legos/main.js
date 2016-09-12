@@ -55,11 +55,3 @@ function calculateAngle(xDist, yDist) {
   var degrees = Math.atan( y / x) * rad2deg;
   return degrees % 90;
 }
-
-window.addEventListener('load', function() {
-  var legoSpace = new LegoSpace();
-  var xPlane = new XPlane(legoSpace);
-  var yPlane = new YPlane(legoSpace);
-  var zPlane = new ZPlane(legoSpace);
-  initEventHandlers();
-});
