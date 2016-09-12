@@ -10,7 +10,7 @@ body {
 #workspace {
   margin: 0 auto;
   width: 100%;
-  height: 17rem;
+  height: 16.5rem;
   max-width: 1200px; }
   #workspace #lego-space {
     position: absolute;
@@ -21,7 +21,8 @@ body {
     height: 25rem;
     perspective: 2000px;
     perspective-origin: 60% top;
-    transform-style: preserve-3d; }
+    transform-style: preserve-3d;
+    transform: rotateX(-10deg); }
 
 .plane {
   position: absolute;
@@ -116,56 +117,62 @@ body {
     background-color: #f34ed0;
     border: 1px solid #f01ec3; }
 
-#controls {
+#lego-set, #controls {
   width: 66%;
   max-width: 800px;
+  margin-left: auto;
+  margin-right: auto; }
+
+#lego-set {
+  text-align: center; }
+  #lego-set .lego-pile {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin: .33em;
+    border-width: 3px;
+    border-style: solid;
+    position: relative;
+    cursor: -webkit-grab;
+    cursor: grab; }
+    #lego-set .lego-pile:before, #lego-set .lego-pile:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -.2rem;
+      height: .2rem;
+      width: 33%; }
+    #lego-set .lego-pile:before {
+      left: .1rem; }
+    #lego-set .lego-pile:after {
+      right: .1rem; }
+    #lego-set .lego-pile.blue, #lego-set .lego-pile.blue:before, #lego-set .lego-pile.blue:after {
+      background-color: #0582ff;
+      border-color: #0069d1; }
+    #lego-set .lego-pile.green, #lego-set .lego-pile.green:before, #lego-set .lego-pile.green:after {
+      background-color: #00ad41;
+      border-color: #007a2e; }
+    #lego-set .lego-pile.yellow, #lego-set .lego-pile.yellow:before, #lego-set .lego-pile.yellow:after {
+      background-color: #f8d404;
+      border-color: #c6a903; }
+    #lego-set .lego-pile.orange, #lego-set .lego-pile.orange:before, #lego-set .lego-pile.orange:after {
+      background-color: #ff7c0a;
+      border-color: #d66400; }
+    #lego-set .lego-pile.red, #lego-set .lego-pile.red:before, #lego-set .lego-pile.red:after {
+      background-color: #f8272a;
+      border-color: #e5070b; }
+    #lego-set .lego-pile.purple, #lego-set .lego-pile.purple:before, #lego-set .lego-pile.purple:after {
+      background-color: #f34ed0;
+      border-color: #f01ec3; }
+
+#controls {
   font-size: 16px;
-  margin: 0 auto 30px auto;
   z-index: 10; }
-  #controls .lego-set {
-    text-align: center; }
-    #controls .lego-set .lego-pile {
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
-      margin: .8em;
-      border-width: 3px;
-      border-style: solid;
-      position: relative;
-      cursor: -webkit-grab;
-      cursor: grab; }
-      #controls .lego-set .lego-pile:before, #controls .lego-set .lego-pile:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: -.2rem;
-        height: .2rem;
-        width: 33%; }
-      #controls .lego-set .lego-pile:before {
-        left: .1rem; }
-      #controls .lego-set .lego-pile:after {
-        right: .1rem; }
-      #controls .lego-set .lego-pile.blue, #controls .lego-set .lego-pile.blue:before, #controls .lego-set .lego-pile.blue:after {
-        background-color: #0582ff;
-        border-color: #0069d1; }
-      #controls .lego-set .lego-pile.green, #controls .lego-set .lego-pile.green:before, #controls .lego-set .lego-pile.green:after {
-        background-color: #00ad41;
-        border-color: #007a2e; }
-      #controls .lego-set .lego-pile.yellow, #controls .lego-set .lego-pile.yellow:before, #controls .lego-set .lego-pile.yellow:after {
-        background-color: #f8d404;
-        border-color: #c6a903; }
-      #controls .lego-set .lego-pile.orange, #controls .lego-set .lego-pile.orange:before, #controls .lego-set .lego-pile.orange:after {
-        background-color: #ff7c0a;
-        border-color: #d66400; }
-      #controls .lego-set .lego-pile.red, #controls .lego-set .lego-pile.red:before, #controls .lego-set .lego-pile.red:after {
-        background-color: #f8272a;
-        border-color: #e5070b; }
-      #controls .lego-set .lego-pile.purple, #controls .lego-set .lego-pile.purple:before, #controls .lego-set .lego-pile.purple:after {
-        background-color: #f34ed0;
-        border-color: #f01ec3; }
-  #controls .instructions .title {
+  #controls legend {
     font-weight: bold;
-    font-size: larger; }
+    font-size: larger;
+    padding-left: .7em;
+    padding-right: .7em; }
   #controls .instructions .desc p {
     margin: 0.5em 0 0.5em 0.5em; }
 

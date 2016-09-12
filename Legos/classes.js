@@ -90,29 +90,41 @@ class Lego {
 
   // Try to figure out which axis the user is moving the lego along
   // this is done by getting the angle of movement of the mouse,
-  // the angles of the 3 axis, and returning the axis with the angle
+  // the angles of the 3 axes, and returning the axis with the angle
   // closest to the mouse movement
+  // returns the closest two axes
   getAxisOfMovement(eventX, eventY) {
 
     let mouseAngle = calculateAngle(eventX - this.lastClientX, eventY - this.lastClientY);
     console.log(`mouse angle: ${mouseAngle} eventY: ${eventY} lastY: ${this.lastClientY} eventX: ${eventX} lastX: ${this.lastClientX}`);
-    let closestAngle = null;
-    let closestAxis = null;
+    // let closestAngle = null;
+    // let closestAxis = null;
+    let closest = [];
 
     //get the axis angles
     $$(".axis").forEach( axis => {
       let rect = axis.getBoundingClientRect()
       let angle = calculateAngle(rect.right - rect.left, rect.bottom - rect.top);
-      console.log(`axis: ${axis.className} angle: ${angle} top: ${rect.top} bottom: ${rect.bottom} left: ${rect.left} right: ${rect.right}`);
+      let axisName = axis.className.match(/axis-([xyz])/i)[1];
+      console.log(`axis: ${axisName} angle: ${angle} top: ${rect.top} bottom: ${rect.bottom} left: ${rect.left} right: ${rect.right}`);
 
-      if (closestAngle == null || Math.abs(mouseAngle - angle) < Math.abs(mouseAngle - closestAngle)) {
-        closestAngle = angle;
-        closestAxis = axis.className.match(/axis-([xyz])/i)[1];
-      }
+      // if (closestAngle == null || Math.abs(mouseAngle - angle) < Math.abs(mouseAngle - closestAngle)) {
+      //   closestAngle = angle;
+      // let closestAxis = axis.className.match(/axis-([xyz])/i)[1];
+      // }
+
+      closest.push([axisName, angle, Math.abs(mouseAngle - angle)]);
     });
 
-    console.log(`closestAngle: ${closestAxis}: ${closestAngle}`);
-    return closestAxis;
+    closest.sort( (a, b) => {
+      return a[2] - b[2];
+    });
+
+    console.log(closest);
+    return [closest[0][0], closest[1][0]];
+
+    // console.log(`closestAngle: ${closestAxis}: ${closestAngle}`);
+    // return closestAxis;
   }
 
 
@@ -122,9 +134,11 @@ class Lego {
 
     // can only move one dimension at a time!
     var axis = this.getAxisOfMovement(eventX, eventY);
+    console.log(`axes to update: ${axis}`);
 
     // Y
-    if (axis == 'z') {
+    // if (axis == 'z') {
+    if (axis.includes('z')) {
       var legoYxy; // y dimension in the xy plane (not the x plane the block rests on)
       if (eventY < xPlaneRect.top) {
         legoYxy = "9";
@@ -132,14 +146,15 @@ class Lego {
         legoYxy = "0";
       } else {
         legoYxy = (eventY - xPlaneRect.top) / (xPlaneRect.bottom - xPlaneRect.top);
-        legoYxy = Math.floor(9 - (legoYxy * 10));
+        legoYxy = 9 - Math.floor(legoYxy * 10);
       }
       this.elem.style.top = legoYxy + "rem";
       this.zPlaneRow = 9 - legoYxy;
     }
 
     // X
-    if (axis == 'x') {
+    // if (axis == 'x') {
+    if (axis.includes('x')) {
       var legoXxy;
       if (eventX < xPlaneRect.left) {
         legoXxy = "0";
@@ -154,7 +169,8 @@ class Lego {
     }
 
     // Z
-    if (axis == 'y') {
+    // if (axis == 'y') {
+    if (axis.includes('y')) {
       // debugger;
       var yPlaneRect = $(".plane-y").getBoundingClientRect();
       var xPlaneCell = $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`);

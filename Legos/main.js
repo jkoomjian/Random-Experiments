@@ -16,6 +16,13 @@ HTMLElement.prototype.appendNChildren = function(numElems, className, reverseNum
   });
 }
 
+if (!Array.prototype['includes']) {
+  debugger;
+  Array.prototype.includes = function(e) {
+    return this.indexOf(e) >= 0;
+  }
+}
+
 // Given a callback, and x, y coordinates, only execute the callback if the coordinates have changed
 // by more than minPointerDifference
 var lastPointers = {};
