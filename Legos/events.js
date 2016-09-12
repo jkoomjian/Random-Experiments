@@ -1,6 +1,7 @@
 var ctrlKeyDown = false;
 var shiftKeyDown = false;
 var mouseBtnDown = false;
+var mouseMiddleBtnDown = false;
 var lastMouseCoords = [];
 
 
@@ -20,6 +21,8 @@ function updatePointerState() {
       setPrefixedCursorStyle("grab");
     }
 
+  } else if (mouseMiddleBtnDown) {
+    setPrefixedCursorStyle("grabbing");
   } else {
     // default
     document.body.style.cursor = "default";
@@ -53,6 +56,7 @@ function panLegoSpace(startCoords, endCoords) {
 
 //---------- Key events ------------
 function keyDown(event) {
+  //console.log("keyCode: " + event.keyCode);
   if (event.keyCode === 17) ctrlKeyDown = true;
   if (event.keyCode == 16) shiftKeyDown = true;
   updatePointerState();
@@ -65,8 +69,9 @@ function keyUp(event) {
 }
 
 function mouseDown(event) {
-  mouseBtnDown = true;
-  if (ctrlKeyDown || shiftKeyDown) {
+  if (event.button === 0) mouseBtnDown = true;
+  if (event.button === 1) mouseMiddleBtnDown = true;
+  if (ctrlKeyDown || shiftKeyDown || mouseMiddleBtnDown) {
     lastMouseCoords = [event.clientX, event.clientY];
     event.preventDefault();
     updatePointerState();
@@ -75,22 +80,26 @@ function mouseDown(event) {
 
 function mouseUp(event) {
   mouseBtnDown = false;
-  if (ctrlKeyDown || shiftKeyDown) {
+  mouseMiddleBtnDown = false;
+  if (ctrlKeyDown || shiftKeyDown || event.button === 1) {
     updatePointerState();
     event.preventDefault();
   }
 }
 
 function dragLegoSpace(event) {
-  if ((ctrlKeyDown || shiftKeyDown) && mouseBtnDown) {
+  var action;
+  // orbit
+  if ((ctrlKeyDown && mouseBtnDown) || mouseMiddleBtnDown) action = orbitLegoSpace;
+  // pan
+  if (shiftKeyDown && mouseBtnDown) action = panLegoSpace;
+
+  if (action) {
     var currMouseCoords = [event.clientX, event.clientY];
     executeOnGreatEnoughChange(event.clientX, event.clientY, 10, 'dragLegoSpace', function() {
-      let action = ctrlKeyDown ? orbitLegoSpace : panLegoSpace;
       action(lastMouseCoords, currMouseCoords);
       lastMouseCoords = currMouseCoords;
     });
-    // if (pointerPositionDifference(currMouseCoords, lastMouseCoords) > 5) {
-    // }
     event.preventDefault();
   }
 }
