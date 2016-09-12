@@ -19,7 +19,7 @@ function onDrag(event) {
 
 function onDragEnd(e) {
   console.log("at drag end");
-  lego.elem.style.transform = 'translateZ(0rem)';
+  lego.place();
 }
 
 function initializeDrag() {

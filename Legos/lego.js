@@ -56,6 +56,7 @@ class Lego {
   constructor(sourceLegoPile, startClientX, startClientY) {
     this.zPlaneCell = 0;
     this.zPlaneRow = 0;
+    this.zPlaneHeight = 0;
 
     this.mousePath = new MousePath(startClientX, startClientY);
 
@@ -72,7 +73,9 @@ class Lego {
     var xPlaneRect = $(".plane-x").getBoundingClientRect();
     // console.log(`drag x:${eventX} y:${eventY} lego x:${this.elem.style.left} y:${this.elem.style.top}`);
 
-    // can only move two dimensions at a time!
+    var styleProp, style;
+
+    // can only move 1 dimension at a time!
     var axis = this.mousePath.onDragGetAxes(eventX, eventY);
     console.log(`axes to update: ${axis}`);
 
@@ -87,8 +90,10 @@ class Lego {
         legoYxy = (eventY - xPlaneRect.top) / (xPlaneRect.bottom - xPlaneRect.top);
         legoYxy = 9 - Math.floor(legoYxy * 10);
       }
-      this.elem.style.top = legoYxy + "rem";
+
       this.zPlaneRow = 9 - legoYxy;
+      styleProp = "top";
+      style = legoYxy + "rem";
     }
 
     // X
@@ -102,8 +107,9 @@ class Lego {
         legoXxy = (eventX - xPlaneRect.left) / (xPlaneRect.right - xPlaneRect.left);
         legoXxy = Math.floor(legoXxy * 10);
       }
-      this.elem.style.left = legoXxy + "rem";
       this.zPlaneCell = legoXxy;
+      styleProp = "left";
+      style = legoXxy + "rem";
     }
 
     // Y
@@ -124,14 +130,35 @@ class Lego {
         legoZxy = (xPlaneCellBottom - eventY) / yPlaneHeight;
         legoZxy = Math.floor(legoZxy * 10);
       }
+
       // console.log(`y axis: ${legoZxy} cellBottom: ${xPlaneCellBottom} eventY: ${eventY}`);
-      this.elem.style.transform = `translateZ(-${legoZxy}rem)`;
+      this.zPlaneHeight = legoZxy;
+      styleProp = "transform";
+      style = `translateZ(${legoZxy * -1}rem)`;
     }
 
     console.log(`coords: ${this.zPlaneCell}, ${this.zPlaneRow}`);
+    if (this.isCollision()) {
+      console.log("collision!");
+    } else {
+      this.elem.style[styleProp] = style;
+      $$('.plane-x .cell.active').forEach( cell => {cell.className = cell.className.replace("active", "");});
+      $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`).className += " active";
+    }
+  }
 
-    $$('.plane-x .cell.active').forEach( cell => {cell.className = cell.className.replace("active", "");});
-    $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`).className += " active";
+  place() {
+    var landingCell = $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`)
+    var currStackSize = landingCell['currStackSize'] || 0;
+
+    landingCell['currStackSize'] = currStackSize + 1;
+    lego.elem.style.transform = `translateZ(${currStackSize * -1}rem)`;
+  }
+
+  isCollision() {
+    var landingCell = $(`.plane-x .row-${this.zPlaneRow} .cell-${this.zPlaneCell}`)
+    var currStackSize = landingCell['currStackSize'] || 0;
+    return (currStackSize > this.zPlaneHeight);
   }
 
 }
