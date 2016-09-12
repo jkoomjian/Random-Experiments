@@ -1,14 +1,16 @@
 class Transform {
   constructor(transformStr) {
     this.transformStr = transformStr;
-    this.transformParts = transformStr.split(" ");
     this.transform = {};
-    this.transformParts.forEach( part => {this._addProp(part)} );
+    this._addProps();
   }
 
-  _addProp(part) {
-    var r = new RegExp("(.+?)\\((.+?)\\)", 'g').exec(part);
-    if (r && r.length > 1) this.transform[ r[1] ] = r[2];
+  _addProps() {
+    var parts = this.transformStr.match(/[^\s]+?\([^\)]+?\)/g);
+    parts.forEach( part => {
+      var r = new RegExp("(.+?)\\((.+?)\\)", 'g').exec(part);
+      if (r && r.length > 1) this.transform[ r[1] ] = r[2];
+    });
   }
 
   getPropValueInDegree(prop) {

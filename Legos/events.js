@@ -54,11 +54,40 @@ function panLegoSpace(startCoords, endCoords) {
   $("#lego-space").style.transform = t.toString();
 }
 
+function zoom(zoomAmt){
+  var t = new Transform($("#lego-space").style.transform)
+  var magicNumber = .001; //amount to increase scale by
+  var baseScale = 1;
+
+  if (t.transform["scale3d"]){
+    baseScale = t.transform["scale3d"];
+    baseScale = baseScale.split(",")[0].trim();
+    baseScale = parseFloat(baseScale);
+  }
+
+  var newScale = (magicNumber * zoomAmt) + baseScale;
+  t.transform["scale3d"] = `${newScale}, ${newScale}, ${newScale}`;
+  $("#lego-space").style.transform = t.toString();
+}
+
 //---------- Key events ------------
 function keyDown(event) {
-  //console.log("keyCode: " + event.keyCode);
-  if (event.keyCode === 17) ctrlKeyDown = true;
-  if (event.keyCode == 16) shiftKeyDown = true;
+  // console.log("keyCode: " + event.keyCode);
+  switch(event.keyCode) {
+    case 17:
+      ctrlKeyDown = true
+      break;
+    case 16:
+      shiftKeyDown = true;
+      break;
+    case 187: //+
+      zoom(120);
+      break;
+    case 189: //-
+      zoom(-120);
+      break;
+  }
+
   updatePointerState();
 }
 
@@ -87,7 +116,7 @@ function mouseUp(event) {
   }
 }
 
-function dragLegoSpace(event) {
+function mouseMove(event) {
   var action;
   // orbit
   if ((ctrlKeyDown && mouseBtnDown) || mouseMiddleBtnDown) action = orbitLegoSpace;
@@ -96,7 +125,7 @@ function dragLegoSpace(event) {
 
   if (action) {
     var currMouseCoords = [event.clientX, event.clientY];
-    executeOnGreatEnoughChange(event.clientX, event.clientY, 10, 'dragLegoSpace', function() {
+    executeOnGreatEnoughChange(event.clientX, event.clientY, 10, 'mouseMove', function() {
       action(lastMouseCoords, currMouseCoords);
       lastMouseCoords = currMouseCoords;
     });
@@ -105,27 +134,8 @@ function dragLegoSpace(event) {
 }
 
 function wheelMove(event) {
-  if (ctrlKeyDown) {
-    var toTransform = "";
-    var currTransform = $("#lego-space").style.transform;
-    var magicNumber = .001; //amount to increase scale by
-    var baseScale = 1;
-
-    if (currTransform.match(/scale3d/)) {
-      var r = new RegExp(/\s?scale3d\(([\d\.]+),\s?[\d\.]+,\s?[\d\.]+\)/g).exec(currTransform);
-      if (r) {
-        currTransform = currTransform.replace(r[0], "");
-        baseScale = parseFloat(r[1]);
-      }
-    }
-
-    var newScale = (magicNumber * event.wheelDelta) + baseScale;
-    toTransform = currTransform + ` scale3d(${newScale}, ${newScale}, ${newScale})`;
-    // console.log(toTransform);
-    $("#lego-space").style.transform = toTransform;
-
-    event.preventDefault();
-  }
+  zoom(event.wheelDelta);
+  event.preventDefault();
 }
 
 //---------- Assign Event Handlers ------------
@@ -134,7 +144,7 @@ function initEventHandlers() {
   window.addEventListener("keyup", keyUp);
   window.addEventListener("mousedown", mouseDown);
   window.addEventListener("mouseup", mouseUp);
-  window.addEventListener("mousemove", dragLegoSpace);
+  window.addEventListener("mousemove", mouseMove);
   window.addEventListener("wheel", wheelMove);
   initializeDrag();
 }
