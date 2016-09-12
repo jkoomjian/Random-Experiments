@@ -1,10 +1,19 @@
 var lego;
 function onDragStart(e) {
   console.log("start drag!");
-  e.dataTransfer.dropEffect = "copy";
-
   //create a new lego
   lego = new Lego(event.target, event.clientX, event.clientY)
+  _onDragStartCommon(e);
+}
+
+function onDragStartExistingLego(e) {
+  console.log("start drag w/existing lego!");
+  lego = event.target.legoObj;
+  _onDragStartCommon(e);
+}
+
+function _onDragStartCommon(e) {
+  e.dataTransfer.dropEffect = "copy";
   e.dataTransfer.setDragImage($("#empty"), 0, 0);
 }
 

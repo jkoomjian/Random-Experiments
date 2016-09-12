@@ -153,6 +153,11 @@ class Lego {
 
     landingCell['currStackSize'] = currStackSize + 1;
     lego.elem.style.transform = `translateZ(${currStackSize * -1}rem)`;
+
+    this.elem.legoObj = this;
+    this.elem.addEventListener("dragstart", onDragStartExistingLego);
+    this.elem.addEventListener("drag", onDrag);
+    this.elem.addEventListener("dragend", onDragEnd);
   }
 
   isCollision() {
