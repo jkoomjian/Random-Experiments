@@ -1,0 +1,104 @@
+@off-black: #444;
+@off-white: #F9F4CC;
+@off-white-lit: #FFFF99;
+@red: #DC002A;
+@green: green;
+@red-lit: #ff0533;
+@green-lit: #33FF33;
+
+
+// Global
+a {text-decoration: none;}
+a:focus {outline: none;}  //bad for accessibility, but looks better
+
+//Mixins
+.active-button {
+  box-shadow: 0px 0px 10px 5px @off-black inset;
+  transition: box-shadow .1s;
+}
+
+//Styles
+.left-container, .right-container {display: inline-block; vertical-align: top;}
+.left-container {width: 650px;}
+.left-container {margin-left: 100px;}
+
+.panel {
+  margin: 30px auto 0 auto; max-width: 450px;
+  border: 4px solid @off-black;
+  background-color: #d4d4d4; box-shadow: 2px 2px 5px 0 @off-black;
+
+  .window {
+    margin: 60px 60px 40px 60px;
+    background-color: @off-black;
+
+    &>div {display: inline-block; width: 161px; vertical-align: middle;}
+
+    .floor-dial {
+      text-align: center; padding: auto 50px;
+      color: @off-white;
+      font-size: 100px;
+      height: 260px;
+      position: relative; overflow-y: hidden;
+
+      .floor-dial-face {
+        position: absolute; width: 161px; bottom: 0;
+        transition: bottom 1s linear 0s;
+
+        .floor-no {
+          height: 120px;
+          margin: 70px auto;
+        }
+      }
+    }
+
+    .indicators > div {
+      display: block;
+      width: 100px; height: 100px; margin: 20px auto;
+      box-shadow: 0px 0px 10px 0 @off-black inset;
+    }
+
+    .indicators .up {
+      background-color:  @green;
+      &.active {background-color: @green-lit;}
+    }
+
+    .indicators .down {
+      background-color: @red;
+      &.active {background-color: @red-lit;}
+    }
+
+  }
+
+  .buttons {
+    margin: 0 60px 50px 60px; text-align: center;
+    direction: rtl;
+
+    a.floor-button {
+      height: 100px; width: 100px;
+      color: @off-black; background-color: @off-white;
+      border-radius: 50%;
+      border: 3px solid @off-black; box-shadow: 0px 0px 10px 0 @off-black inset;
+      font-size: 66px; text-align: center;
+      display: inline-block; margin: 10px 20px;
+      cursor: pointer;
+
+      &>div {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.active {background-color: @off-white-lit;}
+      &:active {.active-button}
+    }
+
+  }
+
+}
+
+.entry-desc {
+  text-align: center; margin-top: 60px;
+  color: @off-black;
+  .author {display: inline;}
+  h2, h4 {margin: 5px 0;}
+}
