@@ -1,0 +1,98 @@
+<html>
+
+<head>
+	<style type="text/css">
+		hr {
+			width: 100%;
+			margin: 20px 0 20px 0;
+			clear: both;
+		}
+		.title {
+			font-weight: bold;
+			padding: 10px 0;
+		}
+		.example {
+			float: left;
+			width: 100%;
+			margin: 20px 0;
+			border-top: 1px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	
+	<div class="example">
+		<div class="title">Block elements hog the entire line</div>
+		<div style="display: block; height: 100px; width: 100px; border: 1px solid red;">100px x 100px DIV</div>
+		<div style="display: block; height: 100px; width: 100px; border: 1px solid blue;">100px x 100px DIV</div>
+	</div>
+
+	<div class="example">	
+		<div class="title">Inline elements use as little space as they need and line up nicely next to each other.  You can't set height or width on inline elems</div>
+		<div style="display: inline; height: 100px; width: 100px; border: 1px solid red;">100px x 100px SPAN</div>
+		<div style="display: inline; height: 100px; width: 100px; border: 1px solid blue;">100px x 100px SPAN</div>
+	</div>
+	
+	<div class="example">
+		<div class="title">The two in combination</div>
+		<div style="display: block; border: 1px solid red;">Block with no dimensions</div>
+		<span style="border: 1px solid blue;">Inline with no dimensions</span>
+	</div>
+
+	<div class="example">
+		<div class="title">To make block elements share a line, use float: left.  This is useful when you need to set the width/height or other block properties but also have elements next to each other.</div>
+		<div style="display: block; float: left; height: 100px; width: 100px; border: 1px solid red;"></div>
+		<div style="display: block; float: left; height: 100px; width: 100px; border: 1px solid blue;"></div>
+	</div>
+
+	<div class="example">	
+		<div class="title">Floated blocks are outside the normal flow, so other elements act as if they are not there.  Here a blue block (100px x 100px) is inside a red box. The red box has width: 100px but no height set.  In first example, the blue box pushes the red box down 100px.  In second example the blue box has float: left, so the red box ignores it.</div>
+
+		<table>
+			<tr>
+				<td>
+					<div style="width: 100px; border: 1px solid red">
+						<div style="width: 50px; height: 100px; margin: 0 25px; border: 1px solid blue">block inside block</div>
+					</div>
+							</td>
+							<td style="padding-left: 40px;">
+					<div style="display: block; width: 100px; border: 1px solid red">
+						<div style="display: block; float: left; width: 50px; height: 100px; margin: 0 25px; border: 1px solid blue">block inside block w/float</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+
+
+	</div>
+
+
+	<div class="example">	
+		<div class="title">Fix this by adding float to the parent container (the red box)</div>
+		<div style="display: block; float: left; width: 100px; border: 1px solid red">
+			<div style="display: block; float: left; width: 50px; height: 100px; margin: 0 25px; border: 1px solid blue"></div>
+		</div>
+	</div>
+
+	<div class="example">
+		<div class="title">Siblings will float around the floated elements, rather than acting like normal block and inline elements</div>
+		<div style="display: block; float: left; width: 100px; border: 1px solid red">
+			<div style="display: block; float: left; width: 50px; height: 100px; margin: 0 25px; border: 1px solid blue"></div>
+		</div>
+		<div style="border: 1px solid green">non-floated block element</div>
+		<span style="border: 1px solid orange">non-floated inline element</span>
+	</div>
+
+	<div class="example">
+		<div class="title">To fix this, add clear: both to the first element following the floated elements. The following elements will be pushed down.</div>
+		<div style="float: left; width: 100px; border: 1px solid red">
+			<div style="float: left; width: 50px; height: 100px; margin: 0 25px; border: 1px solid blue"></div>
+		</div>
+		<div style="clear: both; border: 1px solid green">non-floated block element with clear:both</div>
+		<div style="border: 1px solid yellow">a second non-floated block element without clear</div>
+		<span style="border: 1px solid orange">non-floated inline element</span>
+	</div>
+
+</body></html>

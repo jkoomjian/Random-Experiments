@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title>How To Center</title>
+	<style type="text/css">
+		.title {
+			/*font-weight: bold;*/
+			padding: 10px 0;
+		}
+		.example {
+			float: left;
+			width: 100%;
+			margin: 20px 0;
+			border-top: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>How To Center All Elements</h1>
+
+	<div class="example">
+		<div class="title"><b>Inline Elements</b> - easy just use text-align: center on the outer element</div>
+		<div style="width: 500px; border: 1px solid red; text-align: center;">
+			<button>Centered Inline Button</button>
+		</div>
+	</div>
+
+	<div class="example">
+		<div class="title"><b>Block Level Elements With Fixed Width</b> - Use margin: auto;</div>
+		<div style="width: 500px; height: 150px; border: 1px solid red;">
+			<div style="margin: auto; border: 1px solid blue; width: 100px; height: 100px;">Centered Div</div>
+		</div>
+	</div>
+
+	<div class="example">
+		<div class="title"><b>Block Level Elements Without Fixed Width</b> - margin: auto won't work - instead put text-align: center; on the outer div and display: inline-block; on the inner div </div>
+		<div style="width: 500px; height: 50px; border: 1px solid red; margin-bottom: 25px;">
+			<div style="margin: 10px auto; border: 1px solid blue;">Centered Div W/O Fixed Width (margin: auto)</div>
+		</div>
+		<div style="text-align: center; width: 500px; height: 50px; border: 1px solid red;">
+			<div style="display: inline-block; border: 1px solid blue;">Centered Div W/O Fixed Width (with fix)</div>
+		</div>
+	</div>
+
+	<div class="example">
+		<div class="title"><b>Floated Elements</b> - Use the following hack - right aligns w/outer elem, then left:-50% aligns r edge w/center. inner elem has left: 50% which centers it on the centeline.
+	<pre><code>
+		.outer {position: relative; left: -50%; float: right;}
+		.inner {position: relative; left: 50%;}
+	</code></pre>
+</div>
+		<div style="width: 500px; height: 50px; border: 1px solid red; float: left;">
+			<div style="position: relative; left: -50%; float: right; border: 1px dotted yellow;">
+				<div style="position: relative; left: 50%; border: 1px dotted green;">
+					<div style="float: left; margin: auto; border: 1px solid blue; width: 150px;">Floated Div</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

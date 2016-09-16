@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			.clearfix:before, .clearfix:after {content:"";display:table;}
+			.clearfix:after {clear:both;}
+	
+			body > div {margin-bottom: 20px;}
+			.box {float: left; margin: 10px; border: 1px solid black; background-color: tan; padding: 10px;}
+			#rounded-corners > div {
+				text-align: center;
+				padding: 10px;
+				border: 1px solid black;
+				width: 150px;
+				height: 150px;
+				margin: 20px;
+				background-color: LemonChiffon;
+				border-radius: 10px;
+				float: left;
+			}
+				#rounded-corners .rc2 {border-radius: 10px 20px 30px 40px;}
+				#rounded-corners .rc3 {border-radius: 10px 40px;}			
+			#box-shadow > div {float: left; margin: 10px; border: 1px solid gray;}
+			#text-shadow {margin: 10px; border: 0px solid black;}
+			.multiple-text-shadow {
+				text-shadow:
+					rgba(81, 204, 0, 0.789063) 2px 2px, 
+					rgba(81, 204, 0, 0.78125) 4px 4px, 
+					rgba(78, 204, 0, 0.773438) 6px 6px, 
+					rgba(78, 204, 0, 0.765625) 8px 8px, 
+					rgba(75, 204, 0, 0.757813) 10px 10px, 
+					rgba(75, 204, 0, 0.75) 12px 12px, 
+					rgba(71, 204, 0, 0.742188) 14px 14px, 
+					rgba(71, 204, 0, 0.734375) 16px 16px, 
+					red 18px 18px, 
+					rgba(68, 204, 0, 0.71875) 20px 20px;
+			}
+			#font-face {margin: 10px; font-family: 'Russo One', Arial, serif; font-weight: 400;}
+			#linear-gradient > div {margin: 10px; padding: 5px; float: left; width: 200px; height: 200px;}
+			#alpha > div {height: 30px; float: left; margin: 10px;}
+			#outline > div {float: left; margin: 10px;}
+			#transform {margin-top: 50px;}
+			#transform > div.hover-box:hover {-moz-transform: rotate(30deg);}
+		</style>
+		<link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<h2 style="text-align: center;">CSS3 Attributes</h2>
+		<div id="rounded-corners" class="clearfix">
+			<div class="rounded-corners">All corners even: border-radius: 10px;</div>
+			<div class="rounded-corners rc2">4 different corners: border-radius: 10px 20px 30px 40px;</div>
+			<div class="rounded-corners rc3">border-radius: 10px 40px;</div>
+		</div>
+		<div id="box-shadow" class="clearfix">
+			<div style="box-shadow: grey 10px 5px">Box Shadow: box-shadow: grey 10px 5px</div>
+			<div style="box-shadow: grey 5px 5px 10px">Box Shadow: box-shadow: grey 5px 5px 10px</div>
+			<div style="box-shadow: grey 5px 5px 10px inset">Box Shadow: box-shadow: grey 5px 5px 10px inset</div>
+		</div>
+		<div id="text-shadow" class="clearfix">
+			<span style="text-shadow: rgb(0,0,150) 3px 3px 5px">Text Shadow: text-shadow color offsetW offsetH blur</span>
+			<span style="text-shadow: rgb(0,0,150) 3px 3px">No Blur</span>
+			<span class="multiple-text-shadow" style="">Multiple Shadows</span>
+		</div>
+		<div id="font-face">
+			<p>@font-face is still somewhat of a mess - IE uses .EOT, FF/Chrome/Safari use .TTF and Mobile Safari uses SVG.
+				Instead use font kit like Google Web Fonts: <a href="http://www.google.com/webfonts">http://www.google.com/webfonts</a>
+				<br/>
+				You just select a font, include a css link to get the font-face def, and use the new font-family in your css	
+			</p>
+		</div>
+		<div id="linear-gradient" class="clearfix">
+			<div style="background: -moz-linear-gradient(top, blue, red);background: -webkit-linear-gradient(top, blue, red)">background: linear-gradient(top, blue, red)</div>
+			<div style="background: -moz-linear-gradient(left, blue, red);background: -webkit-linear-gradient(left, blue, red)">background: linear-gradient(left, blue, red)</div>
+			<div style="background: -moz-radial-gradient(center, circle, red 50%, blue 100%);background: -webkit-radial-gradient(center, circle, red 50%, blue 100%);">background: radial-gradient(center, circle, red 50%, blue 100%);</div>
+			<div style="background: -moz-radial-gradient(center, circle, red 50%, blue 50%);background: -webkit-radial-gradient(center, circle, red 50%, blue 50%);">background: radial-gradient(center, circle, red 50%, blue 50%);</div>
+		</div>
+		<div id="alpha" class="clearfix">
+			<div style="background-color: rgba(255,0,0,.3)">rgba(255,0,0,.3)</div>
+			<div style="background-color: rgba(255,0,0,.6)">rgba(255,0,0,.6)</div>
+			<div style="background-color: rgba(255,0,0,1)">rgba(255,0,0,1)</div>
+		</div>
+		<div id="outline" class="clearfix">
+			<div style="border: 1px solid black; outline: 2px dashed #000099; outline-offset: 15px;">outline 2px dashed #000099; outline-offset: 15px;</div>
+		</div>
+		<div id="transform" class="clearfix">
+			<div style="-moz-transform: scaleY(2);" class="box">transform: scaleY(2)</div>
+			<div style="-moz-transform: rotate(30deg);" class="box">transform: rotate(30deg)</div>
+			<div style="-moz-transform: skew(30deg);" class="box">transform: skew(30deg)</div>
+			<div style="-moz-transform: translateY(-100px);" class="box">transform: translateY(-100px)</div>
+			<div style="" class="box hover-box">Hover</div>
+			<div style="-moz-transition: all 1s" class="box hover-box">Hover Transition</div>
+		</div>
+	</body>
+</html>
