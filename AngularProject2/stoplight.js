@@ -1,14 +1,9 @@
-/**
- * June 22, 2016
- * Tested on FF and Chrome.
- */
-
 var stopLightApp = angular.module('cityRoads', []);
 
 /*----------- Services ----------------*/
 //Stoplight Direction can be "NorthSouth" or "EastWest"
 stopLightApp.service('stopLightService', function($rootScope, $timeout, $interval) {
-  //- should hold value that indicates the direction of traffic. North/South and East/West
+  // holds value that indicates the direction of traffic. North/South and East/West
   var stopLightDirection = "NorthSouth";
   var stopLightSwitchInProgress = false;
 
@@ -26,7 +21,7 @@ stopLightApp.service('stopLightService', function($rootScope, $timeout, $interva
     return currLightColor == color;
   };
 
-  //- create a function that will toggle the value.
+  //toggle the lights value.
   this.toggleLights = function(skipApply) {
     stopLightSwitchInProgress = true;
     if (!skipApply) $rootScope.$apply();
@@ -64,8 +59,8 @@ stopLightApp.service('stopLightService', function($rootScope, $timeout, $interva
 });
 
 /*----------- Directives ----------------*/
-//- should change colors based on stopLightService.
-//- use an attribute to determine which direction the stop light will use.
+// change colors based on stopLightService.
+// uses attribute to determine which direction the stop light will use.
 stopLightApp.directive('stopLightRoad', function($templateCache, stopLightService){
   return {
     restrict: 'E',
@@ -84,7 +79,7 @@ stopLightApp.directive('stopLightRoad', function($templateCache, stopLightServic
   };
 });
 
-//- should contain button that will toggle stopLightService.
+// button to toggle stopLightService.
 stopLightApp.directive('stopLightSwitchDirective', function(stopLightService){
   return function(scope, elem, attrs) {
     elem.on('click', function(event) {
