@@ -18,7 +18,7 @@
 
 <body>
 
-<h1>The 6 Different Values of 'this' in JS</h1>
+<h1>The 8 Different Values of 'this' in JS</h1>
 
 <pre>
 // 1. Global Namespace - outside of a funnction or object, this = window or the global context
@@ -106,7 +106,9 @@ function Test7() {
 }
 t7 = new Test7();
 t7.badClosure()();
+</pre>
 
+<pre>
 //8. Event Listeners - this resolves to the dom node that recieved the event
 document.addEventListener("click", function() {
   this //resolves to document
