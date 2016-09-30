@@ -8,7 +8,6 @@ $desktop-width: 960px;
 @mixin lego-pile($lego-color) {
     background-color: $lego-color; border-color: darken($lego-color, 10%);
 }
-
 .mixin-test {
   @include test;
   @include lego-pile($lego-blue);
@@ -27,7 +26,6 @@ $desktop-width: 960px;
 @function grid-width($n) {
   @return $n * 2;
 }
-
 //called like js functions
 .function-test {
   background-color: darken($lego-blue, 30%);
