@@ -48,12 +48,32 @@ sayHey.apply(myContext, ['there']);
 </pre>
 
 <pre>
-//4. Inside a normal function (including anonymous functions) - this = window in non-strict, undefined in strict mode
+//4. Inside a normal function (including anonymous functions)
+//    It's complicated - 'this' is bound at runtime, depending on the context it's called from
+//    Best to always avoid using this pattern!
 test4Str = "hello!";
 function test4() {
   return this.test4Str;
 }
 test4();
+
+//The this binding is done at runtime!
+var test4b = {
+  hello: 'world',
+  sayHi: function() {
+    console.log(this.hello);
+  }
+}
+test4b.sayHi(); //world
+var test4c = test4b.sayHi
+test4c(); //undefined!!!
+
+var test4d = function() {
+  console.log(this.hello);
+}
+test4b['myTest4d'] = test4d;
+test4d(); //undefined
+test4b.myTest4d(); //world
 </pre>
 
 <pre>

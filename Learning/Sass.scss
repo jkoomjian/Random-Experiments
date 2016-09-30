@@ -1,0 +1,83 @@
+/* Variables - defined like css properties*/
+$lego-blue: #0582ff;
+$desktop-width: 960px;
+
+
+/* Mixins - mixins use parenthesis, like functions*/
+@mixin test {width: 100%;}
+@mixin lego-pile($lego-color) {
+    background-color: $lego-color; border-color: darken($lego-color, 10%);
+}
+
+.mixin-test {
+  @include test;
+  @include lego-pile($lego-blue);
+}
+
+/* Mixins with content */
+@mixin desktop {
+  @media (min-width: $desktop-width) {
+    @content;
+  }
+}
+@include desktop { .mobile-only {display: none !important;}  }
+
+
+/* Functions */
+@function grid-width($n) {
+  @return $n * 2;
+}
+
+//called like js functions
+.function-test {
+  background-color: darken($lego-blue, 30%);
+  width: grid-width(5px);
+}
+
+
+/* Extends */
+%common-style {text-align: center; margin: auto;}
+.extends-test {@extend %common-style;}
+
+
+/* If */
+.if-test {
+  border-top-width: if(true, 1px, 2px); //1px
+  border-bottom-width: if(false, 1px, 2px) //2px
+}
+
+/* For */
+@for $i from 1 through 3 {
+  .for-item-#{$i} {color: red;}
+}
+
+/* ForEach */
+//array
+$lego-names-colors: (blue: blue, green: green);
+// #{$color-name} - interpolation
+@each $color-name, $color-value in $lego-names-colors {
+  each-test.#{$color-name} {background-color: $color-value;}
+}
+
+
+/* Import */
+// _reset.scss
+// @import 'reset';
+
+
+/* Math */
+.math-test {width: 100% / 2;}
+
+
+/* @at-root */
+//@at-root causes nested rules to be emitted at the root of the document
+.parent {
+  .child1 {color: red;}
+  @at-root {
+    .child2 {color: blue}
+  }
+}
+//compiles to:
+// .parent {}
+// .parent .child1 {}
+// .child2 {}
