@@ -37,14 +37,16 @@ new This1().evalHello(); //world
 </pre>
 
 <pre>
-//3. Call and Apply - this is passed as a parameter
+//3. Bind, Call and Apply - this is passed as a parameter
 var myContext = {greet: 'hey'};
 function sayHey(person) {
   return this.greet + " " + person;
 }
 sayHey.call(myContext, 'you');
 sayHey.apply(myContext, ['there']);
+sayHey.bind(myContext)();
 // only difference between call and apply is that apply takes args in a single array
+// bind returns a function (does not execute the target function)
 </pre>
 
 <pre>

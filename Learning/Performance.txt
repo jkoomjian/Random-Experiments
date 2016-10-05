@@ -1,0 +1,32 @@
+Performance Improvement Ideas:
+
+Network:
+* use a CDN
+* use sprites, concatenate js, css, to have as few assets as possible
+* use browser caching
+* add defer to <script>
+* put non-necessary css <link> at bottom of page
+* use HTTP2 (then include your assets seperately)
+* replace images w/svg sprites
+* avoid redirects
+* gzip assets
+
+Assets:
+* concatenate JS into one file and compress
+* concatenate CSS into one file and compress
+* optimize images
+* generate various image sizes, use media queries, srcset, or <picture> to only include the appropriate image
+
+Rendering:
+* doctype set <!DOCTYPE html>
+* valid html, proper encoding: <meta charset="utf-8">
+* use csstriggers.com to minimize layout, painting, compositing the browser has to do during animations
+* animated elements should be out of flow
+* don't run animations when not necessary, or on too many elements
+
+JS:
+* ensure any processing is put on the event queue, not done syncrounously
+* for long-running processes, use webworkers, or break the process into smaller pieces and chain them together with setTimeout()
+
+Other:
+* use google page speed insites
