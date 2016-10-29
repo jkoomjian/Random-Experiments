@@ -35,3 +35,28 @@ function isPalindrome(str) {
   }
   return true;
 }
+
+function factorial(n) {
+  if (n == 1) return 1;
+  return n * factorial(n-1);
+}
+
+function AlphabetSoup(str) {
+  return str.split('').sort().join("");
+}
+
+function closureTest(n) {
+  var ar = [];
+  for (var i=0; i<n; i++) {
+    ar.push(
+      (function(j) {
+        return function() {
+          console.log(j);
+        }
+      })(i)
+    );
+  }
+  return ar;
+}
+closureTest(4).forEach(function(e) { e() });
+closureTest(4).forEach( e => e() );
