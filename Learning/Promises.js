@@ -1,12 +1,11 @@
 /*------------------ Promises! ------------------*/
-function asyncMethodSucces(callback) { setTimeout(callback, 3000, 'success'); }
+function asyncMethodSuccess(callback) { setTimeout(callback, 3000, 'success'); }
 function asyncMethodFailure(callback) { setTimeout(callback, 1000, 'fail'); }
-function asyncMethodError() { setTimeout(() => {throw new Error("just cause")}, 1000); }
 
 // Promises are built into ES6!
 var myPromise = new Promise(function(resolve, reject) {
   //your async code goes here
-  asyncMethodSucces(function(status) {
+  asyncMethodSuccess(function(status) {
     if (status === "success") {
       resolve("success");
     } else {
@@ -29,7 +28,7 @@ myPromise.then(
 
 // Promise - takes a function which will call the async function, and then call resolve or reject depending on the outcome
 var p1 = new Promise((resolve, reject) => {
-  asyncMethodSucces( val => {
+  asyncMethodSuccess( val => {
     if (val == 'success') {
       resolve(val);
     } else {
@@ -45,18 +44,35 @@ p1.then( val => console.log("fulfilled:", val),
 
  //You can add a .catch() to the end of a chain of .then()'s and it will catch any error in the chain
  // this is much easier, and how most people do it
- p.then(resolveFunc)
-  .then(resolveFunc)
-  .catch(errorFunc);
+ // p.then(resolveFunc)
+ //  .then(resolveFunc)
+ //  .catch(errorFunc);
 
-//you can also use catch, instead of errorCallback, or pass null has the handler
-var p2 = new Promise((resolve, reject) => {
-  asyncMethodError(function() {
-    resolve('worked');
-  });
+// you can also use catch, instead of errorCallback, or pass null has the handler
+// The catch() method returns a Promise and deals with rejected cases only.
+// It behaves the same as calling Promise.prototype.then(undefined, onRejected).
+var p2 = new Promise( (resolve, reject) => {
+    asyncMethodSuccess( () => {
+      try {
+        throw new Error("just cause");
+      } catch(ex) {
+        console.log("rejecting promise!");
+        reject(ex);
+      }
+    });
 });
-p2.then( val => console.log("fulfilled:", val) )
-   .catch( err => console.log("error: " + err.message) );
+(p2.then( val => console.log("fullfilled, should never be called: " + val) )
+   .catch( err => console.log("caught error: " + err.message) ));
+
+(Promise.reject('rejected')
+  .then( (val) => console.log("resolved") )
+  .catch( (err) => console.log("caught error: " + err) ))
+
+let p25 = new Promise( (resolve, reject) => {throw new Error("just cause2")} );
+(p25.then( (val) => console.log("resolved") )
+  .catch( (err) => console.log("caught error: " + err) ));
+
+
 
 //Catch will also catch errors from inside then()
 var p3 = new Promise( (resolve, reject) => resolve() );
@@ -106,3 +122,17 @@ Promise.race(promises2)
     console.log("completed first promise!");
     results.forEach( e => console.log("result: " + e));
   });
+
+// Promises are in one of 3 states - pending, fulfilled, rejected
+// Constructors are passed a callback with resolve and reject params
+var p101 = new Promise( (resolve, reject) => {/* Async logic here, calls either resolve() or reject() */});
+
+// If the promise has already been fulfilled or rejected when a handler is attached, the handler will be called immediatly
+// there is no race condition between an asynchronous operation completing and its handlers being attached.
+
+// If you have a value, and you arent sure if it is a promise, use Promise.resolve
+Promise.resolve('adsf') //now a resolved promise
+        .then( msg => {
+          // then called, even though it was attached after promise was resolved
+          console.log(`Promise resolved w/message: ${msg}`);
+        });
