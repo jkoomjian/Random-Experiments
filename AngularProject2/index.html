@@ -7,53 +7,27 @@
     <link rel="stylesheet/less" type="text/css" href="stoplight.less" />
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js"></script>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    <script type="text/ng-template" id="stopLightTemplate">
-      <div class="road-wrapper {{lightDirection}}" >
-        <!-- comments added to avoid the problem with spaces between inline elems -->
-        <div class="road"></div><!--
-      --><div class="road-end">
-          <div class="stoplight">
-            <div class="pole"></div>
-            <div class="stoplight-box">
-              <div ng-class="['light', activeLightColor('green')]"></div>
-              <div ng-class="['light', activeLightColor('yellow')]"></div>
-              <div ng-class="['light', activeLightColor('red')]"></div>
-            </div>
-          </div>
-        </div><!--
-      --><div class="road-junction">
-          <div class="top-corner"></div>
-          <div class="road-junction-center"></div>
-          <div class="bottom-corner"></div>
-        </div>
-      </div>
-    </script>
-
-
+    <!-- Latest compiled and minified bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </head>
   <body>
     <h1>Stop Lights!</h1>
 
-<div id="stoplight-body">
+      <div id="stoplight-body">
 
-  <stop-light-road light-direction="west" street-direction="EastWest"></stop-light-road>
-  <stop-light-road light-direction="north" street-direction="NorthSouth"></stop-light-road>
-  <stop-light-road light-direction="east" street-direction="EastWest"></stop-light-road>
-  <stop-light-road light-direction="south" street-direction="NorthSouth"></stop-light-road>
+        <stop-light-road light-direction="west" street-direction="EastWest"></stop-light-road>
+        <stop-light-road light-direction="north" street-direction="NorthSouth"></stop-light-road>
+        <stop-light-road light-direction="east" street-direction="EastWest"></stop-light-road>
+        <stop-light-road light-direction="south" street-direction="NorthSouth"></stop-light-road>
 
-  <div class="buttons btn-group">
-    <button type="button" class="btn btn-default" ng-class="{'btn-success': isInMode('manual')}" id="toggleLights" stop-light-switch-directive>Toggle Lights</button>
-    <button type="button" class="btn btn-default" ng-class="{'btn-success': isInMode('auto')}" id="autoLights" stop-light-switch-directive-auto>Timer Sets Lights</button>
-  </div>
+        <div class="buttons btn-group">
+          <!-- for some reasons the directives need to be wrapped?? -->
+          <span><light-mode-button data-light-mode='manual' id="toggleLights" data-button-text="Toggle Lights" /></span>
+          <span><light-mode-button data-light-mode='auto' id="autoLights" data-button-text="Timer Sets Lights" /></span>
+        </div>
 
-</div>
+      </div>
 
   </body>
 </html>

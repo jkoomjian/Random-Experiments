@@ -1,3 +1,7 @@
+//TODO
+//move all state to scope
+
+
 var stopLightApp = angular.module('cityRoads', []);
 
 /*----------- Services ----------------*/
@@ -21,6 +25,12 @@ stopLightApp.service('stopLightService', function($rootScope, $timeout, $interva
     return currLightColor == color;
   };
 
+
+  // Return the color class if given color is active, else return ""
+  this.isLit = function(streetDirection, color) {
+    return getActiveLightColor(streetDirection) == color;
+  };
+
   //toggle the lights value.
   this.toggleLights = function(skipApply) {
     stopLightSwitchInProgress = true;
@@ -29,11 +39,6 @@ stopLightApp.service('stopLightService', function($rootScope, $timeout, $interva
       stopLightDirection = stopLightDirection == "NorthSouth" ? "EastWest" : "NorthSouth";
       stopLightSwitchInProgress = false;
     }, 1500);
-  };
-
-  // Return the color class if given color is active, else return ""
-  this.activeLightColor = function(streetDirection, color) {
-    return getActiveLightColor(streetDirection) == color ? color : "";
   };
 
   this.getMode = function() {
@@ -65,42 +70,41 @@ stopLightApp.directive('stopLightRoad', function($templateCache, stopLightServic
   return {
     restrict: 'E',
     scope: true,
-    template: function() {
-      return $templateCache.get('stopLightTemplate');
-    },
+    templateUrl: 'stoplight.html',
     link: function(scope, elem, attrs) {
       scope.lightDirection = attrs["lightDirection"];
       var streetDirection = attrs["streetDirection"];
       scope.streetDirection = streetDirection;
-      scope.activeLightColor = function(color) {
-        return stopLightService.activeLightColor(streetDirection, color);
+      scope.showLight = function(color) {
+        return stopLightService.isLit(streetDirection, color) ? "on" : "";
       };
     }
   };
 });
 
-// button to toggle stopLightService.
-stopLightApp.directive('stopLightSwitchDirective', function(stopLightService){
-  return function(scope, elem, attrs) {
-    elem.on('click', function(event) {
-      stopLightService.setMode('manual');
-      stopLightService.toggleLights();
-    });
-  };
-});
-
-stopLightApp.directive('stopLightSwitchDirectiveAuto', function(stopLightService){
-  return function(scope, elem, attrs) {
-    elem.on('click', function(event) {
-      stopLightService.setMode('auto');
-      stopLightService.startAutoMode();
-    });
-  };
+stopLightApp.directive('lightModeButton', function(stopLightService) {
+  return {
+    restrict: 'E',
+    replace: true,  // replace the directive element
+    scope: true,  // create a new child scope
+    templateUrl: "lightmodebutton.html",
+    link: function(scope, elem, attrs) {
+      let idText = {manual: "toggleLights", auto: "autoLights"};
+      let mode = attrs['lightMode'];
+      scope.buttonText = attrs['buttonText'];
+      scope.buttonId = idText[mode];
+      scope.isInMode = function() {
+        return stopLightService.getMode() == mode;
+      };
+      elem.on('click', function(event) {
+        stopLightService.setMode(mode);
+        if (mode == 'manual') stopLightService.toggleLights();
+        if (mode == 'auto') stopLightService.startAutoMode();
+      });
+    }
+  }
 });
 
 /*----------- Controllers ----------------*/
 stopLightApp.controller('MainController', function($scope, stopLightService){
-  $scope.isInMode = function(mode) {
-    return stopLightService.getMode() == mode;
-  };
 });
