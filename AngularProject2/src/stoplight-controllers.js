@@ -1,7 +1,7 @@
-var stopLightControllers = angular.module('stopLightControllersModule', []);
+const mod = angular.module('stopLightControllersModule', [])
 
-/*----------- Controllers ----------------*/
-stopLightControllers.controller('MainController', function($scope, stopLightService){
-});
+  /*----------- Controllers ----------------*/
+  .controller('MainController', function($scope, stopLightService){
+  });
 
-// export {stopLightControllers}
+// export default mod.name

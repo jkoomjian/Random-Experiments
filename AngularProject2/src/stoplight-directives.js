@@ -1,9 +1,9 @@
-var stopLightDirectives = angular.module('stopLightDirectivesModule', []);
+const mod = angular.module('stopLightDirectivesModule', []);
 
 /*----------- Directives ----------------*/
 // change colors based on stopLightService.
 // uses attribute to determine which direction the stop light will use.
-stopLightDirectives.directive('stopLightRoad', function($templateCache, stopLightService){
+mod.directive('stopLightRoad', function($templateCache, stopLightService){
   return {
     restrict: 'E',
     scope: true,
@@ -19,7 +19,7 @@ stopLightDirectives.directive('stopLightRoad', function($templateCache, stopLigh
   };
 });
 
-stopLightDirectives.directive('lightModeButton', function(stopLightService) {
+mod.directive('lightModeButton', function(stopLightService) {
   return {
     restrict: 'E',
     replace: true,  // replace the directive element
@@ -42,4 +42,4 @@ stopLightDirectives.directive('lightModeButton', function(stopLightService) {
   }
 });
 
-// export default stopLightDirectives
+// export default mod.name
