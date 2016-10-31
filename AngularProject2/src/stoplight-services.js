@@ -48,9 +48,13 @@ const mod = angular.module('stopLightServicesModule', [])
     };
 
     //toggle the lights value.
-    this.toggleLights = function(skipApply) {
-      stopLightSwitchInProgress = true;
-      if (!skipApply) $rootScope.$apply();
+    this.toggleLights = function() {
+      $timeout(function() {
+        // Wrapped in a $timeout to ensure the stopLightSwitchInProgress update always occurs within the
+        // $digest lifecycle. Avoids a manual call to $digest, which will fail in auto mode, where
+        // toggleLighes is called in a $interval, and therefore already within the $digest cycle
+        stopLightSwitchInProgress = true;
+      }, 0);
       $timeout(function() {
         stopLightDirection = stopLightDirection == "NorthSouth" ? "EastWest" : "NorthSouth";
         stopLightSwitchInProgress = false;
@@ -59,7 +63,7 @@ const mod = angular.module('stopLightServicesModule', [])
 
     this.startAutoMode = function() {
       toggleLightsPromise = $interval( () => {
-        this.toggleLights(true);
+        this.toggleLights();
       }, 5000);
       this.toggleLights();
     };
