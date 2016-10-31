@@ -7,7 +7,7 @@ stopLightDirectives.directive('stopLightRoad', function($templateCache, stopLigh
   return {
     restrict: 'E',
     scope: true,
-    templateUrl: 'stoplight.html',
+    templateUrl: 'templates/stoplight.html',
     link: function(scope, elem, attrs) {
       scope.lightDirection = attrs["lightDirection"];
       var streetDirection = attrs["streetDirection"];
@@ -24,7 +24,7 @@ stopLightDirectives.directive('lightModeButton', function(stopLightService) {
     restrict: 'E',
     replace: true,  // replace the directive element
     scope: true,  // create a new child scope
-    templateUrl: "lightmodebutton.html",
+    templateUrl: "templates/lightmodebutton.html",
     link: function(scope, elem, attrs) {
       let idText = {manual: "toggleLights", auto: "autoLights"};
       let mode = attrs['lightMode'];
@@ -41,3 +41,5 @@ stopLightDirectives.directive('lightModeButton', function(stopLightService) {
     }
   }
 });
+
+// export default stopLightDirectives

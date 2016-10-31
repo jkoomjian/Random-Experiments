@@ -1,1 +1,0 @@
-var stopLightApp = angular.module('cityRoads', ['stopLightServicesModule', 'stopLightDirectivesModule', 'stopLightControllersModule']);

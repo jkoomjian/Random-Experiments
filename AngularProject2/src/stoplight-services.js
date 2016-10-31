@@ -1,10 +1,10 @@
 /*----------- Services ----------------*/
 
 //wrapped in its own module
-var stopLightService = angular.module('stopLightServicesModule', []);
+var stopLightServices = angular.module('stopLightServicesModule', []);
 
 //Stoplight Direction can be "NorthSouth" or "EastWest"
-stopLightService.service('stopLightService', function($rootScope, $timeout, $interval) {
+stopLightServices.service('stopLightService', function($rootScope, $timeout, $interval) {
 
   // holds value that indicates the direction of traffic. North/South and East/West
   var stopLightDirection = "NorthSouth";
@@ -66,3 +66,5 @@ stopLightService.service('stopLightService', function($rootScope, $timeout, $int
   };
 
 });
+
+// export default stopLightServices
