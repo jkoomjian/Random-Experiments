@@ -131,8 +131,29 @@ var p101 = new Promise( (resolve, reject) => {/* Async logic here, calls either 
 // there is no race condition between an asynchronous operation completing and its handlers being attached.
 
 // If you have a value, and you arent sure if it is a promise, use Promise.resolve
-Promise.resolve('adsf') //now a resolved promise
+(Promise.resolve('adsf') //now a resolved promise
         .then( msg => {
           // then called, even though it was attached after promise was resolved
           console.log(`Promise resolved w/message: ${msg}`);
-        });
+        }));
+
+// Returning promises - if .then() returns a new promise, it wlll be evaluated by the next .then() in the chain
+// if .then() doesn't return a promise, the next .then() will run, but it will have a msg value of undefined
+(function returnTest() {
+  (Promise.resolve('asdf')
+    .then( msg => {
+      console.log(`Promise resolved w/message: `, msg);
+      return Promise.resolve('qwer');
+    })
+    .then( msg => console.log(`Promise resolved w/message: `, msg)));
+})();
+// Promise resolved w/message:  asdf
+// Promise resolved w/message:  qwer
+
+(function returnTest() {
+  (Promise.resolve('asdf')
+    .then( msg => console.log(`Promise resolved w/message: `, msg))
+    .then( msg => console.log(`Promise resolved w/message: `, msg)));
+})();
+// Promise resolved w/message:  asdf
+// Promise resolved w/message:  undefined
