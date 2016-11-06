@@ -1,5 +1,5 @@
 <button type="button"
         class="btn btn-default"
-        ng-class="{'btn-success': isInMode()}"
-        id="{{buttonId}}"
-        ng-click="setMode()">{{buttonText}}</button>
+        ng-class="{'btn-success': $ctrl.isInMode()}"
+        id="{{$ctrl.buttonId}}"
+        ng-click="$ctrl.setMode()">{{$ctrl.buttonText}}</button>
