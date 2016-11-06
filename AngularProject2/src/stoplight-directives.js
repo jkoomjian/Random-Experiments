@@ -33,11 +33,11 @@ mod.directive('lightModeButton', function(stopLightService) {
       scope.isInMode = function() {
         return stopLightService.getMode() == mode;
       };
-      elem.on('click', function(event) {
+      scope.setMode  = function() {
         stopLightService.setMode(mode);
         if (mode == 'manual') stopLightService.toggleLights();
         if (mode == 'auto') stopLightService.startAutoMode();
-      });
+      };
     }
   }
 });
