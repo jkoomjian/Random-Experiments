@@ -73,20 +73,19 @@ let p25 = new Promise( (resolve, reject) => {throw new Error("just cause2")} );
   .catch( (err) => console.log("caught error: " + err) ));
 
 
-
 //Catch will also catch errors from inside then()
-var p3 = new Promise( (resolve, reject) => resolve() );
-p3.then( val => console.log("success1") )
+(Promise.resolve()
+   .then( val => console.log("success1") )
    .then( val => {throw new Error("then error")} )
    .then( val => console.log("success2") ) //never reached
-   .catch( err => console.log("error: " + err.message) );
+   .catch( err => console.log("error: " + err.message) ));
 
 //You can transform the value by simply returning a new value
-var p3 = new Promise((resolve, reject) => resolve(1));
-p3.then( val => {console.log(val); return val;}) //1
+(Promise.resolve(1)
+  .then( val => {console.log(val); return val;}) //1
+  .then( val => val + 1)  //1 line fat arrow functions automatically return last value
   .then( val => val + 1)
-  .then( val => val + 1)
-  .then( val => console.log(val)); //3
+  .then( val => console.log(val))); //3
 
 //Use Promise.all() to create a promise which completes when a array of promises completes
 //results will be the values, returned in order or execution
@@ -137,23 +136,16 @@ var p101 = new Promise( (resolve, reject) => {/* Async logic here, calls either 
           console.log(`Promise resolved w/message: ${msg}`);
         }));
 
-// Returning promises - if .then() returns a new promise, it wlll be evaluated by the next .then() in the chain
-// if .then() doesn't return a promise, the next .then() will run, but it will have a msg value of undefined
-(function returnTest() {
-  (Promise.resolve('asdf')
-    .then( msg => {
-      console.log(`Promise resolved w/message: `, msg);
-      return Promise.resolve('qwer');
-    })
-    .then( msg => console.log(`Promise resolved w/message: `, msg)));
-})();
+// Returning promises - if .then() returns a value, it wlll be evaluated by the next .then() in the chain
+// if .then() doesn't return a value, the next .then() will run, but it will have a msg value of undefined
+(Promise.resolve('asdf')
+    .then( msg => {console.log(`Promise resolved w/message: `, msg); return 'qwer';})
+    .then( msg => console.log(`Promise2 resolved w/message: `, msg)));
 // Promise resolved w/message:  asdf
-// Promise resolved w/message:  qwer
+// Promise2 resolved w/message:  qwer
 
-(function returnTest() {
-  (Promise.resolve('asdf')
+(Promise.resolve('asdf')
     .then( msg => console.log(`Promise resolved w/message: `, msg))
     .then( msg => console.log(`Promise resolved w/message: `, msg)));
-})();
 // Promise resolved w/message:  asdf
 // Promise resolved w/message:  undefined
