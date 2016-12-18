@@ -1,5 +1,6 @@
+var currYear = moment().year();
+
 function getCalData() {
-  let currYear = moment().year();
   let out = {daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
               currYear: currYear,
               months: []
@@ -43,11 +44,24 @@ function formatHTML(data) {
   let template = Handlebars.compile(source);
   let html = template(data);
   document.querySelector("#cal-dock").innerHTML = html;
+  document.querySelector("#prevYear").addEventListener('click', decYear);
+  document.querySelector("#nextYear").addEventListener('click', incYear);
 }
 
-function start() {
+function incYear() {return changeYear(1);}
+function decYear() {return changeYear(-1);}
+
+function changeYear(amt) {
+  currYear = (parseInt(currYear, 10) + amt) + "";
+  generateCal();
+  return false;
+}
+
+function generateCal() {
   let out = getCalData();
   formatHTML(out);
 }
 
-window.addEventListener('load', start);
+window.addEventListener('load', function() {
+  generateCal();
+});
