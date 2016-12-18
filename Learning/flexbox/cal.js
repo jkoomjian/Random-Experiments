@@ -27,7 +27,8 @@ function getCalData() {
       // console.log("procesing page: ", currDay.format());
       monthData.dates.push({
         dayOfWeek: currDay.format("ddd"),
-        date: currDay.format("D")
+        date: currDay.format("D"),
+        inMonth: currDay.format("M") == (i + 1) ? "true" : "false"
       });
 
     } while(!currDay.isSame(satAftereMo))

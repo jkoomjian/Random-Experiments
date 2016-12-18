@@ -24,13 +24,15 @@
 
           <div class='day-names'>
             {{#each ../daysOfWeek}}
-              <div class='day-name'>{{this}}</div>
+              <div class='day-name {{this}}'>{{this}}</div>
             {{/each}}
           </div>
 
-          {{#each dates}}
-            <div class='day {{dayOfWeek}}'>{{date}}</div>
-          {{/each}}
+          <div class="days">
+            {{#each dates}}
+              <div class='day {{dayOfWeek}} in-month-{{inMonth}}'>{{date}}</div>
+            {{/each}}
+          </div>
 
         </div>
 
