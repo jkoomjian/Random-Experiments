@@ -1,5 +1,4 @@
 // TODO import libraries via webpack, get rid of script includes of libraries
-// less
 // how to load templates??
 
 Example project to learn Angular. Displays an intersection with stoplights. The stoplights can be triggered manually,
