@@ -4,4 +4,4 @@ const mod = angular.module('stopLightControllersModule', [])
   .controller('MainController', function($scope, stopLightService){
   });
 
-// export default mod.name
+export default mod.name

@@ -65,4 +65,4 @@ const mod = angular.module('stopLightServicesModule', [])
 
   });
 
-// export default mod.name
+export default mod.name

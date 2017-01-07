@@ -1,3 +1,6 @@
+// import "templates/lightmodebutton.html";
+// import "templates/stoplight.html";
+
 const mod = angular.module('stopLightDirectivesModule', []);
 
 /*----------- Directives ----------------*/
@@ -37,4 +40,4 @@ mod.component('lightModeButton', {
   }
 });
 
-// export default mod.name
+export default mod.name
