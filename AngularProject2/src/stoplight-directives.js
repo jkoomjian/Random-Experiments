@@ -1,5 +1,6 @@
-// import "templates/lightmodebutton.html";
-// import "templates/stoplight.html";
+// light_button_template is a string containing the content of lightmodebutton.html
+import light_button_template from '../templates/lightmodebutton.html';
+import stoplight_template from '../templates/stoplight.html';
 
 const mod = angular.module('stopLightDirectivesModule', []);
 
@@ -7,7 +8,7 @@ const mod = angular.module('stopLightDirectivesModule', []);
 // change colors based on stopLightService.
 // uses attribute to determine which direction the stop light will use.
 mod.component('stopLightRoad', {
-  templateUrl: 'templates/stoplight.html',
+  template: stoplight_template,
   bindings: {
     lightDirection:  '@',
     streetDirection: '@'
@@ -21,7 +22,7 @@ mod.component('stopLightRoad', {
 });
 
 mod.component('lightModeButton', {
-  templateUrl: "templates/lightmodebutton.html",
+  template: light_button_template,
   bindings: {
     mode: '@lightMode',
     buttonText: '@'

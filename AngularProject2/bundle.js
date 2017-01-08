@@ -60,11 +60,11 @@
 
 	var _stoplightDirectives2 = _interopRequireDefault(_stoplightDirectives);
 
-	var _stoplightServices = __webpack_require__(81);
+	var _stoplightServices = __webpack_require__(83);
 
 	var _stoplightServices2 = _interopRequireDefault(_stoplightServices);
 
-	var _stoplightControllers = __webpack_require__(82);
+	var _stoplightControllers = __webpack_require__(84);
 
 	var _stoplightControllers2 = _interopRequireDefault(_stoplightControllers);
 
@@ -34947,23 +34947,33 @@
 
 /***/ },
 /* 80 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// import "templates/lightmodebutton.html";
-	// import "templates/stoplight.html";
+
+	var _lightmodebutton = __webpack_require__(81);
+
+	var _lightmodebutton2 = _interopRequireDefault(_lightmodebutton);
+
+	var _stoplight = __webpack_require__(82);
+
+	var _stoplight2 = _interopRequireDefault(_stoplight);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mod = angular.module('stopLightDirectivesModule', []);
+
+	console.log("stoplight template: ", _stoplight2.default);
 
 	/*----------- Directives ----------------*/
 	// change colors based on stopLightService.
 	// uses attribute to determine which direction the stop light will use.
 	mod.component('stopLightRoad', {
-	  templateUrl: 'templates/stoplight.html',
+	  templateUrl: _stoplight2.default,
 	  bindings: {
 	    lightDirection: '@',
 	    streetDirection: '@'
@@ -34977,7 +34987,7 @@
 	});
 
 	mod.component('lightModeButton', {
-	  templateUrl: "templates/lightmodebutton.html",
+	  templateUrl: _lightmodebutton2.default,
 	  bindings: {
 	    mode: '@lightMode',
 	    buttonText: '@'
@@ -35000,6 +35010,18 @@
 
 /***/ },
 /* 81 */
+/***/ function(module, exports) {
+
+	module.exports = "<button type=\"button\"\n        class=\"btn btn-default\"\n        ng-class=\"{'btn-success': $ctrl.isInMode()}\"\n        id=\"{{$ctrl.buttonId}}\"\n        ng-click=\"$ctrl.setMode()\">{{$ctrl.buttonText}}</button>";
+
+/***/ },
+/* 82 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"road-wrapper {{$ctrl.lightDirection}}\" >\n  <!-- comments added to avoid the problem with spaces between inline elems -->\n  <div class=\"road\"></div><!--\n--><div class=\"road-end\">\n    <div class=\"stoplight\">\n      <div class=\"pole\"></div>\n      <div class=\"stoplight-box\">\n        <div ng-class=\"['light', 'green', $ctrl.showLight('green')]\"></div>\n        <div ng-class=\"['light', 'yellow', $ctrl.showLight('yellow')]\"></div>\n        <div ng-class=\"['light', 'red', $ctrl.showLight('red')]\"></div>\n      </div>\n    </div>\n  </div><!--\n--><div class=\"road-junction\">\n    <div class=\"top-corner\"></div>\n    <div class=\"road-junction-center\"></div>\n    <div class=\"bottom-corner\"></div>\n  </div>\n</div>";
+
+/***/ },
+/* 83 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35076,7 +35098,7 @@
 	exports.default = mod.name;
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports) {
 
 	'use strict';
