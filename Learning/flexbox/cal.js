@@ -40,7 +40,6 @@ function getCalData() {
 }
 
 function formatHTML(data) {
-  // debugger;
   let source   = document.querySelector("#cal-template").innerHTML;
   let template = Handlebars.compile(source);
   let html = template(data);
