@@ -4,7 +4,7 @@ module.exports = {
     filename: './dist/bundle.js'
   },
   watch: true,
-  target: 'node',
+  target: 'web',
   module: {
     loaders: [
       {
@@ -12,7 +12,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          presets: ['es2015', 'react']
         }
       },
       {
