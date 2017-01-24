@@ -10,15 +10,7 @@ import calTemplate from './cal-template.handlebars';
 import './cal.scss';
 
 
-//----Global State---------------------------------
-// var currYear = moment().year();
-
-
 //----React---------------------------------
-
-// create a calendar component
-// header bar
-// months, dates
 
 var Calendar = React.createClass({
 
@@ -71,77 +63,80 @@ var CalHeader = React.createClass({
 
 var CalMonths = React.createClass({
   render: function() {
+
+    let months = [];
+    for (let i=0; i<12; i++) {
+      months.push(<CalMonth currMonth={i} currYear={this.props.currYear} key={i} />)
+    }
+
     return (
       <div className='months'>
+        {months}
       </div>
     );
   }
 });
 
-// var CalMonth = React.createClass({
-//   render: function() {
-//     return (
-//       <div class="month">
-//         <h2 class='name'>{{this.currMonthFull}}</h2>
-//         <CalMonthDayNames />
-//         <CalMonthDays />
-//       </div>
-//     );
-// });
-//
-// var CalMonthDayNames = React.createClass({
-//   render: function() {
-//     return (
-//       <div class='day-names'>
-//         {{#each ../daysOfWeek}}
-//           <div class='day-name {{this}}'>{{this}}</div>
-//         {{/each}}
-//       </div>
-//     );
-// });
-//
-// var CalMonthDays = React.createClass({
-//   render: function() {
-//     return (
-//       <div class="days">
-//         {{#each dates}}
-//           <div class='day {{dayOfWeek}} in-month-{{inMonth}}'>{{date}}</div>
-//         {{/each}}
-//       </div>
-//     );
-// });
+var CalMonth = React.createClass({
+
+  render: function() {
+    const monthData = getMonthData(this.props.currYear, this.props.currMonth);
+
+    return (
+      <div className="month">
+        <h2 className='name'>{monthData.currMonthFull}</h2>
+        <CalMonthDayNames />
+        <CalMonthDays monthData={monthData} />
+      </div>
+    );
+  }
+});
 
 
-function launch() {
-  ReactDOM.render(
-    <Calendar />,
-    document.getElementById('cal-dock')
-  );
-}
+var CalMonthDayNames = React.createClass({
+  daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+
+  render: function() {
+
+    const daysOfWeekElems = this.daysOfWeek.map( day => {
+      return <div className={`day-name ${day}`}>{day}</div>;
+    });
+
+    return (
+      <div className='day-names'>
+        {daysOfWeekElems}
+      </div>
+    );
+  }
+});
+
+var CalMonthDays = React.createClass({
+  render: function() {
+    const datesElems = this.props.monthData.dates.map( date => {
+      return <div className={`day ${date.dayOfWeek} in-month-${date.inMonth}`}>{date.date}</div>;
+    });
+
+    return (
+      <div className="days">
+        {datesElems}
+      </div>
+    );
+  }
+});
 
 
-
-
-
-
-//----Old---------------------------------
-function getCalData() {
-  let out = {daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
-              currYear: currYear,
-              months: []
-            };
-
-  for (let i=0; i<12; i++) {
+//---- Logic ---------------------------------
+function getMonthData(currYear, currMonth) {
 
     let monthData = {};
-    monthData.currMonthFull = moment({year: currYear, month: i, date: 1}).format("MMMM");
-    monthData.currMonthShort = moment({year: currYear, month: i, date: 1}).format("MMM");
+    monthData.currMonthFull = moment({year: currYear, month: currMonth, date: 1}).format("MMMM");
+    monthData.currMonthShort = moment({year: currYear, month: currMonth, date: 1}).format("MMM");
     monthData.dates = [];
 
-    let firstOfMo = moment({year: currYear, month: i, date: 1});
+    let firstOfMo = moment({year: currYear, month: currMonth, date: 1});
     let daysInMo = firstOfMo.clone().endOf("month").date();
     let sunBeforeMo = firstOfMo.day(-0);
-    let satAftereMo = moment({year: currYear, month: i, date: daysInMo}).day(6);
+    let satAftereMo = moment({year: currYear, month: currMonth, date: daysInMo}).day(6);
 
     let currDay = sunBeforeMo.clone();
     currDay.add(-1, 'days');
@@ -153,15 +148,19 @@ function getCalData() {
       monthData.dates.push({
         dayOfWeek: currDay.format("ddd"),
         date: currDay.format("D"),
-        inMonth: currDay.format("M") == (i + 1) ? "true" : "false"
+        inMonth: currDay.format("M") == (currMonth + 1) ? "true" : "false"
       });
 
     } while(!currDay.isSame(satAftereMo))
 
-    out.months.push(monthData);
-  }
+  return monthData;
+}
 
-  return out;
+function launch() {
+  ReactDOM.render(
+    <Calendar />,
+    document.getElementById('cal-dock')
+  );
 }
 
 window.addEventListener('load', function() {
