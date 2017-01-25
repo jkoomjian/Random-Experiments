@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/cal.js',
+  entry: './src/app.js',
   output: {
     filename: './dist/bundle.js'
   },
