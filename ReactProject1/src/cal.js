@@ -3,9 +3,6 @@ import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Internal Libraries
-import calTemplate from './cal-template.handlebars';
-
 // Static Assets
 import './cal.scss';
 

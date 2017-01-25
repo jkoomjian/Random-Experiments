@@ -1,9 +1,10 @@
 A calendar to demonstrate using React.
 
 TODO:
-* add all components
++* add all components
 * move to ES6
-* jsx in templates?
+* switch to create-react-app
+* aphrodite
 
 
 Learning:
