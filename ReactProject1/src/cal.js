@@ -99,7 +99,7 @@ var CalMonthDayNames = React.createClass({
   render: function() {
 
     const daysOfWeekElems = this.daysOfWeek.map( day => {
-      return <div className={`day-name ${day}`}>{day}</div>;
+      return <div key={day} className={`day-name ${day}`}>{day}</div>;
     });
 
     return (
@@ -113,7 +113,7 @@ var CalMonthDayNames = React.createClass({
 var CalMonthDays = React.createClass({
   render: function() {
     const datesElems = this.props.monthData.dates.map( date => {
-      return <div className={`day ${date.dayOfWeek} in-month-${date.inMonth}`}>{date.date}</div>;
+      return <div key={date.key} className={`day ${date.dayOfWeek} in-month-${date.inMonth}`}>{date.date}</div>;
     });
 
     return (
@@ -148,7 +148,8 @@ function getMonthData(currYear, currMonth) {
       monthData.dates.push({
         dayOfWeek: currDay.format("ddd"),
         date: currDay.format("D"),
-        inMonth: currDay.format("M") == (currMonth + 1) ? "true" : "false"
+        inMonth: currDay.format("M") == (currMonth + 1) ? "true" : "false",
+        key: currDay.format("X")  //unix timestamp
       });
 
     } while(!currDay.isSame(satAftereMo))
