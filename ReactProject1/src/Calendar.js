@@ -14,7 +14,7 @@ class Calendar extends React.Component {
     this.decYear = this._decYear.bind(this);
     this.state = {
       currYear: moment().year()
-    }
+    };
   }
 
   _incYear() {
@@ -35,12 +35,12 @@ class Calendar extends React.Component {
   render() {
     return (
       <div>
-        <CalHeader currYear={this.state.currYear} incYear={this.incYear} decYear={this.decYear} />
-        <CalMonths currYear={this.state.currYear} />
+        <CalHeader />
+        <CalMonths />
       </div>
     );
   }
 
-};
+}
 
 export default Calendar;

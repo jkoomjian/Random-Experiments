@@ -1,6 +1,8 @@
 // Vendor Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
 // Internal Libraries
 import Calendar from './Calendar';
@@ -9,8 +11,10 @@ import Calendar from './Calendar';
 import './cal.scss';
 
 function launch() {
-  ReactDOM.render(
-    <Calendar />,
+  ReactDOM.render((
+    <Provider store={store}>
+      <Calendar />
+    </Provider>),
     document.getElementById('cal-dock')
   );
 }
