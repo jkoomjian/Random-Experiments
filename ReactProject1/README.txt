@@ -18,11 +18,11 @@ Learning:
 * jest - testing
 
 React Redux Steps:
-* create a store file with reducers
 * create a constants file with action names
+* create a store file with reducers
 * update components
 ** mapStateToProps
+** mapDigestToProps
 ** update export to connect()
 ** update props
 * add <Provider>
-* mapDigestToProps

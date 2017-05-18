@@ -5,12 +5,14 @@ import moment from 'moment';
 /** Reducers **/
 const currYearReducer = function(state, action) {
 
-  if (state === undefined) {
-    return moment().year();
-  }
-
   if (action.type == Constants.UPDATE_CURR_YEAR) {
-    return action.curr_year;
+
+    if (state === undefined) {
+      return moment().year();
+    } else {
+      return action.curr_year;
+    }
+
   }
 
   return state;
