@@ -149,3 +149,33 @@ var p101 = new Promise( (resolve, reject) => {/* Async logic here, calls either 
     .then( msg => console.log(`Promise resolved w/message: `, msg)));
 // Promise resolved w/message:  asdf
 // Promise resolved w/message:  undefined
+
+
+/* Promise with a 'finally' block */
+// Set a success variable to notify .then blocks following the catch of success
+let success=true;
+(Promise.resolve('asdf')
+    .then( msg => {
+        console.log(`Promise resolved w/message: `, msg);
+        return 'hello';
+    })
+    .then( msg => {
+        console.log(`Promise resolved w/message: `, msg);
+        throw new Error('hello error')
+    })
+    .catch( err => {
+        console.log('caught error: ', err);
+        success=false;
+        return success;
+    })
+    .then( (args) =>{
+        console.log('at finally', args);
+    })
+)
+
+// Promise resolved w/message:  asdf
+// Promise resolved w/message:  hello
+// caught error:  Error: hello error
+//    at Promise.resolve.then.then.msg (repl:8:7)
+//    at process._tickDomainCallback (internal/process/next_tick.js:135:7)
+// at finally false
