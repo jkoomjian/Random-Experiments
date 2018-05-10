@@ -65,5 +65,12 @@ makeRequest().then( (x) => console.log('makeRequest returned: ', x) );
 // That is to say: code that executes one operation at a time. A function with multiple await expressions in it will be
 // suspended once at a time on each await expression until that Promise is settled
 
-// Overall, seems complicated to balance sync, async code, still requires you to know promises.
-// Also poor support. Not worth using at the moment.
+// To get return values working, the call must be wrapped in an async method and called with await:
+let makeRequest2 = async () => {
+  let myPromiseResult = await myAsyncMethod();
+  return myPromiseResult + "-done";
+}
+let makeRequest3 = async() => {
+  console.log('makeRequest returned: ', await makeRequest2());
+}
+makeRequest3();
