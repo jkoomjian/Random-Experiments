@@ -1,0 +1,59 @@
+body {
+  max-width: 800px;
+  margin: 1em auto; }
+
+h1, .months .month h2.name {
+  background-color: #42858e;
+  color: white; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+h1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  margin: 0; }
+
+.Sun, .Sat {
+  color: #be1e2d; }
+
+.months {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 15px;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-auto-flow: row;
+  margin-top: 15px; }
+  @media (max-width: 800px) and (min-width: 601px) {
+    .months {
+      grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) {
+    .months {
+      grid-template-columns: 1fr; } }
+  .months .month {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 0; }
+    .months .month h2.name {
+      grid-column: 1 / 8;
+      margin: 0;
+      text-align: center;
+      padding: 0.4rem 0.2rem; }
+    .months .month .day-cell {
+      padding: 0.2rem;
+      text-align: center; }
+    .months .month .day-name {
+      background-color: #f2f2f2;
+      font-weight: bold; }
+    .months .month .day.in-month-false {
+      color: #c5c5c5; }
+    .months .month .day.Sun.in-month-false, .months .month .day.Sat.in-month-false {
+      color: #ebbbc0; }
+
+/*# sourceMappingURL=cal.css.map */

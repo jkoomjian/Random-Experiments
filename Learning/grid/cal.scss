@@ -1,0 +1,80 @@
+// sass --watch cal.scss:cal.css
+
+$green: #42858e;
+$gray: #f2f2f2;
+$red: #be1e2d;
+$light-gray: #c5c5c5;
+$light-red: #ebbbc0;
+$gap: 15px;
+
+body {
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+%title {
+  background-color: $green;
+  color: white;
+}
+
+a {text-decoration: none; color: inherit;}
+
+h1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  @extend %title;
+  margin: 0;
+}
+
+.Sun, .Sat {color: $red;}
+
+.months {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-column-gap: $gap * 2;
+  grid-row-gap: $gap;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-auto-flow: row;
+  margin-top: $gap;
+
+  @media (max-width: 800px) and (min-width: 601px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+
+  .month {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+
+    h2.name {
+      grid-column: 1 / 8;
+      margin: 0;
+      text-align: center;
+      @extend %title;
+      padding: 0.4rem 0.2rem;
+    }
+
+    .day-cell {
+      padding: 0.2rem;
+      text-align: center;
+    }
+
+    .day-name {
+      background-color: $gray;
+      font-weight: bold;
+    }
+
+    .day {
+      &.in-month-false {color: $light-gray;}
+      &.Sun.in-month-false, &.Sat.in-month-false {color: $light-red;}
+    }
+  }
+}
