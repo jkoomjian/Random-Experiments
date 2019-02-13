@@ -1,0 +1,44 @@
+Great for deploying apps to AWS Lambda
+npm install -g serverless
+// Set your AWS keys
+// sls is the serverless app
+sls config credentials --provider aws --key PUBLIC_KEY --secret SECRET_KEY
+
+each lambda can hold an entire node instance - so you write your node app, and then deploy it to Lambda
+Must be stateless - can connect to other AWS services for state
+Lambda handles scaling, verifies the app is always running
+
+// Generate a serverless lambda app
+$ sls create -t aws-nodejs -n serverless-nodejs-app
+$ npm init -y
+$ npm install --save express serverless-http
+
+handler.js - this is the file which will be called by lambda - all execution will begin here
+^ this is set in the `handler` section of serverless.yml and can be changed
+servereless.yml - config for lambda
+
+You will need to set some AWS params in serverless.yml - name, runtime, stage, region
+
+// Deploy
+$ sls deploy
+
+This will deploy to AWS! It will return a url to call the lambda with. By default this is in a dev environment
+
+To deploy to prod:
+Add a secrets.json file to keep environment variables
+To secrets.json, add
+{
+  "NODE_ENV": "production"
+}
+
+Update serverless.yml to reference the secrets file
+custom: # add these two lines
+  secrets: ${file(secrets.json)} # reference the secrets.json file
+
+
+Amazing, that's it! Delete the node_modules and .serverless folders from the service and run npm install once again, but this time with the --production flag.
+
+// Deploy to prod!
+$ sls deploy
+
+Serverless is very neat - allows you to work with other cloud providers besides just AWS

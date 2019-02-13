@@ -1,0 +1,85 @@
+Questions:
+* does the web image have any state? do you have to rebuild the image to rebuild the app code?
+
+Docker:
+Packages an app and the software it requires into one image.
+Like a VM image, except a VM image includes everything - the app, libraries, and the OS. Docker only includes the app and libraries - multiple docker images run on the same host OS - "run and manage apps side-by-side in isolated containers"
+
+ everything required to make a piece of software run is packaged into isolated containers. Unlike VMs, containers do not bundle a full operating system - only libraries and settings required to make the software work are needed
+
+ docker images should always run the same on different machines
+
+ app configuration is pushed into the docker image - so each developer setting up the project doesnt have to configure the db, install os libraries, etc - they just run the docker image and it is already set up
+
+ Image
+ An image is a lightweight, stand-alone, executable package that includes everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and config files.
+
+Container
+A container is a runtime instance of an image — what the image becomes in memory when actually executed. It runs completely isolated from the host environment by default, only accessing host files and ports if configured to do so.
+
+I think: an image has no state. Once it is uncompressed and run, it may have a state which is different than the original image. This is why you have to keep track of containers as well as images.
+
+Containers run apps natively on the host machine’s kernel. They have better performance characteristics than virtual machines that only get virtual access to host resources through a hypervisor
+
+I think this only really works on Linux.
+Container processes run natively, so performance shouldn't be an issue
+
+With images and containers, you don't have to worry about the host OS - frees you from dealing with OS settings, OS updates - as long as the host OS is up to date, the image will be up to date. With VMs you have to update each OS.
+
+App dependencies are included in the image, and are not installed on the host. You can use 'docker ps' on your container to see the processes running
+
+Images are defined by a Dockerfile.
+
+Dockerfile will define what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you have to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile will behave exactly the same wherever it runs.
+
+Docker files use their own language
+
+ADD command adds files to your image when you build the image
+To build image:
+> docker build -t my_image_name .
+
+This build the image and stores it in your machines docker registry. Not in a filesystem file.
+To view your docker images:
+> docker images
+
+To run a docker image:
+> docker run -p 4000:80 my_image_name
+The 4000:80 maps port 80 in the image to port 4000 on the host
+Use the '-d' flag to run in the background. You will be able to see your running container with
+> docker ps
+Docker ps will show you the container id as well as the name of the original image, and the command the container was kicked off with
+Stop a container with
+> docker stop <container id>
+
+Docker has an image registry, similar to npm's public registry. Like npm, you can set up other registries, but Docker's is the default
+The notation for images added to Docker's public registry is: username/image_name
+Using this notation, you can run apps in the registry that haven't been downloaded to your machine - run will simply download them if they don't exist
+> docker run username/image_name
+
+Services:
+In production, you will likely need to run multiple containers - ex web server, db server, background processing.
+Docker provides a way to configure all these services, so with one command you can get all the services you need running.
+The configuration of services is done in docker-compose.yml
+In it, you define the image names, ports to use, number of containers to run (for load balancing)
+
+* create my_image.Dockerfile docker file
+* > docker build -t <image_name>  # to build image
+* > docker run <image_name>   # to instantiate and run a container from the given image
+
+Swarm
+A way to package entire clusters
+Multi-container, multi-machine applications are made possible by joining multiple machines into a “Dockerized” cluster called a swarm.
+containers in your swarm are called nodes
+
+Stack
+A stack is a group of interrelated services that share dependencies, and can be orchestrated and scaled together
+
+Each docker container should have its own focus/app it hosts
+
+VOLUME instruction should be used to expose any database storage area, configuration storage, or files/folders created by your docker container
+
+The image is stateless, but the container can have state
+
+A docker image is a series of layers. The container adds a write layer around the image. The write layer is unique to that container. If you open a file in the image, it will be in the image layouer, but if you modify the file and save it, the file will be copied into the container's write layer.
+
+Data volumes allow the docker container to access the host's harddrive. Multiple running docker containers can access the same space on the hosts hdd. If a container is deleted, the data will remain on the host. Normally, when you delete a container the data goes with it

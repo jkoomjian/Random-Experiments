@@ -80,3 +80,33 @@ two // '2'
 let [one, ...two] = ar;
 one // '1'
 two // ['2', '3']
+
+// Rest/Spread Properties
+
+// In a function definition, ... groups the remaining params in an array
+restParam(1, 2, 3, 4, 5);
+function restParam(p1, p2, ...p3) {
+  // p1 = 1
+  // p2 = 2
+  // p3 = [3, 4, 5]
+}
+
+// In front of an array, ... explodes the array - convert it to parameters
+const values = [99, 100, -1, 48, 16];
+console.log( Math.max(...values) )
+const ar = [1, 2, ...values]; // [1, 2, 99, 100, -1, 48, 16]
+
+// You can also do this for objects
+const myObject = {a: 1, b: 2, c: 3};
+const { a, ...x } = myObject;
+// a = 1
+// x = { b: 2, c: 3 }
+
+restParam( {a: 1, b: 2, c: 3} );
+function restParam({ a, ...x }) {
+  // a = 1
+  // x = { b: 2, c: 3 }
+}
+
+// Shallow copy clone:
+const valuesClone = {...values};

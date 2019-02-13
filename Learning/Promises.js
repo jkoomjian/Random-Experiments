@@ -179,3 +179,15 @@ let success=true;
 //    at Promise.resolve.then.then.msg (repl:8:7)
 //    at process._tickDomainCallback (internal/process/next_tick.js:135:7)
 // at finally false
+
+// ES2018 adds Promise.finally()
+(Promise.resolve('asdf')
+  .then(msg => {
+    return 'hello';
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => {
+    console.log('at finally');
+  }));

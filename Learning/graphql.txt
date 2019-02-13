@@ -1,0 +1,33 @@
+Allows you to combine api requests into one http request/response
+** multiple requests in a http request -> http response returns multiple api requests in json array
+GraphQL APIs are organized in terms of types and fields, not endpoints.
+
+You provide functions for each field in the type system
+So you run GraphQl as a layer above the db? between db -> GraphQl -> api/http
+
+GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing code and data.
+
+More of a style for structuring api requests
+
+You can pass parameters:
+{
+  human(id: "1000") {
+    name
+    height
+  }
+}
+
+You can even chain the args, like a filter. The nested args will only be applied the results matching the higher level args
+
+Queries should have the format:
+<operation type> <operation name> {
+  // data to get
+}
+
+operation name is basically for debugging
+operation type can be query, mutation, or subscription
+
+GraphQL has a first-class way to factor dynamic values out of the query, and pass them as a separate dictionary. These values are called variables.
+Just like predefined queries in mysql
+Instead use $variableName in the query, and then pass in the value when you call the query
+You can set default values for the variables: $episode: Episode = "JEDI"

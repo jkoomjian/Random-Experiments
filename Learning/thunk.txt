@@ -1,0 +1,76 @@
+Redux Thunk middleware allows you to write action creators that return a function instead of an action. The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met
+
+The inner function receives the store methods dispatch and getState as parameters.
+
+A thunk is a function that wraps an expression to delay its evaluation.
+
+0) To enable Redux Thunk, use applyMiddleware() (thunk is just middleware):
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/index';
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
+
+
+The parts are:
+
+1) Action creator: returns a function to perform asynchronous dispatch:
+
+const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+function increment() {
+  // return the action
+  return {
+    type: INCREMENT_COUNTER
+  };
+}
+// this is the action creator
+function incrementAsync() {
+  // returns a method which takes dispatch
+  return (dispatch) => {
+    setTimeout(() => {
+      // Yay! Can invoke sync or async actions with `dispatch`
+      dispatch(increment());
+    }, 1000);
+  };
+}
+
+Can also take the state as a param:
+function incrementIfOdd() {
+  return (dispatch, getState) => {
+    const { counter } = getState();
+
+    if (counter % 2 === 0) {
+      return;
+    }
+
+    dispatch(increment());
+  };
+}
+
+2) Then call the action creator. It returns a promise which resolves when the action creator finishes:
+store.dispatch(
+  incrementAsync()
+).then(() =>
+  response.send(ReactDOMServer.renderToString(<MyApp store={store} />))
+);
+
+--------------
+Action creators don't need to return anything
+they can return a function which calls dispatch in the then() block
+
+function fetchPosts(subreddit) {
+  return dispatch => {
+    dispatch(requestPosts(subreddit))
+    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+      .then(response => response.json())
+      // dispatch called again
+      .then(json => dispatch(receivePosts(subreddit, json)))
+  }
+}
+
+* dispatch is included in props by default if you dont set mapDispatchToProps
+* you can call dispatch multple times with thunk - usually once at the before a fetch to load a spinner, and once at the completion of the fetch to load the data
+you should use action creators with thunk - make it simpler?
+* action creator -> dispatched action -> reducer updates state -> react component render called with updated props

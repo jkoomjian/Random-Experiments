@@ -70,7 +70,15 @@ let makeRequest2 = async () => {
   let myPromiseResult = await myAsyncMethod();
   return myPromiseResult + "-done";
 }
-let makeRequest3 = async() => {
+let makeRequest3 = async () => {
   console.log('makeRequest returned: ', await makeRequest2());
 }
 makeRequest3();
+
+// You can't use await in for loops - loops remain synchronous and will complete before the inner async methods complete
+// ES2018 introduces asynchronous iterators, which are just like regular iterators except the next() method returns a Promise. Therefore, the await keyword can be used with for … of loops to run asynchronous operations in series
+async function process(array) {
+  for await (let i of array) {
+    doSomething(i);
+  }
+}

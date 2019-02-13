@@ -1,0 +1,46 @@
+when you dispatch a change in a component, the change to this.props will not happen until componentWillReceiveProps is called
+calling store.getState() will get the latest copy of the state
+
+instead update the question in the addQuestion reducer
+
+Redux actions ofen have the form:
+{
+  type: my_type,
+  other_data: my_data
+}
+
+but they don't have to. An action is just an object map - it can be anything:
+{
+  CALL_API: {
+    types: ['one', 'two']
+  }
+}
+
+
+Middleware:
+Provides a third-party extension point between dispatching an action, and the moment it reaches the reducer
+
+To define your middleware, initialize it with:
+applyMiddleware(myMiddleware)
+//The middleware should export the following crazy function:
+export default store => next => action => {
+  // store, next, and action are all available
+  // when finished call next(action)
+
+  // before dispatch
+  next(action)  //dispatch!
+  // after dispatch
+}
+
+next is the same as store.dispatch
+
+Now middleware takes the next() dispatch function, and returns a dispatch function, which in turn serves as next() to the middleware to the left, and so on. It's still useful to have access to some store methods like getState(), so store stays available as the top-level argument.
+
+// Dispatch an action - will flow through middleware
+store.dispatch(actionCreator())
+
+// Setup with:
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk, otherMiddleware)  //Multiple middleware classes can be passed
+);
