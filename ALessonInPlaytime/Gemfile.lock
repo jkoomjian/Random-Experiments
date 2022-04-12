@@ -14,7 +14,7 @@ GIT
       rest-client (~> 1.4)
 
 PATH
-  remote: ./vendor/browsercms-3.5.7
+  remote: vendor/browsercms-3.5.7
   specs:
     browsercms (3.5.7)
 
@@ -100,7 +100,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.25.1)
-    mini_portile (0.5.2)
+    mini_portile2 (2.8.0)
     multi_json (1.8.4)
     multi_xml (0.5.5)
     mysql2 (0.3.14)
@@ -110,8 +110,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     paperclip (3.0.4)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -123,6 +124,7 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    racc (1.6.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
