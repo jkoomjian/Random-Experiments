@@ -14,7 +14,7 @@ GIT
       rest-client (~> 1.4)
 
 PATH
-  remote: ./vendor/browsercms-3.5.7
+  remote: vendor/browsercms-3.5.7
   specs:
     browsercms (3.5.7)
 
@@ -169,7 +169,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.61)
     uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
