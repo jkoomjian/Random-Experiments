@@ -14,7 +14,7 @@ GIT
       rest-client (~> 1.4)
 
 PATH
-  remote: ./vendor/browsercms-3.5.7
+  remote: vendor/browsercms-3.5.7
   specs:
     browsercms (3.5.7)
 
@@ -82,10 +82,14 @@ GEM
       debugger-ruby_core_source (~> 1.3.5)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.3.5)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.0.2)
     highline (1.6.21)
     hike (1.2.3)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     httparty (0.12.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -110,6 +114,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.11.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     paperclip (3.0.4)
@@ -148,8 +153,10 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -173,6 +180,9 @@ GEM
     uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     uuidtools (2.1.4)
 
 PLATFORMS
